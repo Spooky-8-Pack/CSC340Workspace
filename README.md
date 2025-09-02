@@ -1,2 +1,23 @@
-# CSC340Workspace
+## Title
+Spartan Shop
+
+## Team Members
 Gloria Sukidi
+Adrien Aldridge 
+
+## Description
+Our app will be a clothing shop. Customers can view available clothes, add to their cart and favorites list, checkout items within their cart, and write reviews on shops. Providers can list clothing for sale, view statisitics on active and past orders, and reply to customer reviews. The goals of this app is to provide students with a place on campus to buy and sell clothing. This app will provide a community for students to expand their wardrobe and sell clothing they don't want anymore.
+
+## App Functions
+
+1. Customer (Adrian Aldridge)
+    i. Create/modify customer profile - Register a customer profile
+    ii. View available services - View available items and shops 
+    iii. Subscribe to available services - Add items to cart/favorites list 
+    iv. Write reviews for subscribed services - Review quality of clothing and delivery
+2. Provider (Gloria Sukidi)
+    i. Create/modify provider profile - Register a seller profile using an email and password. The profile will include a profile picture, bio description, and optional social media links. Providers can modify all personal information.
+    ii. Create services - Manage a provider dashboard where products can be added for sale with images, a description, and prices.
+    iii. View customer statistics - View the daily/weekly/monthly interactions with the product, including how many times an item has been viewed (clicked on) and has been added to/removed from cart.
+    iv. Reply to reviews - Providers can respond to reviews with short messages. A provider's reply will be donated with a specific highlight or color.
+
