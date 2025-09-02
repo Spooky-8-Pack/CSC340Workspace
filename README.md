@@ -1,4 +1,5 @@
-# CSC340Workspace
+# CSC340Workspace 
+
 ## Title
 > Spartan Shop
 
