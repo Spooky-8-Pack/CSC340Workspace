@@ -1,10 +1,10 @@
 # Software Requirements Specification
-## For <project name>
+## For Spartan Thrift
 
 Version 0.1  
-Prepared by <author>  
-<organization>  
-<date created> 
+Prepared by Gloria Sukidi & Adrian Aldridge
+CSC 340
+September 16, 2025
 
 Table of Contents
 =================
@@ -37,14 +37,14 @@ Table of Contents
 ## Revision History
 | Name | Date    | Reason For Changes  | Version   |
 | ---- | ------- | ------------------- | --------- |
-|      |         |                     |           |
+|Gloria|   9/16  |  Initial SRS        |   1.0     |
 |      |         |                     |           |
 |      |         |                     |           |
 
 ## 1. Introduction
 
 ### 1.1 Document Purpose
-Describe the purpose of the SRS and its intended audience.
+The purpose of the Software Requirements Specification (SRS) is to describe the client-view and developer-view requirements for the Spartan Thrift application. 
 
 ### 1.2 Product Scope
 Identify the product whose software requirements are specified in this document, including the revision or release number. Explain what the product that is covered by this SRS will do, particularly if this SRS describes only part of the system or a single subsystem. 
