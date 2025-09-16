@@ -1,5 +1,5 @@
 ## Title
-Spartan Shop
+Spartan Thrift
 
 ## Team Members
 Gloria Sukidi
