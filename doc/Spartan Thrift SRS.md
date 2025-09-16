@@ -49,7 +49,14 @@ The purpose of the Software Requirements Specification (SRS) is to describe the 
 ### 1.2 Product Scope
 The purpose of Spartan Thrift is to provide a convenient online platform for students to buy and sell clothing. We will connect sellers to customers using a web-based application where sellers can list and manage their stock and customers can view and buy clothing they want. We hope to provide a comfortable user experience and offer the best service possible.
 
-### 1.3 Definitions, Acronyms and Abbreviations                                                                                                                                                                          |
+### 1.3 Definitions, Acronyms and Abbreviations 
+
+- Java: Programming language used for the backend of Spartan Thrift
+- API: Application Programming Interface. Used to Interface with the backend and frontend of application.
+- HTML: Hypertext Markup Language. Used to design frontend of Spartan thrift
+- CSS: Cascading Style Sheets. Used to add style and appearance to web app.
+- JavaScript: A computer programiming language commonly used to create interactive effects within web browsers. Used   in conjunction with JAVA and HTML. 
+
 ### 1.4 References
 
 ### 1.5 Document Overview
