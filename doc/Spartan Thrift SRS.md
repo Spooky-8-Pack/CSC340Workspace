@@ -38,7 +38,7 @@ Table of Contents
 | Name | Date    | Reason For Changes  | Version   |
 | ---- | ------- | ------------------- | --------- |
 |Gloria|   9/16  |  Initial SRS        |   1.0     |
-|      |         |                     |           |
+|Adrian|   9/16  |  Changed SRS        |   1.0     |
 |      |         |                     |           |
 
 ## 1. Introduction
@@ -47,36 +47,37 @@ Table of Contents
 The purpose of the Software Requirements Specification (SRS) is to describe the client-view and developer-view requirements for the Spartan Thrift application. 
 
 ### 1.2 Product Scope
-Identify the product whose software requirements are specified in this document, including the revision or release number. Explain what the product that is covered by this SRS will do, particularly if this SRS describes only part of the system or a single subsystem. 
-Provide a short description of the software being specified and its purpose, including relevant benefits, objectives, and goals. Relate the software to corporate goals or business strategies. If a separate vision and scope document is available, refer to it rather than duplicating its contents here.
+The purpose of Spartan Thrift is to provide a convenient online platform for students to buy and sell clothing. We will connect sellers to customers using a web-based application where sellers can list and manage their stock and customers can view and buy clothing they want. We hope to provide a comfortable user experience and offer the best service possible.
 
 ### 1.3 Definitions, Acronyms and Abbreviations                                                                                                                                                                          |
-
 ### 1.4 References
-List any other documents or Web addresses to which this SRS refers. These may include user interface style guides, contracts, standards, system requirements specifications, use case documents, or a vision and scope document. Provide enough information so that the reader could access a copy of each reference, including title, author, version number, date, and source or location.
 
 ### 1.5 Document Overview
-Describe what the rest of the document contains and how it is organized.
+Section 1 is a general introduction to the document, it is intended for general readers. Section 2 focuses on the product and it's function, this section is intended for potential customers and stakeholders. Section 3 specifies requirments and constraints for the product and development process. It is intended for stakeholders and the development team. 
 
 ## 2. Product Overview
-This section should describe the general factors that affect the product and its requirements. This section does not state specific requirements. Instead, it provides a background for those requirements, which are defined in detail in Section 3, and makes them easier to understand.
+Spartan Thrift is a web-based application designed to connect students looking to buy or sell clothing. Customers can browse listed clothing, purchase items, and leave reviews based on quality of clothing and delivery. Sellers can manage listings, track customer orders, and respond to customer reviews. The system supports both customers and sellers. Each tailor-made to provide the best experience to the end user. 
 
 ### 2.1 Product Functions
-Summarize the major functions the product must perform or must let the user perform. Details will be provided in Section 3, so only a high level summary (such as a bullet list) is needed here. Organize the functions to make them understandable to any reader of the SRS. A picture of the major groups of related requirements and how they relate, such as a top level data flow diagram or object class diagram, is often effective.
+- Customer Functions
+  - Search listed clothing items
+  - Add/remove items to/from a cart to purchase
+  - Add/remove items to/from a wishlist to save for later
+  - Write reviews on purchased items
+- Seller Functions
+  - List clothing items for sale
+  - Manage listed items
+  - View customer statistics and active orders
+  - Respond to reviews on their products
 
 ### 2.2 Product Constraints
-This subsection should provide a general description of any other items that will limit the developer’s options. These may include:  
-
-* Interfaces to users, other applications or hardware.  
-* Quality of service constraints.  
-* Standards compliance.  
-* Constraints around design or implementation.
+The current plan is to use Java for the backend and HTML/CSS and JavaSript for the frontend, this would limit the program to only running on computers with Java JDK 21 or higher installed. It would also present problems for scaling up. With a short deadline on the team, this may be the largest scope the project can acheive. 
   
 ### 2.3 User Characteristics
-Identify the various user classes that you anticipate will use this product. User classes may be differentiated based on frequency of use, subset of product functions used, technical expertise, security or privilege levels, educational level, or experience. Describe the pertinent characteristics of each user class. Certain requirements may pertain only to certain user classes. Distinguish the most important user classes for this product from those who are less important to satisfy.
+Our application should be usable by most anyone who can use a web browser. As long as users have basic knowledge on how to use most websites and know what kind of clothing they would wish to buy/sell they should be an expert on our application. 
 
 ### 2.4 Assumptions and Dependencies
-List any assumed factors (as opposed to known facts) that could affect the requirements stated in the SRS. These could include third-party or commercial components that you plan to use, issues around the development or operating environment, or constraints. The project could be affected if these assumptions are incorrect, are not shared, or change. Also identify any dependencies the project has on external factors, such as software components that you intend to reuse from another project, unless they are already documented elsewhere (for example, in the vision and scope document or the project plan).
+We will use Java, with HTML/CSS and JavaScript. Our project will be dependent on an external currency conversion API to allow customers to view prices for items in their local currency. 
 
 ## 3. Requirements
 
