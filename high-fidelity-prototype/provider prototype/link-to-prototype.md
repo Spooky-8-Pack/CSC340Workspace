@@ -1,1 +1,2 @@
-We used Figma to build our prototype. The prototype can be found here (https://www.figma.com/proto/mIddA2r7DMJJKvTfYLd3zB/CSC-340-Project?page-id=2%3A2&node-id=2-62&p=f&viewport=175%2C65%2C0.2&t=KhBAw3YF8GBqHZI4-1&scaling=contain&content-scaling=fixed&starting-point-node-id=2%3A62).
+We used Figma to build our prototype. The prototype can be found here:
+(https://www.figma.com/proto/mIddA2r7DMJJKvTfYLd3zB/CSC-340-Project?page-id=2%3A2&node-id=2-62&p=f&viewport=175%2C65%2C0.2&t=KhBAw3YF8GBqHZI4-1&scaling=contain&content-scaling=fixed&starting-point-node-id=2%3A62).
