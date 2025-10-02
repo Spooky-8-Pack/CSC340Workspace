@@ -86,7 +86,7 @@ nav {
     border: 3px solid black;
     border-right: none;
     padding: 5px;
-    height: 20px;
+    height: 30px;
     border-radius: 5px 0 0 5px;
     outline: none;
     color: black; /* changes the color of the text in the search bar when you click out */
