@@ -3,11 +3,12 @@
     padding: 0;
 }
 
-nav {
-    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
-}
-
 .navbar {
+    position: sticky!important;
+    top: 0;
+    z-index: 1000;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, 
+                rgba(0, 0, 0, 0.24) 0px 1px 2px;
     display: grid;
     grid-template-columns: 1fr 800px 1fr;
     background-color: #FFB71B;
@@ -18,6 +19,16 @@ nav {
     flex-flow: row nowrap;
     padding-left: 50px;
     gap: 20px;
+}
+
+.nav-left button {
+    border: none;
+    background-color: transparent;
+}
+
+.menu-button span {
+    font-size: larger;
+    color: white;
 }
 
 .menu-dropdown {

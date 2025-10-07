@@ -15,7 +15,7 @@
         <div class="nav-left">
             <img src="./assets/UNCG_Spartan_Head.png" style="width: 75px; height: 75px" alt="UNC Greensboro spartan logo">
             <div class="menu-dropdown">
-                <button class="navbar menu-button">
+                <button class="menu-button">
                     <img src="./assets/white-menu-icon.png" style="width: 36px; height: 36px" alt="Menu icon"/>
                     <span>Categories</span>
                 </button>
@@ -42,7 +42,7 @@
 
         <div class="nav-right">
             <div class="icons">
-                <button class="profile"><i class="fa-solid fa-user"></i></button>
+                <button id="profile"><i class="fa-solid fa-user"></i></button>
                 <button class="heart"><i class="fa-solid fa-heart"></i></button>
                 <button class="cart"><i class="fa-solid fa-cart-shopping"></i></button>
             </div>
@@ -52,10 +52,20 @@
     </nav>
 
     <section class="home">
+        <div class="login-panel" id="login-panel">
+            <h2>Hello Guest,</h2>
+            <div class="panel-buttons">
+                <div class="log-in-out">
+                    <button class="sign-in">Sign in</button>
+                    <button class="log-out">Log out</button>
+                </div>
+                <button class="sell-now">Sell now</button>
+            </div>
+        </div>
         <div class="home-background">
             <div class="home-description">
-                <h1>Spartan Thrift</h2>
-                <h2>The <span class="highlight">only</span> online campus thrift store</h3>
+                <h1>Spartan Thrift</h1>
+                <h2 style="color: white;">The <span class="highlight">only</span> online campus thrift store</h2>
                 <div class="gender-filter">
                     <button class="gfilter">Shop men</button>
                     <button class="gfilter">Shop women</button>
@@ -131,6 +141,7 @@
 
     </section>
 
+<!-- Footer from https://mdbootstrap.com/snippets/standard/mdbootstrap/2885027?view=side -->
 <footer
         class="text-center text-lg-start text-white"
         style="background-color: #FFB71B"
