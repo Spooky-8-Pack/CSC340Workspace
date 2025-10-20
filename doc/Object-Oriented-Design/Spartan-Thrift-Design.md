@@ -29,7 +29,7 @@ Spartan Thrift is an online commerce website where students can buy and sell use
 
 ## 2. Use Cases
 ### 2.1 Use Case Model
-![Use Case Model](https://github.com/csc340-uncg/f25-team0/blob/main/doc/Object-Oriented-Design/Use-Case-Model.png)
+![Use Case Model](https://github.com/Spooky-8-Pack/CSC340Workspace/blob/agsukidi-milestone4/doc/Object-Oriented-Design/Use-Case-Model.png)
 
 ### 2.2 Use Case Descriptions
 
