@@ -12,7 +12,7 @@ Table of Contents
 * 2 [Use Cases](#2-use-cases)
   * 2.1 [Use Case Model](#21-use-case-model)
   * 2.2 [Use Case Descriptions](#22-use-case-descriptions)
-    * 2.2.1 [Actor: Farmer](#221-actor-farmer)
+    * 2.2.1 [Actor: Seller](#221-actor-seller)
     * 2.2.2 [Actor: Customer](#222-actor-customer) 
 * 3 [UML Class Diagram](#3-uml-class-diagram)
 * 4 [Database Schema](#4-database-schema)
@@ -54,7 +54,7 @@ A customer shall be able to sign in using their registred email and password. Af
 A customer shall be able to view available clothing. They can do this from the home page or using the search function. They can filter clothing by style, size, or seller. They will also be able to select a specific item to view more details.
 ##### 2.2.1.4 Add Clothing to Cart
 Upon selecting an item, a customer shall be able to purchase the item by adding to their cart and checking out through their cart. Or save for later by adding to a wishlist.
-##### 2.2.1.5 Review Produce Box
+##### 2.2.1.5 Review Item
 A customer may write a review for an item they purchased. They can rate the delivery and quality of the item.
 
 ## 3. UML Class Diagram
