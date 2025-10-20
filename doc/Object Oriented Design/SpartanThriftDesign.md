@@ -29,7 +29,7 @@ Spartan Thrift is a web application to ease the buying and selling of clothing b
 
 ## 2. Use Cases
 ### 2.1 Use Case Model
-![Use Case Model]()
+![Use Case Model](https://github.com/Spooky-8-Pack/CSC340Workspace/blob/aaldridge-milestone4/doc/Object%20Oriented%20Design/Use-Case-Model.png)
 
 ### 2.2 Use Case Descriptions
 
@@ -58,6 +58,6 @@ Upon selecting an item, a customer shall be able to purchase the item by adding 
 A customer may write a review for an item they purchased. They can rate the delivery and quality of the item.
 
 ## 3. UML Class Diagram
-![UML Class Diagram]()
+![UML Class Diagram](https://github.com/Spooky-8-Pack/CSC340Workspace/blob/aaldridge-milestone4/doc/Object%20Oriented%20Design/UML-Diagram.png)
 ## 4. Database Schema
 ![UML Class Diagram]()
