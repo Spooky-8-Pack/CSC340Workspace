@@ -16,7 +16,7 @@ public class CustomerService {
     }
 
     //get a customer by id  
-    public Object getCustomerById(@PathVariable long customerId){
+    public Customer getCustomerById(@PathVariable long customerId){
         return customerRepository.findById(customerId).orElse(null);
     }
 
@@ -28,6 +28,11 @@ public class CustomerService {
     //get customer by email
     public Object getCustomerByEmail(String email){
         return customerRepository.getCustomersByEmail(email);
+    }
+
+    //add customer
+    public Customer addCustomer(Customer customer){
+        return customerRepository.save(customer);
     }
 
     //update customer
