@@ -60,4 +60,4 @@ A customer may write a review for an item they purchased. They can rate the deli
 ## 3. UML Class Diagram
 ![UML Class Diagram](https://github.com/Spooky-8-Pack/CSC340Workspace/blob/aaldridge-milestone4/doc/Object%20Oriented%20Design/UML-Diagram.png)
 ## 4. Database Schema
-![UML Class Diagram]()
+![UML Class Diagram](https://github.com/Spooky-8-Pack/CSC340Workspace/blob/aaldridge-milestone4/doc/Object%20Oriented%20Design/database_diagram.png)
