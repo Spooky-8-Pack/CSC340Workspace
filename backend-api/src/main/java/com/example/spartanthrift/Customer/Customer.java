@@ -1,7 +1,5 @@
 package com.example.spartanthrift.Customer;
 
-import org.springframework.web.bind.annotation.CookieValue;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
