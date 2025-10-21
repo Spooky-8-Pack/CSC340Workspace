@@ -31,18 +31,18 @@ Spartan Thrift is a web application to ease the buying and selling of clothing b
 ### 2.1 Use Case Model
 ![Use Case Model](https://github.com/Spooky-8-Pack/CSC340Workspace/blob/aaldridge-milestone4/doc/Object%20Oriented%20Design/Use-Case-Model.png)
 
-### 2.2 Use Case Descriptions
-
-#### 2.2.1 Actor: Seller
+#### 2.2.1 Actor: Provider
 ##### 2.2.1.1 Sign Up
-
+A provider shall create a profile using their first and last name, email, and password. They shall provide a shop name, description, location and an optional shop image.
 ##### 2.2.1.2 Log In
+A provider shall sign in using their registered email and password. After logging in, the provider shall be directed to their dashboard where they see an overview of their shop and stats.
 
 ##### 2.2.1.3 Update Profile
-
-##### 2.2.1.4 List Clothing
-
+A provider shall modify their profile by going to their profile page. They can change their email, password, and shop.
+##### 2.2.1.4 Add products
+A provider shall be able to create new clothing listings. They shall provide a item name, description, and price. The added item shall be associated to the provider and their shop.
 ##### 2.2.1.4 View Customer Stats
+A provider shall be able to view statistics such as total revenue and average delivery and quality ratings.
 
 
 #### 2.2.2 Actor: Customer
