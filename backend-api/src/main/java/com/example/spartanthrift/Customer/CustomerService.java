@@ -1,8 +1,11 @@
 package com.example.spartanthrift.Customer;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
+
+import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class CustomerService {
@@ -11,36 +14,44 @@ public class CustomerService {
     private CustomerRepository customerRepository;
 
     //get all customers
-    public Object getAllCustomers(){
+    public List<Customer> getAllCustomers(){
         return customerRepository.findAll();
     }
 
     //get a customer by id  
-    public Customer getCustomerById(@PathVariable long customerId){
-        return customerRepository.findById(customerId).orElse(null);
-    }
+     public Customer getCustomerById(Long id) {
+        return customerRepository.findById(id)
+            .orElseThrow(() -> new EntityNotFoundException("Customer not found"));
+     }
 
-    //get customer by name
-    public Object getCustomerByName(String name){
-        return customerRepository.getCustomersByName(name);
-    }
-
-    //get customer by email
-    public Object getCustomerByEmail(String email){
-        return customerRepository.getCustomersByEmail(email);
-    }
+     //search customers by address
+     public List<Customer> searchByAddress(String address){
+        return customerRepository.findByAddress(address);
+     }
 
     //add customer
-    public Customer addCustomer(Customer customer){
+    public Customer createCustomer(Customer customer){
+        if(customerRepository.existsByEmail(customer.getEmail())){
+            throw new IllegalStateException("Email already registered");
+        }
         return customerRepository.save(customer);
     }
-
+    
     //update customer
-    public Customer updateCustomer(Long customerId, Customer customer){
+    public Customer updateCustomer(Long id, Customer customerDetails) {
+        Customer customer = customerRepository.findById(id)
+            .orElseThrow(() -> new EntityNotFoundException("Customer not found"));
+
+        customer.setName(customerDetails.getName());
+        customer.setEmail(customerDetails.getEmail());
+        customer.setAddress(customerDetails.getAddress());
         return customerRepository.save(customer);
     }
 
-    public void deleteCustomer(Long customerId){
-        customerRepository.deleteById(customerId);
+    public void deleteCustomer(Long id){
+       if (!customerRepository.existsById(id)){
+        throw new EntityNotFoundException("Customer not found");
+       }
+       customerRepository.deleteById(id);
     }    
 }

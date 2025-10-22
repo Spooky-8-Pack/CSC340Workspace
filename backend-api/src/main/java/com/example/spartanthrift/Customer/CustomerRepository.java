@@ -1,23 +1,20 @@
 package com.example.spartanthrift.Customer;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
-    
+    //find customers by address
+    List<Customer> findByAddress(String address);
 
-    //custom query to search for customers by email
-    @Query(value = "select * from customers s where s.email like %?1%", nativeQuery = true)
-    List<Customer> getCustomersByEmail(String email);
+    //find if a customer is registered under an email
+    boolean existsByEmail(String email);
 
-    //custom query to search for customers by name
-    @Query(value = "select * from customers s where s.name like %?1%", nativeQuery = true)
-    List<Customer> getCustomersByName(String name);
+    //find a customer by email
+    Optional<Customer> findbyEmail(String email);
 
-
-    
 } 
