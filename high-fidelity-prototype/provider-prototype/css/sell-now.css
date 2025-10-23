@@ -43,3 +43,8 @@
   width: 100%;
 }
 
+.form-name {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
