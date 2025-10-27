@@ -2,8 +2,11 @@ package com.example.spartanthrift.Product;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import jakarta.persistence.EntityNotFoundException;
 
+@Service
 public class ProductService {
     private ProductRepository productRepository;
 
