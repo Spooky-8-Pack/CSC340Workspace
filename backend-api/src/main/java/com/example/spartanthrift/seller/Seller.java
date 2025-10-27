@@ -11,7 +11,6 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @Data
 @NoArgsConstructor
 @Entity
@@ -37,18 +36,5 @@ public class Seller {
     @NotBlank
     @Column(nullable = false)
     private String password;
-
-    @NotBlank
-    @Column(nullable = false)
-    private String shopName;
-
-    @NotBlank
-    @Column(nullable = false)
-    private String shopDescription;
-
-    // Optional image for shop storefront
-    @Column
-    private String shopImagePath;
-    // Add code for image upload
 
 }
