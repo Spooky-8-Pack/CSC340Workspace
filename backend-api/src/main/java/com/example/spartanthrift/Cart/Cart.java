@@ -31,6 +31,8 @@ public class Cart {
 
     private LocalDateTime dateAdded;
 
+    private boolean inCart = true;
+
     //getters and setters
 
     public Long getId() {
@@ -63,5 +65,13 @@ public class Cart {
 
     public void setDateAdded(LocalDateTime dateAdded) {
         this.dateAdded = dateAdded;
+    }
+
+    public boolean isInCart() {
+        return inCart;
+    }
+
+    public void setInCart(boolean inCart) {
+        this.inCart = inCart;
     }
 }
