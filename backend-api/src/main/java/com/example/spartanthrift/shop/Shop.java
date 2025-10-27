@@ -7,7 +7,7 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import com.example.spartanthrift.seller.Seller;
-import com.example.spartanthrift.product.product; // Import for after merging to access the product class
+// import com.example.spartanthrift.product.product; // Import for after merging to access the product class
 
 
 import java.util.List;
@@ -38,8 +38,8 @@ public class Shop {
     @NotBlank
     private String location;
 
-    @OneToMany(mappedBy = "shop", cascade = CascadeType.ALL)
-    @JsonIgnoreProperties("shop")
-    private List<Product> products = new ArrayList<>();
+    // @OneToMany(mappedBy = "shop", cascade = CascadeType.ALL)
+    // @JsonIgnoreProperties("shop")
+    // private List<Product> products = new ArrayList<>();
 
 }
