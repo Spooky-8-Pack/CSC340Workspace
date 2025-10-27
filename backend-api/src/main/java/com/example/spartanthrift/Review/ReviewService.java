@@ -44,7 +44,7 @@ public class ReviewService {
     }
 
     //get reviews by product
-    public List<Review> getReviewsByProduceBox(Product product) {
+    public List<Review> getReviewsByProduct(Product product) {
         return reviewRepository.findByProduct(product);
     }
 
