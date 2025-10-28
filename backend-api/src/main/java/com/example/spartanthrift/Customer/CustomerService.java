@@ -41,6 +41,7 @@ public class CustomerService {
             .orElseThrow(() -> new EntityNotFoundException("Customer not found"));
 
         customer.setName(customerDetails.getName());
+        customer.setPassword(customerDetails.getPassword());
         customer.setEmail(customerDetails.getEmail());
         customer.setAddress(customerDetails.getAddress());
         return customerRepository.save(customer);
