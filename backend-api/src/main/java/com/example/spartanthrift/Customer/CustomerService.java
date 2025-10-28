@@ -1,7 +1,5 @@
 package com.example.spartanthrift.Customer;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +12,7 @@ public class CustomerService {
     private CustomerRepository customerRepository;
 
     //get all customers
-    public List<Customer> getAllCustomers(){
+    public Object getAllCustomers(){
         return customerRepository.findAll();
     }
 
@@ -25,7 +23,7 @@ public class CustomerService {
      }
 
      //search customers by address
-     public List<Customer> searchByAddress(String address){
+     public Object searchByAddress(String address){
         return customerRepository.findByAddress(address);
      }
 
