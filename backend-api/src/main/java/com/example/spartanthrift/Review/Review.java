@@ -40,6 +40,15 @@ public class Review {
     @Column(columnDefinition = "TEXT")
     private String sellerResponse;
 
+    //constructor given no date
+    public Review(Customer customer, Product product, Double rating, String comment, LocalDateTime createdAt) {
+        this.customer = customer;
+        this.product = product;
+        this.rating = rating;
+        this.comment = comment;
+        this.createdAt = createdAt;
+    }
+
     //blank constructor
     public Review(){}
 

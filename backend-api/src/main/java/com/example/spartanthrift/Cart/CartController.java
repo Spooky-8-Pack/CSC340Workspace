@@ -36,17 +36,17 @@ public class CartController {
         return cartService.updateCart(id, cart);
     }
 
-    @PostMapping("cart/{id}/cancel")
+    @PostMapping("/cart/{id}/cancel")
     public void removeFromCart(@PathVariable Long id){
         cartService.removeCart(id);
     }
 
-    @GetMapping("/customer/{customerId}")
+    @GetMapping("/cart/customer/{customerId}")
     public Object getCustomerCart(@PathVariable Long customerId){
         return cartService.getCartByCustomer(customerService.getCustomerById(customerId));
     }
 
-    @GetMapping("/product/{productId}")
+    @GetMapping("/cart/product/{productId}")
     public Object getCartItems(@PathVariable Long productId){
         return cartService.getCartByProduct(productService.getProductById(productId));
     }
