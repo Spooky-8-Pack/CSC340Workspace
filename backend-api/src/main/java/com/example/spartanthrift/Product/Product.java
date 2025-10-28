@@ -30,6 +30,26 @@ public class Product {
 
     //review mapping here
 
+    //blank constructor
+    public Product(){}
+
+    //constructor given ID
+    public Product(Long id, String name, String description, BigDecimal price, boolean available) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.available = available;
+    }
+
+    //constructor given no ID
+    public Product(String name, String description, BigDecimal price, boolean available) {
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.available = available;
+    }
+
     //getters and setters
 
     public Long getId() {

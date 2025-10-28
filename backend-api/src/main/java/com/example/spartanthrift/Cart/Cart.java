@@ -33,6 +33,26 @@ public class Cart {
 
     private boolean inCart = true;
 
+    //blank constructor
+    public Cart(){}
+
+    //constructor given ID
+    public Cart(Long id, Customer customer, Product product, LocalDateTime dateAdded, boolean inCart){
+        this.id = id;
+        this.customer = customer;
+        this.product = product;
+        this.dateAdded = dateAdded;
+        this.inCart = inCart;
+    }
+
+    //constructor given no ID
+    public Cart(Customer customer, Product product, LocalDateTime dateAdded, boolean inCart){
+        this.customer = customer;
+        this.product = product;
+        this.dateAdded = dateAdded;
+        this.inCart = inCart;
+    }
+
     //getters and setters
 
     public Long getId() {

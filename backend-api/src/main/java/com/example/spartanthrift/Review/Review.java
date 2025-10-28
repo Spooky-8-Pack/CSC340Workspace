@@ -40,6 +40,30 @@ public class Review {
     @Column(columnDefinition = "TEXT")
     private String sellerResponse;
 
+    //blank constructor
+    public Review(){}
+
+    //constructor given no ID
+    public Review(Customer customer, Product product, Double rating, String comment, LocalDateTime createdAt, String sellerResponse) {
+        this.customer = customer;
+        this.product = product;
+        this.rating = rating;
+        this.comment = comment;
+        this.createdAt = createdAt;
+        this.sellerResponse = sellerResponse;
+    }
+
+    //constructor given ID
+    public Review(Long id, Customer customer, Product product, Double rating, String comment, LocalDateTime createdAt, String sellerResponse) {
+        this.id = id;
+        this.customer = customer;
+        this.product = product;
+        this.rating = rating;
+        this.comment = comment;
+        this.createdAt = createdAt;
+        this.sellerResponse = sellerResponse;
+    }
+
     //getters and setters
     public Long getId() {
         return id;
