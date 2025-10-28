@@ -1,7 +1,5 @@
 package com.example.spartanthrift.Product;
 
-import java.util.List;
-
 import org.springframework.stereotype.Service;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -43,12 +41,12 @@ public class ProductService {
     }
 
     //get all products
-    public List<Product> getAllProducts(){
+    public Object getAllProducts(){
         return productRepository.findAll();
     }
 
     //get available products
-    public List<Product> getAvailableProducts(){
+    public Object getAvailableProducts(){
         return productRepository.findByAvailable(true);
     }
 

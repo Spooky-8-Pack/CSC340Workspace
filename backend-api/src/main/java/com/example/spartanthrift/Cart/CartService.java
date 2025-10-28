@@ -1,6 +1,5 @@
 package com.example.spartanthrift.Cart;
 
-import java.util.List;
 
 import org.springframework.stereotype.Service;
 
@@ -16,6 +15,11 @@ public class CartService {
     //add item to cart
     public Cart createCart(Cart cart) {
         return cartRepository.save(cart);
+    }
+
+    //view cart
+    public Object viewCart(){
+        return cartRepository.findAll();
     }
 
     //update cart item
@@ -37,12 +41,12 @@ public class CartService {
     }
 
     //find by customer
-    public List<Cart> getCartByCustomer(Customer customer){
+    public Object getCartByCustomer(Customer customer){
         return cartRepository.findByCustomer(customer);
     }
     
     //find by product
-    public List<Cart> getCartByProduct(Product product){
+    public Object getCartByProduct(Product product){
         return cartRepository.findByProduct(product);
     }
 

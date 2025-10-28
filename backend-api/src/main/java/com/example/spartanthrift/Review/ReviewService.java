@@ -44,11 +44,11 @@ public class ReviewService {
     }
 
     //get reviews by product
-    public List<Review> getReviewsByProduct(Product product) {
+    public Object getReviewsByProduct(Product product) {
         return reviewRepository.findByProduct(product);
     }
 
-      public List<Review> getReviewsByCustomer(Customer customer) {
+      public Object getReviewsByCustomer(Customer customer) {
         return reviewRepository.findByCustomer(customer);
     }
 
