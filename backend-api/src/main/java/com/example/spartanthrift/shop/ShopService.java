@@ -1,12 +1,12 @@
 package com.example.spartanthrift.shop;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -24,7 +24,7 @@ public class ShopService {
     public Shop updateShop(Long id, Shop shopDetails) {
         Shop shop = shopRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Shop not found"));
 
-        if(!shop.getShopName().equals(shopDetails.getShopName()) && shopRepository.existsByShopName(shopDetials.getShopName())) {
+        if(!shop.getShopName().equals(shopDetails.getShopName()) && shopRepository.existsByShopName(shopDetails.getShopName())) {
             throw new IllegalStateException("Shop name already exists");
         }
 

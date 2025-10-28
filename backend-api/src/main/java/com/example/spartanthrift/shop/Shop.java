@@ -1,17 +1,24 @@
 package com.example.spartanthrift.shop;
 
+import com.example.spartanthrift.seller.Seller;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import com.example.spartanthrift.seller.Seller;
 // import com.example.spartanthrift.product.product; // Import for after merging to access the product class
 
 
-import java.util.List;
-import java.util.ArrayList;
+// import java.util.List;
+// import java.util.ArrayList;
 
 @Data
 @NoArgsConstructor
@@ -37,6 +44,7 @@ public class Shop {
 
     @NotBlank
     private String location;
+
 
     // @OneToMany(mappedBy = "shop", cascade = CascadeType.ALL)
     // @JsonIgnoreProperties("shop")
