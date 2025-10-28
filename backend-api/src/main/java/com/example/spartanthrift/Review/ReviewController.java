@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.spartanthrift.Customer.CustomerService;
@@ -17,13 +18,14 @@ import com.example.spartanthrift.Product.Product;
 import com.example.spartanthrift.Product.ProductService;
 
 @RestController
+@RequestMapping("/reviews")
 public class ReviewController {
     private ReviewService reviewService;
     private ProductService productService;
     private  CustomerService customerService;
     //seller service goes here
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<Review> createReview(@RequestBody Review review) {
         return ResponseEntity.ok(reviewService.createReview(review));
     }

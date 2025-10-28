@@ -9,14 +9,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("/products")
 public class ProductController {
     private ProductService productService;
     
     //create a product
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<Product> createProduct(@RequestBody Product product){
         return ResponseEntity.ok(productService.createProduct(product));
     }
@@ -41,12 +43,13 @@ public class ProductController {
     }
 
     //get available products
-    @GetMapping
+    @GetMapping("/available")
     public ResponseEntity<List<Product>> getAvailableProducts() {
         return ResponseEntity.ok(productService.getAvailableProducts());
     }
 
     //get all products
+    @GetMapping("/all")
     public ResponseEntity<List<Product>> getAllProducts(){
         return ResponseEntity.ok(productService.getAllProducts());
     }
