@@ -15,7 +15,9 @@ import com.example.spartanthrift.Product.ProductService;
 public class CartController {
     @Autowired
     private CartService cartService;
+    @Autowired
     private ProductService productService;
+    @Autowired
     private CustomerService customerService;
     //seller service goes here
 

@@ -1,5 +1,6 @@
 package com.example.spartanthrift.Review;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,12 +13,15 @@ import com.example.spartanthrift.Product.ProductService;
 
 @RestController
 public class ReviewController {
+    @Autowired
     private ReviewService reviewService;
+    @Autowired
     private ProductService productService;
+    @Autowired
     private  CustomerService customerService;
     //seller service goes here
 
-    @PostMapping("/reviews/create")
+    @PostMapping("/reviews")
     public Object createReview(@RequestBody Review review) {
         return reviewService.createReview(review);
     }
