@@ -4,20 +4,32 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.example.spartanthrift.seller.Seller;
+import com.example.spartanthrift.seller.SellerRepository;
+
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
-import lombok.RequiredArgsConstructor;
 
 @Service
-@RequiredArgsConstructor
 @Transactional
 public class ShopService {
     private final ShopRepository shopRepository;
+    private final SellerRepository sellerRepository;  
+      
+    public ShopService(ShopRepository shopRepository, SellerRepository sellerRepository) {
+        this.shopRepository = shopRepository;
+        this.sellerRepository = sellerRepository;
+    }
 
-    public Shop createShop(Shop shop) {
-        if(shopRepository.existsByShopName(shop.getShopName())) {
+    public Shop createShop(Long sellerId, String shopName, String description, String location) {
+        Seller seller = sellerRepository.findById(sellerId).orElseThrow(() -> new RuntimeException("Seller not found"));
+        
+        if(shopRepository.existsByShopName(shopName)) {
             throw new IllegalStateException("Shop name already exists");
         }
+
+        Shop shop = new Shop(seller, shopName, description, location);
+        
         return shopRepository.save(shop);
     }
 
