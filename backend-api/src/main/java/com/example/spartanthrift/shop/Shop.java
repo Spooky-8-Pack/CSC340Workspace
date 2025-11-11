@@ -12,7 +12,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
-import lombok.Data;
 import lombok.NoArgsConstructor;
 // import com.example.spartanthrift.product.product; // Import for after merging to access the product class
 
@@ -20,7 +19,6 @@ import lombok.NoArgsConstructor;
 // import java.util.List;
 // import java.util.ArrayList;
 
-@Data
 @NoArgsConstructor
 @Entity
 @Table(name = "shops")
@@ -35,7 +33,7 @@ public class Shop {
     @JsonIgnoreProperties("shop")
     private Seller seller;
 
-    @NotBlank
+    @NotBlank 
     @Column(nullable = false)
     private String shopName;
 
@@ -45,6 +43,44 @@ public class Shop {
     @NotBlank
     private String location;
 
+    public Shop(Seller seller, String shopName, String description, String location) {
+        this.seller = seller; 
+        this.shopName = shopName;
+        this.description = description;
+        this.location = location;
+    }
+
+    public void setShopName(String shopName) {
+        this.shopName = shopName;
+    }
+
+    public String getShopName() {
+        return shopName;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public Seller getSeller() {
+        return seller;
+    }
+
+    public void setSeller(Seller seller) {
+        this.seller = seller;
+    }
 
     // @OneToMany(mappedBy = "shop", cascade = CascadeType.ALL)
     // @JsonIgnoreProperties("shop")
