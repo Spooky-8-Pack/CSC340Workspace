@@ -1,10 +1,16 @@
 package com.example.spartanthrift.seller;
 
+import com.example.spartanthrift.shop.Shop;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -31,6 +37,10 @@ public class Seller {
 
     public Seller() {
     }
+
+    @OneToOne(mappedBy = "seller", cascade = CascadeType.ALL)
+    @JsonBackReference
+    private Shop shop;
 
     public Seller(Long id, String name, String email, String password) {
         this.id = id;
@@ -65,6 +75,14 @@ public class Seller {
 
     public String getPassword() {
         return password;
+    }
+
+    public Shop getShop() {
+        return shop;
+    }
+
+    public void setShop(Shop shop) {
+        this.shop = shop;
     }
 
 }
