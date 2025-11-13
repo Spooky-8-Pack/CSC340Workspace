@@ -10,7 +10,6 @@ public class CustomerController {
     @Autowired
     private CustomerService customerService;
 
-    
     //get customer profile - view profile
     @GetMapping("/customers/{id}")
     public Object getCustomerById(@PathVariable Long id, Model model) {
@@ -25,6 +24,15 @@ public class CustomerController {
         return "customer-cart";
     }
 
+    //get customer signup form
+    @GetMapping("/customers/signup")
+    public Object showSignupForm(Model model){
+        Customer customer = new Customer();
+        model.addAttribute("customer", customer);
+        model.addAttribute("title", "Sign Up");
+        return "customer-signup";
+    }
+      
     //create a customer - sign up
     @PostMapping("/customers/signup")
     public Object createCustomer(Customer customer) {
@@ -32,27 +40,25 @@ public class CustomerController {
         return "redirect:/home";
     }
 
+    //get customer update form
+    @GetMapping("/customers/{id}/update")
+    public String showUpdateForm(@PathVariable Long id, Model model){
+        Customer customer = customerService.getCustomerById(id);
+        model.addAttribute("customer", customer);
+        return "customer-update";
+    }
+
     //update customer - update a profile
-    @PutMapping("/customers/{id}")
-    public Customer updateCustomer(@PathVariable Long id, @RequestBody Customer customerDetails) {
-        return customerService.updateCustomer(id, customerDetails);
+    @PostMapping("/customers/{id}/update")
+    public String updateCustomer(@PathVariable Long id, Customer customerDetails) {
+        customerService.updateCustomer(id, customerDetails);
+        return "redirect:/customers/" + id;
     }
 
     //delete profile
-    @GetMapping("/customers/{id}")
+    @GetMapping("/customers/{id}/delete")
     public Object deleteCustomer(@PathVariable Long id) {
         customerService.deleteCustomer(id);
         return "redirect:/home";
-    }
-
-    //end points im not sure i'll need
-    @GetMapping("/customers")
-    public Object getAllCustomers() {
-        return customerService.getAllCustomers();
-    }
-
-    @GetMapping("/search/address")
-    public Object searchByAddress(@RequestParam String key) {
-        return customerService.searchByAddress(key);
     }
 }
