@@ -10,13 +10,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/api/sellers")
-@RequiredArgsConstructor
 public class SellerController {
     private final SellerService sellerService;
+
+    public SellerController(SellerService sellerService) {
+        this.sellerService = sellerService;
+    }
 
     @PostMapping
     public ResponseEntity<Seller> createSeller(@Valid @RequestBody Seller seller) {
@@ -32,4 +34,5 @@ public class SellerController {
     public ResponseEntity<Seller> getSeller(@PathVariable Long id) { 
         return ResponseEntity.ok(sellerService.getSellerById(id));
     }
+
 }

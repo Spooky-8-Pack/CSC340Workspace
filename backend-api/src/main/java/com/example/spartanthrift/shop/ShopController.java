@@ -2,6 +2,7 @@ package com.example.spartanthrift.shop;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,16 +11,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/api/shops")
-@RequiredArgsConstructor
 public class ShopController {
     private final ShopService shopService;
+
+    public ShopController(ShopService shopService) {
+        this.shopService = shopService;
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<Shop> getShop(@PathVariable Long id) {
@@ -32,8 +36,10 @@ public class ShopController {
     }
 
     @PostMapping
-    public ResponseEntity<Shop> createShop(@Valid @RequestBody Shop shop) {
-        return ResponseEntity.ok(shopService.createShop(shop));
+    public ResponseEntity<Shop> createShop(@RequestParam Long sellerId, @Valid @RequestBody Shop shop) {
+        Shop newShop = shopService.createShop(sellerId, shop.getShopName(), shop.getDescription(), shop.getLocation());
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(newShop);
     }
 
     @PutMapping("/{id}")

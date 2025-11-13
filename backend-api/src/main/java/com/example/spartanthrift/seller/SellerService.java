@@ -4,13 +4,14 @@ import org.springframework.stereotype.Service;
 
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
-import lombok.RequiredArgsConstructor;
-
 @Service
-@RequiredArgsConstructor
 @Transactional
 public class SellerService {
     private final SellerRepository sellerRepository;
+
+    public SellerService(SellerRepository sellerRepository) {
+        this.sellerRepository = sellerRepository;
+    }
 
     public Seller createSeller(Seller seller) {
         if (sellerRepository.existsByEmail(seller.getEmail())) {
