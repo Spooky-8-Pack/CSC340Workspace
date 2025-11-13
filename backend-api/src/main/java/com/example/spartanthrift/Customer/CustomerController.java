@@ -1,9 +1,11 @@
 package com.example.spartanthrift.Customer;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.ui.Model;
 
-@RestController
+@Controller
 public class CustomerController {
     @Autowired
     private CustomerService customerService;
@@ -18,6 +20,7 @@ public class CustomerController {
         return customerService.updateCustomer(id, customerDetails);
     }
 
+    //get customer profile
     @GetMapping("/customers/{id}")
     public Customer getCustomerById(@PathVariable Long id) {
         return customerService.getCustomerById(id);
