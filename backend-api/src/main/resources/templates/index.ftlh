@@ -14,7 +14,7 @@
 <body>
     <nav class="navbar">
         <div class="nav-left">
-            <a href="index.html"><img src="./assets/UNCG_Spartan_Head.png" style="width: 75px; height: 75px" alt="UNC Greensboro spartan logo"></a>
+            <a href="/home"><img src="./assets/UNCG_Spartan_Head.png" style="width: 75px; height: 75px" alt="UNC Greensboro spartan logo"></a>
             <div class="menu-dropdown">
                 <button class="menu-button">
                     <img src="./assets/white-menu-icon.png" style="width: 36px; height: 36px" alt="Menu icon"/>
@@ -43,9 +43,9 @@
 
         <div class="nav-right">
             <div class="icons">
-                <button id="profile"><i class="fa-solid fa-user"></i></button>
-                <button class="heart"><i class="fa-solid fa-heart"></i></button>
-                <button class="cart"><i class="fa-solid fa-cart-shopping"></i></button>
+                <button href="#" id="profile"><i class="fa-solid fa-user"></i></button>
+                <button href="#" class="heart"><i class="fa-solid fa-heart"></i></button> <!-- To Do: add favs list-->
+                <button href="#" class="cart"><i class="fa-solid fa-cart-shopping"></i></button> <!-- To Do: add cart-->
             </div>
             
         </div>
@@ -56,10 +56,10 @@
         <h2>Hello Guest,</h2>
         <div class="panel-buttons">
             <div class="log-in-out">
-                <a href="./sign-in.html" class="sign-in">Sign in</a>
-                <a href="./sign-up.html" class="sign-up">Sign up</a>
+                <a href="/customers/signin" class="sign-in">Sign in</a>
+                <a href="/customers/signup" class="sign-up">Sign up</a>
             </div>
-            <a href="./sell-now.html" class="sell-now">Sell now</a>
+            <a href="#" class="sell-now">Sell now</a>
         </div>
     </div>   
 
