@@ -1,7 +1,7 @@
 package com.example.spartanthrift.shop;
 
 import com.example.spartanthrift.seller.Seller;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -12,14 +12,12 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
-import lombok.NoArgsConstructor;
 // import com.example.spartanthrift.product.product; // Import for after merging to access the product class
 
 
 // import java.util.List;
 // import java.util.ArrayList;
 
-@NoArgsConstructor
 @Entity
 @Table(name = "shops")
 public class Shop {
@@ -30,7 +28,7 @@ public class Shop {
 
     @OneToOne
     @JoinColumn(name = "seller_id", nullable = false)
-    @JsonIgnoreProperties("shop")
+    @JsonBackReference
     private Seller seller;
 
     @NotBlank 
@@ -42,6 +40,9 @@ public class Shop {
 
     @NotBlank
     private String location;
+
+    public Shop() {
+    }
 
     public Shop(Seller seller, String shopName, String description, String location) {
         this.seller = seller; 
@@ -80,6 +81,10 @@ public class Shop {
 
     public void setSeller(Seller seller) {
         this.seller = seller;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     // @OneToMany(mappedBy = "shop", cascade = CascadeType.ALL)
