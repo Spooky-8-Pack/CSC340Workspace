@@ -30,7 +30,7 @@ public class CustomerController {
         Customer customer = new Customer();
         model.addAttribute("customer", customer);
         model.addAttribute("title", "Sign Up");
-        return "customer-signup";
+        return "customer-sign-up";
     }
       
     //create a customer - sign up

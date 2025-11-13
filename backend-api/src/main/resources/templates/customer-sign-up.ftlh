@@ -49,7 +49,6 @@
       color: #333;
     }
     input[type="text"],
-    input[type="number"],
     textarea {
       padding: 0.5em;
       font-size: 1em;
