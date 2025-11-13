@@ -38,6 +38,12 @@ public class Customer {
     @JsonIgnoreProperties("customer")
     private List<Cart> cart = new ArrayList<>();
 
+    public Customer(String name, String email, String password, String address) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.address = address;
+    }
 
     //blank constructor
     public Customer(){
@@ -93,5 +99,13 @@ public class Customer {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public List<Cart> getCart() {
+        return cart;
+    }
+
+    public void setCart(List<Cart> cart) {
+        this.cart = cart;
     }
 }

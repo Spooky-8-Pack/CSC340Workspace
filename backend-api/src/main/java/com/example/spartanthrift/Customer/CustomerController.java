@@ -14,7 +14,6 @@ public class CustomerController {
     //get customer profile - view profile
     @GetMapping("/customers/{id}")
     public Object getCustomerById(@PathVariable Long id, Model model) {
-        //return customerService.getCustomerById(id);
         model.addAttribute("customer", customerService.getCustomerById(id));
         model.addAttribute("title", "Customer ID: ");
         return "customer-profile";
@@ -27,10 +26,9 @@ public class CustomerController {
     }
 
     //create a customer - sign up
-    @PostMapping("/customer/sign up")
+    @PostMapping("/customers/signup")
     public Object createCustomer(Customer customer) {
-        //return customerService.createCustomer(customer);
-        Customer newCustomer = customerService.createCustomer(customer);
+        customerService.createCustomer(customer);
         return "redirect:/home";
     }
 

@@ -56,10 +56,10 @@
         <h2>Hello Guest,</h2>
         <div class="panel-buttons">
             <div class="log-in-out">
-                <a href="./sign-in.html" class="sign-in">Sign in</a>
-                <a href="./sign-up.html" class="sign-up">Sign up</a>
+                <a href="#" class="sign-in">Sign in</a> <!-- To Do -->
+                <a href="/customers/signup" class="sign-up">Sign up</a>
             </div>
-            <a href="./sell-now.html" class="sell-now">Sell now</a>
+            <a href="#" class="sell-now">Sell now</a> <!-- Provider Side -->
         </div>
     </div>  
 
@@ -67,18 +67,15 @@
     <section class="signup">
         <div class="signup-container">
             <div class="header">
-                <h1>Sign up to sell today!</h1>
-                <span>Already have an account? <a href="./sign-in.html">Sign In</a></span>
+                <h1>Sign up to buy today!</h1>
+                <span>Already have an account? <a href="#">Sign In</a></span> <!-- To Do -->
             </div>
             <div class="form">
-                <form action="/register" method="post">
+                <form action="/customers/signup" method="post" enctype="multipart/form-data">
                     <input type="text" name="username" id="username" placeholder="Username" />
                     <input type="email" name="email" placeholder="Email" id="email"/>
                     <input type="password" name="password" placeholder="Password" id="password" />
-                    <input type="text" name="store-name" placeholder="Store name" id="store-name">
-                    <input type="text" name="store-description" placeholder="Description" id="store-description">
-                    <input type="text" name="location" placeholder="location"id="location">
-                    <input type="file" name="shop-image" placeholder="Upload storefront image!"accept="image/png, image/jpeg">   
+                    <input type="text" name="address" placeholder="Address" id="address"> 
                     <button type="submit">Sign Up</button>
                 </form>
             </div>
@@ -137,7 +134,7 @@
                 Useful links
                 </h6>
                 <p>
-                <a class="text-white">Your Account</a>
+                <a href="/customers/{id}" class="text-white">Your Account</a>
                 </p>
                 <p>
                 <a class="text-white">Become an Affiliate</a>
