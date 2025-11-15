@@ -1,15 +1,14 @@
 package com.example.spartanthrift.shop;
 
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/shops/statistics")
 public class ShopStatisticsController {
-    private final ShopService shopStatisticsService;
+    private final ShopStatisticsService shopStatisticsService;
 
-    public ShopStatisticsController(ShopService shopStatisticsService) {
+    public ShopStatisticsController (ShopStatisticsService shopStatisticsService) {
         this.shopStatisticsService = shopStatisticsService;
     }
 
