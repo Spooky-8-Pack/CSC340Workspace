@@ -30,7 +30,10 @@ public class Review {
     @JsonIgnoreProperties("reviews")
     private Product product;
 
-    private Double rating;
+    @NotNull
+    @Min(1)
+    @Max(5)
+    private Double overallRating;
 
     @Column(columnDefinition = "TEXT")
     private String comment;
@@ -41,10 +44,10 @@ public class Review {
     private String sellerResponse;
 
     //constructor given no date
-    public Review(Customer customer, Product product, Double rating, String comment, LocalDateTime createdAt) {
+    public Review(Customer customer, Product product, Double overallRating, String comment, LocalDateTime createdAt) {
         this.customer = customer;
         this.product = product;
-        this.rating = rating;
+        this.overallRating = overallRating;
         this.comment = comment;
         this.createdAt = createdAt;
     }
@@ -53,21 +56,21 @@ public class Review {
     public Review(){}
 
     //constructor given no ID
-    public Review(Customer customer, Product product, Double rating, String comment, LocalDateTime createdAt, String sellerResponse) {
+    public Review(Customer customer, Product product, Double overallRating, String comment, LocalDateTime createdAt, String sellerResponse) {
         this.customer = customer;
         this.product = product;
-        this.rating = rating;
+        this.overallRating = overallRating;
         this.comment = comment;
         this.createdAt = createdAt;
         this.sellerResponse = sellerResponse;
     }
 
     //constructor given ID
-    public Review(Long id, Customer customer, Product product, Double rating, String comment, LocalDateTime createdAt, String sellerResponse) {
+    public Review(Long id, Customer customer, Product product, Double overallRating, String comment, LocalDateTime createdAt, String sellerResponse) {
         this.id = id;
         this.customer = customer;
         this.product = product;
-        this.rating = rating;
+        this.overallRating = overallRating;
         this.comment = comment;
         this.createdAt = createdAt;
         this.sellerResponse = sellerResponse;
@@ -90,7 +93,6 @@ public class Review {
         this.customer = customer;
     }
 
-    
     public Product getProduct() {
         return product;
     }
@@ -99,12 +101,12 @@ public class Review {
         this.product = product;
     }
 
-    public Double getRating() {
-        return rating;
+    public Double getOverallRating() {
+        return overallRating;
     }
 
-    public void setRating(Double rating) {
-        this.rating = rating;
+    public void setRating(Double overallRating) {
+        this.overallRating = overallRating;
     }
 
         public String getComment() {
