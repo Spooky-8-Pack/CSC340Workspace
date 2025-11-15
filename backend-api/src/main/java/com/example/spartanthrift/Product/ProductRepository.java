@@ -11,4 +11,5 @@ import com.example.spartanthrift.shop.Shop;
 public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> findByShopAndAvailable(Shop shop, boolean available);
     List<Product> findByAvailable(boolean available);
+    List<Product> findByShop(Shop shop);
 }
