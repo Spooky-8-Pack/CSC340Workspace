@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="./css/seller-shop.css">
+    <link rel="stylesheet" href="./css/shop.css">
     <link rel="stylesheet" href="./css/navbar.css">
     <link rel="stylesheet" href="./css/login-panel.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -82,8 +82,8 @@
                 <div class="reviews">
                     <div class="review-card">
                         <h3>Reviewer Name</h3>
-                        <p>Stars: </p>
-                        <p>Reviwer Comment</p>
+                        <p>Rating: </p>
+                        <p>Comment</p>
 
                     </div>
                 </div>
@@ -93,14 +93,10 @@
                 </div>
             </div>
 
-            
-
         </div>
 
 
     </section>
-
-
 
 
     
@@ -247,7 +243,13 @@
     </footer> 
 
     <script src="./js/login-panel.js" defer></script>
-    <script src="./js/seller-shop.js" defer></script>
+    <script src="./js/seller-shop.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            filterSelection("products");
+        });
+    </script>
     
     
 </body>
