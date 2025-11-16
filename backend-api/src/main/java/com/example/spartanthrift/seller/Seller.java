@@ -1,8 +1,7 @@
-package com.example.spartanthrift.seller;
+package com.example.spartanthrift.Seller;
 
 import com.example.spartanthrift.shop.Shop;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
