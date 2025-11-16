@@ -17,7 +17,7 @@ import com.example.spartanthrift.Product.Product;
 import com.example.spartanthrift.Product.ProductRepository;
 import com.example.spartanthrift.Review.Review;
 import com.example.spartanthrift.Review.ReviewRepository;
-import com.example.spartanthrift.seller.SellerService;
+import com.example.spartanthrift.Seller.SellerService;
 
 import jakarta.persistence.EntityNotFoundException;
 
