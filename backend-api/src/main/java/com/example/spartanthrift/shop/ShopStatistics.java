@@ -72,7 +72,7 @@ public class ShopStatistics {
         this.availableProducts = availableProducts;
     }
 
-    public int productsSold() {
+    public int getProductsSold() {
         return productsSold;
     }
 
