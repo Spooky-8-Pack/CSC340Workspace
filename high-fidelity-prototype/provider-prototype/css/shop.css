@@ -1,0 +1,157 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.shop-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    min-height: 50vh;
+    padding: 30px;
+}
+
+.shop-image {
+    width: 400px;
+    height: 400px;
+}
+
+.shop-details {
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+}
+
+.shop-details h3 {
+    font-size: 36px;
+}
+
+.shop-details p {
+    font-size: 30px;
+}
+
+
+
+.seller-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-size: larger;
+}
+
+#seller-image {
+    border-radius: 50%;
+    width: 75px;
+    height: 75px;
+}
+
+.shop-stuff {
+    background-color: #F5F5F5;
+    min-height: 100vh;
+}
+
+/* Filtering */ 
+.btnContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    gap: 20px;
+    padding: 30px 20px 20px 20px;
+}
+
+.btnContainer button {
+  background: #FF4742;
+  border: 1px solid #FF4742;
+  border-radius: 6px;
+  box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-block;
+  font-family: nunito,roboto,proxima-nova,"proxima nova",sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 16px;
+  min-height: 40px;
+  outline: 0;
+  padding: 20px 0px 0px 0px 14px;
+  text-align: center;
+  text-rendering: geometricprecision;
+  text-transform: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+}
+
+.btnContainer button:hover {
+  background-color: initial;
+  background-position: 0 0;
+  color: #FF4742;
+  
+}
+
+.filterBtn.active {
+    font-weight: bold;
+    color: black;
+}
+
+.filter-container > div {
+    display: none;
+}
+
+.filter-container > div.active {
+  display: block;
+}
+
+/* About */
+.about {
+    padding: 20px 30px 0px 30px; /* Top right bottom left */
+}
+
+.about p {
+    font-size: larger;
+    color: black;
+}
+
+/* Products */
+
+.products {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    padding: 20px 30px 20px 30px;
+}
+
+.product-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;    
+    background-color: white;
+    width: 20%;
+    padding: 10px 0px 10px 0px;
+
+    flex-flow: column nowrap;
+    border-radius: 10      px;
+}
+
+.product-card p {
+    text-align: start;
+}
+
+/* Reviews */
+
+.reviews {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    padding: 20px 30px 20px 30px;
+}
+
+.review-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20%;
+    background-color: white;
+    border-radius: 10px;
+    flex-flow: column nowrap;
+}
