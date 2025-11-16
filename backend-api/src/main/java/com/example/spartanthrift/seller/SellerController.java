@@ -1,4 +1,4 @@
-package com.example.spartanthrift.seller;
+package com.example.spartanthrift.Seller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
