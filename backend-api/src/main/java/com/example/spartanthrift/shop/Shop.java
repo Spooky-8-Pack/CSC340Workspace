@@ -1,6 +1,6 @@
 package com.example.spartanthrift.shop;
 
-import com.example.spartanthrift.seller.Seller;
+import com.example.spartanthrift.Seller.Seller;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.Column;

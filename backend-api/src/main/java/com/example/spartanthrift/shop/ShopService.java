@@ -6,8 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.example.spartanthrift.seller.Seller;
-import com.example.spartanthrift.seller.SellerRepository;
+import com.example.spartanthrift.Seller.Seller;
+import com.example.spartanthrift.Seller.SellerRepository;
 
 import jakarta.transaction.Transactional;
 
