@@ -1,6 +1,7 @@
 package com.example.spartanthrift.Product;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -27,6 +28,9 @@ public class Product {
     private BigDecimal price;
 
     private boolean available = true;
+
+    @Column
+    private LocalDate soldDate;
 
     //review mapping here
 
@@ -92,5 +96,12 @@ public class Product {
     public void setAvailable(boolean available) {
         this.available = available;
     }
+    
+    public LocalDate getSoldDate() {
+        return soldDate;
+    }
 
+    public void setSoldDate(LocalDate soldDate) {
+        this.soldDate = soldDate;
+    }
 }

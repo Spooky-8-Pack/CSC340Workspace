@@ -21,14 +21,14 @@ public class ReviewService {
     public double getAverageRating(Product product) {
         List<Review> reviews = reviewRepository.findByProduct(product);
         OptionalDouble average = reviews.stream()
-                .mapToDouble(review -> review.getRating() != null ? review.getRating() : 0.0)
+                .mapToDouble(review -> review.getOverallRating() != null ? review.getOverallRating() : 0.0)
                 .average();
         return average.orElse(0.0);
     }
 
     //create review
     public Review createReview(Review review) {
-        double rating = review.getRating() != null ? review.getRating() : 0;
+        double rating = review.getOverallRating() != null ? review.getOverallRating() : 0;
 
         review.setRating(rating);
         review.setCreatedAt(LocalDateTime.now());

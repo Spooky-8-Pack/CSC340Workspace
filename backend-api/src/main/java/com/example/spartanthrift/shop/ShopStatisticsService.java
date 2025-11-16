@@ -1,137 +1,162 @@
-// package com.example.spartanthrift.shop;
+package com.example.spartanthrift.shop;
 
-// import com.example.spartanthrift.seller.review.ReviewRepository;
-// import com.example.spartanthrift.seller.SellerService;
-// import com.example.spartanthrift.product.Product;
-// import com.example.spartanthrift.product.ProductRepository;
-// import com.example.spartanthrift.review.Review;
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.format.DateTimeFormatter;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
-// import jakarta.persistence.EntityNotFoundException;
-// import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-// import org.springframework.stereotype.Service;
-// import jakarta.transaction.Transactional;
+import com.example.spartanthrift.Product.Product;
+import com.example.spartanthrift.Product.ProductRepository;
+import com.example.spartanthrift.Review.Review;
+import com.example.spartanthrift.Review.ReviewRepository;
+import com.example.spartanthrift.Seller.SellerService;
 
-// import java.math.BigDecimal;
-// import java.time.LocalDateTime;
-// import java.time.format.DateTimeFormatter;
-// import java.util.*;
-// import java.util.stream.Collectors;
+import jakarta.persistence.EntityNotFoundException;
 
-// @Service
-// @RequiredArgsConstructor
-// @Transactional(readOnly = true)
-// public class ShopStatisticsService {
-//     private final ShopRepositry shopRepository;
-//     private final ProductRepository productRepository;
-//     private final ReviewRepository reviewRepository;
-//     private final SellerService sellerService;
+@Service
+@Transactional(readOnly = true)
+public class ShopStatisticsService {
+    private final ShopRepository shopRepository;
+    private final ProductRepository productRepository;
+    private final ReviewRepository reviewRepository;
+    private final SellerService sellerService;
 
-//     public ShopStatistics getShopStatistics(Long sellerId) {
-//         Shop shop = shopRepository.findBySeller(ShopService.getSellerById(sellerId).orElseThrow(() -> new EntityNotFoundException("Shop not found")));
+    public ShopStatisticsService(ShopRepository shopRepository, ProductRepository productRepository, ReviewRepository reviewRepository,
+        SellerService sellerService) {
+            this.shopRepository = shopRepository;
+            this.productRepository = productRepository;
+            this.reviewRepository = reviewRepository;
+            this.sellerService = sellerService;
+    }
 
-//         ShopStatistics stats = new ShopStatistics();
+    public ShopStatistics getShopStatistics(Long sellerId) {
+        Shop shop = shopRepository.findBySeller(sellerService.getSellerById(sellerId)).orElseThrow(() -> new EntityNotFoundException("Shop not found"));
+    
+        ShopStatistics stats = new ShopStatistics();
 
-//         // Calculate revenue statistics
-//         calculateRevenueStatistics(stats, shop);
+        // Calculate product statistics
+        calculateProductStatistics(stats, shop);
 
-//         // Calculate product statistics
-//         calculateProductStatistics(stats, shop);
+        // Calculate rating statistics
+        calculateRatingStatistics(stats, shop);
 
-//         // Calculate rating statistics
-//         calculateRatingStatistics(stats, shop);
+        // Calculate review statistics
+        calculateReviewStatistics(stats, shop);
 
-//         // Calculate review statistics
-//         calculateReviewStatistics(stats, shop);
+        return stats;
 
-//         return stats;
+    }
 
-//     }
+    /**
+     *  Get product statistics (total products, total available products, total products sold)
+     * @param stats
+     * @param shop
+     */
+    private void calculateProductStatistics(ShopStatistics stats, Shop shop) {
+        List<Product> products = productRepository.findByShop(shop);
+        
+        stats.setTotalProducts(products.size()); // get total products
+        stats.setAvailableProducts((int) products.stream().filter(Product::isAvailable).count()); // get total available products
+        stats.setProductsSold((int) products.stream().filter(p -> !p.isAvailable()).count()); // get total unavailable (sold) products
+    }
 
-//     public void calculateRevenueStatistics(ShopStatistics stats, Shop shop) {
-//         List<Products> allProducts = productRepository.findByProductShopSeller(shop.getSeller());
+    // Revenue Statistics
+        // totalRevenue
+        // monthlyRevenue
+        // revenueByMonth
 
-//         // Total revenue
-//         BigDecimal total = allProducts.stream().map(sub -> sub.getProduct.getPrice()).reduce(BigDecimal.ZERO, BigDecimal::add);
-//         stats.setTotalRevenue(total);
+    public void calculateRevenueStatistics(ShopStatistics stats, Shop shop) {
+        List<Product> soldProducts = productRepository.findByShopAndAvailable(shop, false);
 
-//         // Monthly revenue (current month)
-//         LocalDateTime startOfMonth = LocalDateTime.now().withDayOfMonth(1).withHour(0).withMinute(0);
-//         BigDecimal monthly = allProducts.stream()
-//             .filter(sub -> sub.getStartDate().isAfter(startOfMonth))
-//             .map(sub -> sub.getProduct.getPrice())
-//             .reduce(BigDecimal.ZERO, BigDecimal::add);
-//         stats.setMonthlyRevenue(monthly);
+        // Total revenue
+        BigDecimal totalRevenue = soldProducts.stream()
+            .map(Product::getPrice)
+            .filter(price -> price != null)
+            .reduce(BigDecimal.ZERO, BigDecimal::add);
 
-//         // Revenue by month (last 6 months)
-//         Map<String, BigDecimal> revenueByMonth = new LinkedHashMap<>();
-//         DateTimeFormatter monthFormatter = DateTimeFormatter.ofPattern("MMMM yyyy");
+        stats.setTotalRevenue(totalRevenue);
 
-//         for (int i = 5; i >= 0; i--) {
-//             LocalDateTime monthStart = LocalDateTime.now().minusMonths(i).withDayOfMonth(1).withHour(0).withMinute(0);
-//             LocalDateTime monthEnd = monthStart.plusMonths(1);
+        // Monthly revenue
 
-//             BigDecimal monthlyRev = allProducts.stream()
-//                 .filter(sub -> sub.getStartDate().isAfter(monthStart) && sub.getStartDate)
-//         }
-//         stats.setRevenueByMonth(revenueByMonth);
-//     }
+        Month currentMonth = LocalDate.now().getMonth();
+        BigDecimal monthlyRevenue = soldProducts.stream()
+            .filter(p -> p.getSoldDate() != null && p.getSoldDate().getMonth().equals(currentMonth))
+            .map(Product::getPrice)
+            .filter(Objects::nonNull)
+            .reduce(BigDecimal.ZERO, BigDecimal::add);
 
-//     private void calculateProductStatistics(ShopStatistics stats, Shop shop) {
-//         List<Product> boxes = productRepository.findByShopAndAvailable(shop, true);
-//         stats.setTotalProducts(products.size());
-//         stats.setActiveBoxes((int) products.stream().filter(Product::isAvailable).count());
+        stats.setMonthlyRevenue(monthlyRevenue);
 
-//         // Most popular products
-//         Map<String, Long> popularProducts = products.stream()
-//             .collect(Collectors.toMap(
-//                 Product::getName,
-//                 Product -> productRepository.findByProductName(product).stream()
-//                 .filter(Product:isAvailable)
-//                 .count()
-//             ));
-//             stats.setMostPopularProductS(popularProducts);
-//     }
+        // Revenue by month (last 6 months)
+        Map<String, BigDecimal> revenueByMonth = new LinkedHashMap<>();
+        DateTimeFormatter monthFormatter = DateTimeFormatter.ofPattern("MMMM yyyy");
 
-//      private void calculateRatingStatistics(ShopStatistics stats, Shop shop) {
-//         List<Review> allReviews = reviewRepository.findByProduceBoxFarmFarmer(shop.getSeller());
+        for (int i = 5; i >= 0; i--) {
+            LocalDate monthStart = LocalDate.now().minusMonths(i).withDayOfMonth(1);
+            LocalDate monthEnd = monthStart.plusMonths(1);
 
-//         // Average ratings
-//         stats.setAverageOverallRating(calculateAverageRating(allReviews, Review::getOverallRating));
-//         // Ratings by box
-//         Map<String, Double> ratingsByProduct = shop.getProducts().stream()
-//                 .collect(Collectors.toMap(
-//                         Products::getName,
-//                         product -> calculateAverageRating(
-//                                 reviewRepository.findByProductName(product),
-//                                 Review::getOverallRating)));
-//         stats.setRatingsByProduct(ratingsByProduct);
-//     }
+            BigDecimal monthlyRev = soldProducts.stream()
+                .filter(p -> p.getSoldDate() != null)
+                .filter(p -> !p.getSoldDate().isBefore(monthStart) && p.getSoldDate().isBefore(monthEnd))
+                .map(product -> product.getPrice())
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+            
+            revenueByMonth.put(monthStart.format(monthFormatter), monthlyRev);
+        }
 
-//     private void calculateReviewStatistics(ShopStatistics stats, Farm farm) {
-//         List<Review> allReviews = reviewRepository.findByProductShopSeller(shop.getSeller());
-//         stats.setTotalReviews(allReviews.size());
+        stats.setRevenueByMonth(revenueByMonth);
 
-//         // Response rate
-//         long reviewsWithResponse = allReviews.stream()
-//                 .filter(review -> review.getSellerResponse() != null)
-//                 .count();
-//         stats.setResponseRate(allReviews.isEmpty() ? 0.0 : (double) reviewsWithResponse / allReviews.size() * 100);
+    }
 
-//         // Rating distribution
-//         Map<Double, Long> distribution = allReviews.stream()
-//                 .collect(Collectors.groupingBy(
-//                         review -> review.getOverallRating(),
-//                         Collectors.counting()));
-//         stats.setRatingDistribution(distribution);
-//     }
+    // Rating Statistics
 
-//     private double calculateAverageRating(List<Review> reviews,
-//             java.util.function.Function<Review, Double> ratingExtractor) {
-//         return reviews.stream()
-//                 .mapToDouble(ratingExtractor::apply)
-//                 .average()
-//                 .orElse(0.0);
-//     }
+    private void calculateRatingStatistics(ShopStatistics stats, Shop shop) {
+        List<Review> reviews = reviewRepository.findByProductShopSeller(shop.getSeller());
 
-// }
+        // Average ratings
+        stats.setAverageOverallRating(calculateAverageRating(reviews, Review::getOverallRating));
+        
+    }
+
+    private double calculateAverageRating(List<Review> reviews, java.util.function.Function<Review, Double> ratingExtractor) {
+        return reviews.stream()
+            .mapToDouble(ratingExtractor::apply)
+            .average()
+            .orElse(0.0);
+    }
+
+    
+    // Review Statistics
+
+    private void calculateReviewStatistics(ShopStatistics stats, Shop shop) {
+       List<Review> reviews = reviewRepository.findByProductShopSeller(shop.getSeller());
+       stats.setTotalReviews(reviews.size());
+
+       // Response rate
+       long reviewsWithResponse = reviews.stream()
+            .filter(review -> review.getSellerResponse() != null)
+            .count();
+        
+        stats.setResponseRate(reviews.isEmpty() ? 0.0 : (double) reviewsWithResponse / reviews.size() * 100);
+
+        // Rating distribution
+        Map<Double, Long> distribution = reviews.stream() 
+            .collect(Collectors.groupingBy(
+                review -> review.getOverallRating(),
+                Collectors.counting()
+            ));
+        
+            stats.setRatingDistribution(distribution);
+        
+    }
+
+
+}

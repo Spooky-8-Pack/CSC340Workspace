@@ -3,8 +3,6 @@ package com.example.spartanthrift.shop;
 import java.math.BigDecimal;
 import java.util.Map;
 
-import org.springframework.boot.autoconfigure.pulsar.PulsarAutoConfiguration;
-
 public class ShopStatistics {
     // Revenue Statistics
     private BigDecimal totalRevenue;
@@ -13,6 +11,7 @@ public class ShopStatistics {
 
     // Product Statistics
     private int totalProducts;
+    private int availableProducts;
     private int productsSold;
 
     // Rating Statistics
@@ -26,12 +25,13 @@ public class ShopStatistics {
     public ShopStatistics() {
     }
 
-    public ShopStatistics(BigDecimal totalRevenue, BigDecimal monthlyRevenue, Map<String, BigDecimal> revenueByMonth, int totalProducts, int productsSold, 
+    public ShopStatistics(BigDecimal totalRevenue, BigDecimal monthlyRevenue, Map<String, BigDecimal> revenueByMonth, int totalProducts, int availableProducts, int productsSold, 
         double averageOverallRating, long totalReviews, double responseRate, Map<Double, Long> ratingDistribution){
             this.totalRevenue = totalRevenue;
             this.monthlyRevenue = monthlyRevenue;
             this.revenueByMonth = revenueByMonth;
             this.totalProducts = totalProducts;
+            this.availableProducts = availableProducts;
             this.totalProducts = totalProducts;
             this.productsSold = productsSold;
             this.averageOverallRating = averageOverallRating;
@@ -64,7 +64,15 @@ public class ShopStatistics {
         this.totalProducts = totalProducts;
     }
 
-    public int productsSold() {
+    public int getAvailableProducts() {
+        return availableProducts;
+    }
+
+    public void setAvailableProducts(int availableProducts) {
+        this.availableProducts = availableProducts;
+    }
+
+    public int getProductsSold() {
         return productsSold;
     }
 

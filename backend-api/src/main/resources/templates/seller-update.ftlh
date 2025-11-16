@@ -2,13 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="./css/login-panel.css">
-    <link rel="stylesheet" href="./css/navbar.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/login-panel.css">
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/provider-create.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">   
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
-    <title>Sign up</title>
+    <title>Sell Now</title>
 </head>
 <body>
     
@@ -61,29 +62,26 @@
             </div>
             <a href="./sell-now.html" class="sell-now">Sell now</a>
         </div>
-    </div>  
+    </div>   
 
-
-    <section class="signup">
+    <div class="signup">
         <div class="signup-container">
             <div class="header">
-                <h1>Sign up to sell today!</h1>
-                <span>Already have an account? <a href="./sign-in.html">Sign In</a></span>
+                <h1>Hello, ${seller.name}! Update your shop: ${seller.shop.shopName}</h1>
             </div>
             <div class="form">
                 <form action="/register" method="post">
-                    <input type="text" name="username" id="username" placeholder="Username" />
-                    <input type="email" name="email" placeholder="Email" id="email"/>
-                    <input type="password" name="password" placeholder="Password" id="password" />
-                    <input type="text" name="store-name" placeholder="Store name" id="store-name">
-                    <input type="text" name="store-description" placeholder="Description" id="store-description">
-                    <input type="text" name="location" placeholder="location"id="location">
-                    <input type="file" name="shop-image" placeholder="Upload storefront image!"accept="image/png, image/jpeg">   
-                    <button type="submit">Sign Up</button>
+                    <input type="text" name="shopName" id="shopName" value="${seller.shop.shopName}" placeholder="Shop name">
+                    <input type="text" name="description" id="description" value="${seller.shop.description}" placeholder="Shop description">
+                    <input type="text" name="location" id="location" value="${seller.shop.location}" placeholder="Location">
+                    <input type="file" name="shopImage" id="shopImage" placeholder="Upload storefront image!"accept="image/png, image/jpeg">
+                    <small>Add an  image for your shop storefront!</small>  
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    <a href="/api/sellers/${seller.sellerId?c}" class="btn btn-outline-danger">Cancel</a>
                 </form>
             </div>
         </div>
-    </section>
+    </div>
 
     <!-- Footer from https://mdbootstrap.com/snippets/standard/mdbootstrap/2885027?view=side -->
     <footer
