@@ -72,16 +72,20 @@
             </div>
             <div class="form">
                 <form action="/register" method="post">
+                    <h3>Seller Info</h3>
                     <input type="text" name="name" id="name" placeholder="Name">
                     <input type="email" name="email" id="email" placeholder="Email"/>
                     <input type="password" name="password" id="password" placeholder="Password"/>
                     <input type="file" name="sellerImage" id="sellerImage" placeholder="Upload your picture!"accept="image/png, image/jpeg">
                     <small>Add an  image of yourself!</small>  
+
+                    <h3>Shop Info</h3>
                     <input type="text" name="storeName" id="storeName" placeholder="Store name">
                     <input type="text" name="description" id="description" placeholder="Shop description">
                     <input type="text" name="location" id="location" placeholder="Location">
                     <input type="file" name="shopImage" id="shopImage" placeholder="Upload storefront image!"accept="image/png, image/jpeg">
                     <small>Add an  image for your shop storefront!</small>  
+                    
                     <button type="submit" class="btn btn-primary">Save</button>
                     <a href="/api/sellers" class="btn btn-outline-danger">Cancel</a>
                 </form>
