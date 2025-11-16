@@ -36,22 +36,22 @@
     <section class="shop">
 
         <div class="shop-header">
-            <img class="shop-image" src="./assets/shop.jpg">
+            <img class="shop-image" src="/store-pictures/${(seller.shop.shopImage)!'No_Image_Available.jpg'}">
             <div class="shop-details">
                 <div class="location">
                     <h3>Location</h2>
-                    <p>Your location</p>
+                    <p>${seller.shop.location}</p>
                 </div>
                 <div class="Rating">
                     <h3>Rating</h3>
-                    <p>Your Rating</p>
+                    <p>${seller.shop.overallRating}</p>
                 </div>
                 <a href="#">Edit Shop</a>
             </div>
             <div class="seller-info">
                 <h2>Seller</h2>
-                <img id="seller-image" src="./assets/default-face.png">
-                <p>Full name</p>
+                <img id="seller-image" src="/seller-pictures/${(seller.sellerImage)!'No_Image_Available.jpg'}">
+                <p>${seller.name}</p>
             </div>
         </div>
 
@@ -66,24 +66,24 @@
             <div class="filter-container">
 
                 <div class="about">
-                    <p>Shop description</p>
+                    <p>${seller.shop.description}</p>
                 </div>
 
                 <div class="products">
                     <div class="product-card">
-                        <img src="./assets/No_Image_Available.jpg" style="width: 200px; height: 200px">
+                        <img src="/products/${(seller.product.productImage)!'No_Image_Available.jpg'}" style="width: 200px; height: 200px">
                         <div class="prod-details">
-                            <p>Name</p>
-                            <p>Price</p>
+                            <p>${seller.shop.product.name}</p>
+                            <p>${seller.shop.product.price}</p>
                         </div>
                     </div>
                 </div>
 
                 <div class="reviews">
                     <div class="review-card">
-                        <h3>Reviewer Name</h3>
-                        <p>Rating: </p>
-                        <p>Comment</p>
+                        <h3>${customer.name}</h3>
+                        <p>Rating: ${customer.review.overallRating} </p>
+                        <p>${customer.review.comment}</p>
 
                     </div>
                 </div>
