@@ -71,7 +71,7 @@
                 <span>Already have an account? <a href="./sign-in.html">Sign In</a></span>
             </div>
             <div class="form">
-                <form action="/register" method="post">
+                <form action="/api/sellers" method="post" enctype="multipart/form-data">
                     <h3>Seller Info</h3>
                     <input type="text" name="name" id="name" placeholder="Name">
                     <input type="email" name="email" id="email" placeholder="Email"/>
