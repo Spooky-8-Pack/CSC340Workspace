@@ -1,6 +1,7 @@
 package com.example.spartanthrift.shop;
 
 import com.example.spartanthrift.Seller.Seller;
+import com.example.spartanthrift.Product.Product;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.Column;
@@ -10,9 +11,13 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
-// import com.example.spartanthrift.product.product; // Import for after merging to access the product class
+
+import java.util.List;
+import java.util.ArrayList;
 
 
 // import java.util.List;
@@ -40,6 +45,9 @@ public class Shop {
 
     @NotBlank
     private String location;
+
+    @OneToMany(mappedBy = "shop", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Product> products = new ArrayList<>();
 
     public Shop() {
     }
@@ -87,8 +95,12 @@ public class Shop {
         return id;
     }
 
-    // @OneToMany(mappedBy = "shop", cascade = CascadeType.ALL)
-    // @JsonIgnoreProperties("shop")
-    // private List<Product> products = new ArrayList<>();
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
+    }
 
 }
