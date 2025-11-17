@@ -24,6 +24,7 @@ public class CustomerController {
         return "customer-sign-in";
     }
 
+    //find customer by email in form then redirect to profile 
     @GetMapping("/customers/signin/form")
     public Object findByEmail(String email){
         Customer customer = customerService.findByEmail(email);

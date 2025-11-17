@@ -55,6 +55,7 @@
     }
   </style>
 </head>
+<!-- Currently password does nothing, the login is email based. -->
 <body>
   <h1 style="text-align: center;"> Sign In </h1>
   <main>
