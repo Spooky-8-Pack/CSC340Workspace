@@ -17,11 +17,8 @@ import com.example.spartanthrift.shop.ShopService;
 @RestController
 public class ProductController {
     @Autowired
-    private ProductService productService;
+    private final ProductService productService;
     private final ShopService shopService;
-
-    public ProductController() {
-    }
 
     public ProductController(ProductService productService, ShopService shopService) {
         this.productService = productService;
