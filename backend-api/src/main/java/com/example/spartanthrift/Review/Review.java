@@ -13,6 +13,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class Review {
@@ -30,7 +33,6 @@ public class Review {
     @JsonIgnoreProperties("reviews")
     private Product product;
 
-    @NotNull
     @Min(1)
     @Max(5)
     private Double overallRating;
