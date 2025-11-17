@@ -11,26 +11,6 @@
       margin: 0; padding: 0;
       background: #f9f9f9;
     }
-    header {
-      background: #880000;
-      padding: 1em;
-      color: white;
-      text-align: center;
-    }
-    nav {
-      background: #333;
-      display: flex;
-      justify-content: center;
-    }
-    nav a {
-      color: white;
-      padding: 1em;
-      text-decoration: none;
-      display: block;
-    }
-    nav a:hover {
-      background-color: #575757;
-    }
     main {
       max-width: 600px;
       margin: 2em auto;
@@ -64,7 +44,7 @@
       margin-top: 2em;
       padding: 0.75em;
       font-size: 1em;
-      background-color: #4CAF50;
+      background-color: #FFB71B;
       color: white;
       border: none;
       border-radius: 4px;
@@ -72,22 +52,14 @@
       transition: background-color 0.3s ease;
     }
     button:hover {
-      background-color: #45a049;
+      background-color: #fbd688;
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Update Profile</h1>
-  </header>
-  <nav>
-    <a href="/home">Home</a>
-  </nav>
   <main>
+    <h2> Update Your Profile </h2>
     <form id="new-customer" action="/customers/${customer.customerId}/update" method="post" enctype="multipart/form-data">
-      <label for="customerId">ID</label>
-      <input type="text" id="customerId" name="customerId" value="${customer.customerId}" readonly />
-
      <label for="name">Name</label>
       <input type="text" id="name" name="name" value="${customer.name}" placeholder="Name" />
 
@@ -101,7 +73,7 @@
       <input type="text" id="password" name="password" value="${customer.password}" rows="4" placeholder="Password"/>
 
       <button type="submit">Update Profile</button>
-      <a href="/customers/${customer.customerId}">Cancel</a>
+      <a href="/customers/signin/${customer.customerId}">Cancel</a>
 
       <div id="message" role="alert"></div>
     </form>

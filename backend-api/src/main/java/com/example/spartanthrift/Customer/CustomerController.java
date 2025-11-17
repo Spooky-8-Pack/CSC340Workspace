@@ -66,7 +66,7 @@ public class CustomerController {
     @PostMapping("/customers/{id}/update")
     public String updateCustomer(@PathVariable Long id, Customer customerDetails) {
         customerService.updateCustomer(id, customerDetails);
-        return "redirect:/customers/" + id;
+        return "redirect:/customers/signin/" + id;
     }
 
     //delete profile
