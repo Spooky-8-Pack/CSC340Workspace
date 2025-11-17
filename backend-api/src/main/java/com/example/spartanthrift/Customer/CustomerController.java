@@ -12,12 +12,20 @@ public class CustomerController {
 
     //get customer profile - view profile
     @GetMapping("/customers/{id}")
-    public Object getCustomerById(@PathVariable Long id, Model model) {
-        model.addAttribute("customer", customerService.getCustomerById(id));
-        model.addAttribute("title", "Customer ID: ");
+    public Object getCustomerProfile(@PathVariable Long id, String email, Model model) {
+        Customer customer = customerService.findByEmail(email);
+        Long customerId = customer.getCustomerId();
+        model.addAttribute("customer", customerId);
+        model.addAttribute("title", "Customer: " + customerId);
         return "customer-profile";
     }
-    
+
+    //get customer signin form
+    @GetMapping("/customers/signin")
+    public Object showSigninForm(Model model){
+        return "customer-sign-in";
+    }
+
     //get customer cart - view cart
     @GetMapping("/customers/{id}/cart")
     public Object getCustomerCart(@PathVariable Long id){
