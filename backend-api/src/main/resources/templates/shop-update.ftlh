@@ -70,13 +70,13 @@
                 <h1>Hello, ${seller.name}! Update your shop: ${seller.shop.shopName}</h1>
             </div>
             <div class="form">
-                <form action="/register" method="post">
+                <form action="/api/shops/update/${shop.shopId}" method="post" enctype="multipart/form-data">
                     <input type="text" name="shopName" id="shopName" value="${seller.shop.shopName}" placeholder="Shop name">
                     <input type="text" name="description" id="description" value="${seller.shop.description}" placeholder="Shop description">
                     <input type="text" name="location" id="location" value="${seller.shop.location}" placeholder="Location">
                     <input type="file" name="shopImage" id="shopImage" placeholder="Upload storefront image!"accept="image/png, image/jpeg">
                     <small>Add an  image for your shop storefront!</small>  
-                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="submit" class="btn btn-primary">Update Shop</button>
                     <a href="/api/sellers/${seller.sellerId?c}" class="btn btn-outline-danger">Cancel</a>
                 </form>
             </div>

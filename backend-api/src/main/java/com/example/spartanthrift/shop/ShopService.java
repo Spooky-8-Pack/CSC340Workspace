@@ -1,13 +1,20 @@
 package com.example.spartanthrift.shop;
 
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.example.spartanthrift.Seller.Seller;
 import com.example.spartanthrift.Seller.SellerRepository;
+import com.example.spartanthrift.Seller.SellerService;
 
 import jakarta.transaction.Transactional;
 
@@ -15,37 +22,91 @@ import jakarta.transaction.Transactional;
 @Transactional
 public class ShopService {
     private final ShopRepository shopRepository;
-    private final SellerRepository sellerRepository;  
+    private final SellerRepository sellerRepository; 
+    private final SellerService sellerService; 
 
-    public ShopService(ShopRepository shopRepository, SellerRepository sellerRepository) {
+    private static final String UPLOAD_DIR = "src/main/resources/static/seller-images/";
+
+
+    public ShopService(ShopRepository shopRepository, SellerRepository sellerRepository, SellerService sellerService) {
         this.shopRepository = shopRepository;
         this.sellerRepository = sellerRepository;
+        this.sellerService = sellerService;
     }
 
-    public Shop createShop(Long sellerId, String shopName, String description, String location) {
-        Seller seller = sellerRepository.findById(sellerId).orElseThrow(() -> new RuntimeException("Seller not found"));
-        
-        if(shopRepository.existsByShopName(shopName)) {
+    /**
+     *  Method to create a Shop associated with a Seller
+     * 
+     * @param seller
+     * @param shop
+     * @param shopImage
+     * @return      The created shop
+     */
+    public Shop createShop(Seller seller, Shop shop, MultipartFile shopImage ) {
+        shop.setSeller(seller);
+
+        // Check for duplicate shop name
+        if (shopRepository.existsByShopName(shop.getShopName())) {
             throw new IllegalStateException("Shop name already exists");
         }
-
-        Shop shop = new Shop(seller, shopName, description, location);
+        
+        // Handle shop image
+        String originalFileName = shopImage.getOriginalFilename();
+        if (originalFileName != null && originalFileName.contains(".")) {
+            String fileExtension = originalFileName.substring(originalFileName.lastIndexOf(".") + 1);
+            String fileName = seller.getSellerId() + "-shop." + fileExtension;
+            saveFile(shopImage, fileName);
+            shop.setShopImagePath(fileName);
+        } else {
+            shop.setShopImagePath("No_Image_Available.png");
+        }
         
         return shopRepository.save(shop);
     }
 
-    public Shop updateShop(Long id, Shop shopDetails) {
-        Shop shop = shopRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Shop not found"));
-        String newName = shopDetails.getShopName();
-
-        if(newName != null && !shop.getShopName().equals(shopDetails.getShopName()) && shopRepository.existsByShopName(shopDetails.getShopName())) {
-            throw new IllegalStateException("Shop name already exists");
+    /**
+     *  Helper function to save image file paths
+     * 
+     * @param file
+     * @param fileName
+     */
+    public void saveFile(MultipartFile file, String fileName) {
+        try(InputStream inputStream = file.getInputStream()) {
+            Path filePath = Paths.get(UPLOAD_DIR, fileName);
+            Files.createDirectories(filePath.getParent());
+            Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+    }
 
-        shop.setShopName(shopDetails.getShopName());
-        shop.setDescription(shopDetails.getDescription());
-        shop.setLocation(shopDetails.getLocation());
+    /**
+     *  Update shop information
+     * 
+     * @param id
+     * @param shop
+     * @param shopImage
+     * @return
+     */
+    @SuppressWarnings({"UseSpecificCatch", "CallToPrintStackTrace"})
+    public Shop updateShop(Long id, Shop shop, MultipartFile shopImage) {
+        String originalFileName = shopImage.getOriginalFilename();
 
+        try {
+            if (originalFileName != null && originalFileName.contains(".")) {
+                String fileExtension = originalFileName.substring(originalFileName.lastIndexOf(".") + 1);
+                String fileName = String.valueOf(id) + "." + fileExtension;
+                Path filePath = Paths.get(UPLOAD_DIR + fileName);
+
+                InputStream inputStream = shopImage.getInputStream();
+
+                Files.createDirectories(Paths.get(UPLOAD_DIR));
+                Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
+                shop.setShopImagePath(fileName);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return shopRepository.save(shop);
     }
 
@@ -59,6 +120,11 @@ public class ShopService {
         shopRepository.delete(shop);
     }
 
+    /**
+     *  Get shop by ID
+     * @param id
+     * @return
+     */
     public Shop getShopById(Long id) {
         return shopRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Shop not found"));
     }
