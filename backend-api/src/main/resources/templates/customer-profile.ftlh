@@ -9,13 +9,7 @@
       font-family: Arial, sans-serif;
       margin: 0; padding: 0;
       background: #f9f9f9;
-    }
-    header {
-      background: #880000;
-      padding: 1em;
-      color: white;
-      text-align: center;
-    }
+        }
     nav {
       background: #333;
       display: flex;
@@ -49,20 +43,14 @@
     </head>
     
     <body>
-        <header>
-          <h1>Your Profile</h1>
-        </header>
-        <nav>
-          <a href="/home">Home</a>
-          <a href="/customers/${customer.customerId}/update">Update Your Profile</a> 
-          <a href="/customers/{id}/delete">Delete Your Profile</a> 
-          <a href="">View Your Cart</a> <!-- To Do: Add Cart View -->
-          </nav>
         <main id="content">
          <h2>${customer.name}</h2>
               <div class="customer-details">
                 <p><strong>Address:</strong> ${customer.address}</p>
                 <p><strong>Email:</strong> ${customer.email} years</p>
+                <a href="/customers/${customer.customerId}/update">Update Your Profile</a> 
+                <a href="/customers/${customer.customerId}/delete">Delete Your Profile</a> 
+                <a href="/home">Home</a>
               </div>     
         </main>
     </body>

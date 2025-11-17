@@ -12,11 +12,9 @@ public class CustomerController {
 
     //get customer profile - view profile
     @GetMapping("/customers/{id}")
-    public Object getCustomerProfile(@PathVariable Long id, String email, Model model) {
-        Customer customer = customerService.findByEmail(email);
-        Long customerId = customer.getCustomerId();
-        model.addAttribute("customer", customerId);
-        model.addAttribute("title", "Customer: " + customerId);
+    public Object getCustomerProfile(@PathVariable Long id, Model model) {
+        model.addAttribute("customer", customerService.getCustomerById(id));
+        model.addAttribute("title", "Customer #: " + id);
         return "customer-profile";
     }
 

@@ -58,7 +58,7 @@
 <body>
   <h1 style="text-align: center;"> Sign In </h1>
   <main>
-    <form id="new-customer" action ="/customers/{id}" method="get" enctype="multipart/form-data">
+    <form id="new-customer" action ="/customers/signin" method="get" enctype="multipart/form-data">
 
       <label for="email">Email</label>
       <input type="text" id="email" name="email" placeholder="Email@Example.com"/>
