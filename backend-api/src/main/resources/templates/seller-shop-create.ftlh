@@ -64,32 +64,30 @@
         </div>
     </div>   
 
-    <div class="signup">
+   <div class="signup">
         <div class="signup-container">
             <div class="header">
                 <h1>Sign up to sell today!</h1>
                 <span>Already have an account? <a href="./sign-in.html">Sign In</a></span>
             </div>
             <div class="form">
-                <form action="/api/sellers" method="post" enctype="multipart/form-data">
+                <form action="/api/sellers/create" method="post" enctype="multipart/form-data">
                     <h3>Seller Info</h3>
-                    <input type="text" name="name" id="name" placeholder="Name">
-                    <input type="email" name="email" id="email" placeholder="Email"/>
-                    <input type="password" name="password" id="password" placeholder="Password"/>
+                    <input type="text" name="name" id="name" placeholder="Name" required>
+                    <input type="email" name="email" id="email" placeholder="Email"/ required>
+                    <input type="password" name="password" id="password" placeholder="Password"/ required>
                     <input type="file" name="sellerImage" id="sellerImage" placeholder="Upload your picture!"accept="image/png, image/jpeg">
                     <small>Add an  image of yourself!</small>  
 
                     <h3>Shop Info</h3>
-                    <input type="text" name="storeName" id="storeName" placeholder="Store name">
-                    <input type="text" name="description" id="description" placeholder="Shop description">
-                    <input type="text" name="location" id="location" placeholder="Location">
+                    <input type="text" name="shopName" id="shopName" placeholder="Shop name" required>
+                    <input type="text" name="description" id="description" placeholder="Shop description" required>
+                    <input type="text" name="location" id="location" placeholder="Location" required>
                     <input type="file" name="shopImage" id="shopImage" placeholder="Upload storefront image!"accept="image/png, image/jpeg">
                     <small>Add an  image for your shop storefront!</small>  
                     
                     <button type="submit" class="btn btn-primary">Save</button>
                     <a href="/api/sellers" class="btn btn-outline-danger">Cancel</a>
-                </form>
-            </div>
                 </form>
             </div>
         </div>
