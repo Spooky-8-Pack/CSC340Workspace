@@ -1,14 +1,20 @@
 package com.example.spartanthrift.shop;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.example.spartanthrift.Product.Product;
 import com.example.spartanthrift.Seller.Seller;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
@@ -43,15 +49,20 @@ public class Shop {
 
     private String shopImagePath;
 
+    @OneToMany(mappedBy = "shop", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Product> products = new ArrayList<>();
+
+
     public Shop() {
     }
 
-    public Shop(Seller seller, String shopName, String description, String location, String shopImagePath) {
+    public Shop(Seller seller, String shopName, String description, String location, String shopImagePath, List<Product> products) {
         this.seller = seller; 
         this.shopName = shopName;
         this.description = description;
         this.location = location;
         this.shopImagePath = shopImagePath;
+        this.products = products;
     }
 
     public void setShopName(String shopName) {
@@ -90,16 +101,20 @@ public class Shop {
         return id;
     }
 
-    // @OneToMany(mappedBy = "shop", cascade = CascadeType.ALL)
-    // @JsonIgnoreProperties("shop")
-    // private List<Product> products = new ArrayList<>();
-
     public String getShopImagePath() {
         return shopImagePath;
     }
 
     public void setShopImagePath(String shopImagePath) {
         this.shopImagePath = shopImagePath;
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 
 }
