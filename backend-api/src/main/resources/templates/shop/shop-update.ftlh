@@ -78,7 +78,7 @@
                     <input type="file" name="shopImage" id="shopImage" placeholder="Upload storefront image!"accept="image/png, image/jpeg">
                     <small>Add an  image for your shop storefront!</small>  
                     <button type="submit" class="btn btn-primary">Update Shop</button>
-                    <a href="/api/shops/${shop.id?c}" class="btn btn-outline-danger">Cancel</a>
+                    <a href="/api/sellers/${shop.seller.id?c}/storefront" class="btn btn-outline-danger">Cancel</a>
                 </form>
             </div>
         </div>
