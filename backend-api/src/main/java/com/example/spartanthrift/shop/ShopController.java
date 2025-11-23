@@ -63,16 +63,10 @@ public class ShopController {
      * @return      Redirects to the updated shop storefront
      */
     @PostMapping("/update/{id}") // Doesn't update the right fields yet
-    public Object updateShop(@PathVariable Long id, Shop shop, @RequestParam("shopImage") MultipartFile shopImage) {
+    public String updateShop(@PathVariable Long id, Shop shop, @RequestParam("shopImage") MultipartFile shopImage) {
         Shop updated = shopService.updateShop(id, shop, shopImage);     
           
         return "redirect:/api/sellers/" + updated.getSeller().getId() + "/storefront";
     }
-
-    // @DeleteMapping("/{id}")
-    // public ResponseEntity<Void> deleteShop(@PathVariable Long id) {
-    //     shopService.deleteShop(id);
-    //     return ResponseEntity.ok().build();
-    // }
 
 }
