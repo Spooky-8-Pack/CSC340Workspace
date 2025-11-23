@@ -119,8 +119,8 @@ public class SellerController {
      * @param model
      * @return
      */
-    @GetMapping("/{sellerId}/storefront")
-    public Object showStorefront(@PathVariable("sellerId") Long sellerId, Model model) {
+    @GetMapping("/{id}/storefront")
+    public Object showStorefront(@PathVariable("id") Long sellerId, Model model) {
         Seller seller = sellerService.getSellerById(sellerId);
         Shop shop = shopService.getShopBySellerId(sellerId);
 
