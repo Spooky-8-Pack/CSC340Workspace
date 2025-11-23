@@ -46,17 +46,17 @@ public class Shop {
     @NotBlank
     private String location;
 
-    @OneToMany(mappedBy = "shop", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Product> products = new ArrayList<>();
+    private String shopImagePath;
 
     public Shop() {
     }
 
-    public Shop(Seller seller, String shopName, String description, String location) {
+    public Shop(Seller seller, String shopName, String description, String location, String shopImagePath) {
         this.seller = seller; 
         this.shopName = shopName;
         this.description = description;
         this.location = location;
+        this.shopImagePath = shopImagePath;
     }
 
     public void setShopName(String shopName) {
@@ -101,6 +101,14 @@ public class Shop {
 
     public void setProducts(List<Product> products) {
         this.products = products;
+    }
+
+    public String getShopImagePath() {
+        return shopImagePath;
+    }
+
+    public void setShopImagePath(String shopImagePath) {
+        this.shopImagePath = shopImagePath;
     }
 
 }
