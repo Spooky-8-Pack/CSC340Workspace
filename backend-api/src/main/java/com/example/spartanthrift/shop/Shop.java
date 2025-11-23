@@ -18,7 +18,6 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
-// import com.example.spartanthrift.product.product; // Import for after merging to access the product class
 
 
 // import java.util.List;
