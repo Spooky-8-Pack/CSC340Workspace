@@ -2,16 +2,13 @@ package com.example.spartanthrift.Seller;
 
 import java.io.InputStream;
 import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.multipart.MultipartFile;
-
-import com.example.spartanthrift.shop.Shop;
-import com.example.spartanthrift.shop.ShopRepository;
 
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
@@ -19,13 +16,11 @@ import jakarta.transaction.Transactional;
 @Transactional
 public class SellerService {
     private final SellerRepository sellerRepository;
-    private final ShopRepository shopRepository;
 
     private static final String UPLOAD_DIR = "src/main/resources/static/seller-images/";
 
-    public SellerService(SellerRepository sellerRepository, ShopRepository shopRepository) {
+    public SellerService(SellerRepository sellerRepository) {
         this.sellerRepository = sellerRepository;
-        this.shopRepository = shopRepository;
     }
 
     /**
@@ -34,13 +29,16 @@ public class SellerService {
      * @return
      */
     public Seller createSeller(Seller seller, MultipartFile sellerImage) {
-        Seller newSeller = sellerRepository.save(seller);
+        // Creating seller in sellerRepository
+        Seller newSeller = sellerRepository.save(seller); 
+
+        // Storing sellerImage
         String originalFileName = sellerImage.getOriginalFilename();
 
         try {
             if (originalFileName != null & originalFileName.contains(".")) {
                 String fileExtension = originalFileName.substring(originalFileName.lastIndexOf(".") + 1);
-                String fileName = String.valueOf(newSeller.getSellerId()) + "." + fileExtension;
+                String fileName = String.valueOf(newSeller.getId()) + "." + fileExtension;
                 Path filePath = Paths.get(UPLOAD_DIR + fileName);
 
                 InputStream inputStream = sellerImage.getInputStream();
@@ -54,6 +52,7 @@ public class SellerService {
             e.printStackTrace();
         }
 
+        // Save and return new Seller
         return sellerRepository.save(newSeller);
     }
 
@@ -84,24 +83,6 @@ public class SellerService {
             e.printStackTrace();
         }
         return sellerRepository.save(seller);
-    }
-
-    /**
-     *  Method to create a Shop associated with a Seller
-     *
-     * @param seller
-     * @param shop
-     * @param shopImage
-     * @return
-     */
-    public Shop createShop(Seller seller, Shop shop, MultipartFile shopImage) {
-        shop.setSeller(seller);
-
-        String fileName = seller.getSellerId() + "-shop." + 
-            shopImage.getOriginalFilename().substring(shopImage.getOriginalFilename().lastIndexOf(".") + 1);
-        saveFile(shopImage, fileName);
-
-        return shopRepository.save(shop);
     }
 
     /**

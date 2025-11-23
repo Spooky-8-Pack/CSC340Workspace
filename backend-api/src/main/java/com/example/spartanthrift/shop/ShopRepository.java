@@ -10,6 +10,7 @@ import com.example.spartanthrift.Seller.Seller;
 @Repository
 public interface ShopRepository extends JpaRepository<Shop, Long> {
     Optional<Shop> findBySeller(Seller seller);
-
+    Optional<Shop> findBySellerId(Long id);
+    
     boolean existsByShopName(String shopName);
 }

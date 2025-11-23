@@ -5,20 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/login-panel.css">
     <link rel="stylesheet" href="/css/navbar.css">
-    <link rel="stylesheet" href="/css/provider-create.css">
+    <link rel="stylesheet" href="/css/sell-now.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">   
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
-    <title>Sell Now</title>
+    <title>Update ${shop.shopName}</title>
 </head>
 <body>
     
     <nav class="navbar">
         <div class="nav-left">
-            <a href="index.html"><img src="./assets/UNCG_Spartan_Head.png" style="width: 75px; height: 75px" alt="UNC Greensboro spartan logo"></a>
+            <a href="/"><img src="/assets/UNCG_Spartan_Head.png" style="width: 75px; height: 75px" alt="UNC Greensboro spartan logo"></a>
             <div class="menu-dropdown">
                 <button class="menu-button">
-                    <img src="./assets/white-menu-icon.png" style="width: 36px; height: 36px" alt="Menu icon"/>
+                    <img src="/assets/white-menu-icon.png" style="width: 36px; height: 36px" alt="Menu icon"/>
                     <span>Categories</span>
                 </button>
                 <div class="menu-content">
@@ -67,17 +67,18 @@
     <div class="signup">
         <div class="signup-container">
             <div class="header">
-                <h1>Hello, ${seller.name}! Update your shop: ${seller.shop.shopName}</h1>
+                <h1>Hello, ${seller.name}! Update your shop: ${shop.shopName}</h1>
             </div>
             <div class="form">
-                <form action="/api/shops/update/${shop.shopId}" method="post" enctype="multipart/form-data">
-                    <input type="text" name="shopName" id="shopName" value="${seller.shop.shopName}" placeholder="Shop name">
-                    <input type="text" name="description" id="description" value="${seller.shop.description}" placeholder="Shop description">
-                    <input type="text" name="location" id="location" value="${seller.shop.location}" placeholder="Location">
+                <form action="/api/shops/update/${shop.id?c}" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="id" value="${shop.id?c}" readonly>
+                    <input type="text" name="shopName" id="shopName" value="${shop.shopName}" placeholder="Shop name" required>
+                    <input type="text" name="description" id="description" value="${shop.description}" placeholder="Shop description" required>
+                    <input type="text" name="location" id="location" value="${shop.location}" placeholder="Location" required>
                     <input type="file" name="shopImage" id="shopImage" placeholder="Upload storefront image!"accept="image/png, image/jpeg">
                     <small>Add an  image for your shop storefront!</small>  
                     <button type="submit" class="btn btn-primary">Update Shop</button>
-                    <a href="/api/sellers/${seller.sellerId?c}" class="btn btn-outline-danger">Cancel</a>
+                    <a href="/api/sellers/${shop.seller.id?c}/storefront" class="btn btn-outline-danger">Cancel</a>
                 </form>
             </div>
         </div>

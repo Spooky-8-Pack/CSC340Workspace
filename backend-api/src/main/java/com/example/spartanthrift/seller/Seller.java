@@ -19,7 +19,7 @@ import jakarta.validation.constraints.NotBlank;
 public class Seller {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long sellerId;
+    private Long id;
 
     @NotBlank
     @Column(nullable = false)
@@ -43,16 +43,16 @@ public class Seller {
     @JsonBackReference
     private Shop shop;
 
-    public Seller(Long sellerId, String name, String email, String password, String sellerImagePath) {
-        this.sellerId = sellerId;
+    public Seller(Long id, String name, String email, String password, String sellerImagePath) {
+        this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
         this.sellerImagePath = sellerImagePath;
     }
 
-    public Long getSellerId() {
-        return sellerId;
+    public Long getId() {
+        return id;
     }
 
     public void setName(String name) {

@@ -2,23 +2,25 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="./css/shop.css">
-    <link rel="stylesheet" href="./css/navbar.css">
-    <link rel="stylesheet" href="./css/login-panel.css">
+    <link rel="stylesheet" href="/css/storefront.css">
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/login-panel.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">   
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shop</title>
+    <title>${shop.shopName}</title>
 </head>
 <body>
 
     <nav class="navbar">
         <div class="nav-left">
-            <a href="index.html"><img src="./assets/UNCG_Spartan_Head.png" style="width: 75px; height: 75px" alt="UNC Greensboro spartan logo"></a>
+            <a href="/">
+                <img src="/assets/UNCG_Spartan_Head.png" style="width: 75px; height: 75px" alt="UNC Greensboro spartan logo">
+            </a>
             <div class="menu-dropdown">
                 <button class="menu-button">
-                    <img src="./assets/white-menu-icon.png" style="width: 36px; height: 36px" alt="Menu icon"/>
+                    <img src="/assets/white-menu-icon.png" style="width: 36px; height: 36px" alt="Menu icon"/>
                     <span>Categories</span>
                 </button>
                 <div class="menu-content">
@@ -35,22 +37,23 @@
 
     <section class="shop">
 
+        
         <div class="shop-header">
-            <img class="shop-image" src="/store-pictures/${(seller.shop.shopImage)!'No_Image_Available.jpg'}">
+            <img class="shop-image" src="/shop-images/${(shop.shopImagePath)!'No_Image_Available.jpg'}">
             <div class="shop-details">
                 <div class="location">
                     <h3>Location</h2>
-                    <p>${seller.shop.location}</p>
+                    <p>${shop.location}</p>
                 </div>
                 <div class="Rating">
                     <h3>Rating</h3>
-                    <p>${seller.shop.overallRating}</p>
+                    <p>Nothing yet</p>
                 </div>
-                <a href="#">Edit Shop</a>
+                <a href="/api/shops/updateForm/${shop.id}">Edit Shop</a>
             </div>
             <div class="seller-info">
                 <h2>Seller</h2>
-                <img id="seller-image" src="/seller-pictures/${(seller.sellerImage)!'No_Image_Available.jpg'}">
+                <img id="seller-image" src="/seller-images/${(seller.sellerImagePath)!'No_Image_Available.jpg'}">
                 <p>${seller.name}</p>
             </div>
         </div>
@@ -66,15 +69,15 @@
             <div class="filter-container">
 
                 <div class="about">
-                    <p>${seller.shop.description}</p>
+                    <p>${shop.description}</p>
                 </div>
 
                 <div class="products">
                     <div class="product-card">
                         <img src="/products/${(seller.product.productImage)!'No_Image_Available.jpg'}" style="width: 200px; height: 200px">
                         <div class="prod-details">
-                            <p>${seller.shop.product.name}</p>
-                            <p>${seller.shop.product.price}</p>
+                            <p>None</p>
+                            <p>None</p>
                         </div>
                     </div>
                 </div>
@@ -242,8 +245,8 @@
         <!-- Grid container -->
     </footer> 
 
-    <script src="./js/login-panel.js" defer></script>
-    <script src="./js/seller-shop.js"></script>
+    <script src="/js/login-panel.js" defer></script>
+    <script src="/js/seller-shop.js"></script>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
