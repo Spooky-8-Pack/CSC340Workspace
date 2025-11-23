@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/login-panel.css">
-    <link rel="stylesheet" href="./css/navbar.css">
-    <link rel="stylesheet" href="./css/sell-now.css">
-    <link rel="stylesheet" href="./css/edit-info.css">
+    <link rel="stylesheet" href="/css/login-panel.css">
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/sell-now.css">
+    <link rel="stylesheet" href="/css/update-info.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">   
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
@@ -16,10 +16,12 @@
     
     <nav class="navbar">
         <div class="nav-left">
-            <a href="/"><img src="./assets/UNCG_Spartan_Head.png" style="width: 75px; height: 75px" alt="UNC Greensboro spartan logo"></a>
+            <a href="/">
+                <img src="/assets/UNCG_Spartan_Head.png" style="width: 75px; height: 75px" alt="UNC Greensboro spartan logo">
+            </a>
             <div class="menu-dropdown">
                 <button class="menu-button">
-                    <img src="./assets/white-menu-icon.png" style="width: 36px; height: 36px" alt="Menu icon"/>
+                    <img src="/assets/white-menu-icon.png" style="width: 36px; height: 36px" alt="Menu icon"/>
                     <span>Categories</span>
                 </button>
                 <div class="menu-content">
@@ -70,13 +72,13 @@
         <nav class="navbar navbar-expand-lg p-0">
             <div class="account-navigation">
                 <ul class="navbar-nav">
-                    <!--Update Shop information here-->
-                    <li href="#" class="nav-item active">
+                    <!--Update Seller information here-->
+                    <li href="/api/sellers/updateForm/${seller.id}" class="nav-item active">
                         <a>My account</a>
                     </li>
-                    <!--Update Seller information here-->
-                    <li href="#" class="nav-item">
-                        <a>My Shop</a>
+                    <!--Update Shop information here-->
+                    <li class="nav-item">
+                        <a href="/api/shops/updateForm/${shop.id}">My Shop</a>
                     </li>
                     <!--See Shop orders here-->
                     <li href="#" class="nav-item">
@@ -90,7 +92,7 @@
             <div class="dashboard-container">
                 <div class="account-card">
                     <div class="card-name">
-                        <img src="./assets/No_Image_Available.jpg">
+                        <img src="/seller-images/${(seller.sellerImagePath)!'No_Image_Available.jpg'}">
                         <span class="card-title">Name</span>
                         Your Name
                     </div>
@@ -108,11 +110,14 @@
                     <h1>Update Personal Information</h1>
                     <form action="/api/sellers/update/${seller.id?c}" method="post" enctype="multipart/form-data">
                         <input type="hidden" name="id" value="${seller.id?c}" readonly>
+                        <small>Name</small>
                         <input type="text" name="name" id="name" value="${seller.name}" placeholder="Name" required>
+                        <small>Email</small>
                         <input type="text" name="email" id="email" value="${seller.email}" placeholder="Email" required>
+                        <small>Password</small>
                         <input type="password" name="password" id="password" value="${seller.password}" placeholder="Password" required>
-                        <input type="file" name="sellerImage" id="sellerImage" placeholder="Upload image!"accept="image/png, image/jpeg">
                         <small>Add an  image of yourself!</small>  
+                        <input type="file" name="sellerImage" id="sellerImage" placeholder="Upload image!"accept="image/png, image/jpeg">
                         <button type="submit" class="btn btn-primary">Update</button>
                         <a href="#" class="btn btn-outline-danger">Cancel</a>
                     </form>
