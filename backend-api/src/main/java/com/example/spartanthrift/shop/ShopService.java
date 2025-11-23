@@ -13,8 +13,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.example.spartanthrift.Seller.Seller;
-import com.example.spartanthrift.Seller.SellerRepository;
-import com.example.spartanthrift.Seller.SellerService;
 
 import jakarta.transaction.Transactional;
 
@@ -22,16 +20,11 @@ import jakarta.transaction.Transactional;
 @Transactional
 public class ShopService {
     private final ShopRepository shopRepository;
-    private final SellerRepository sellerRepository; 
-    private final SellerService sellerService; 
 
     private static final String UPLOAD_DIR = "src/main/resources/static/shop-images/";
 
-
-    public ShopService(ShopRepository shopRepository, SellerRepository sellerRepository, SellerService sellerService) {
+    public ShopService(ShopRepository shopRepository) {
         this.shopRepository = shopRepository;
-        this.sellerRepository = sellerRepository;
-        this.sellerService = sellerService;
     }
 
     /**
@@ -55,7 +48,7 @@ public class ShopService {
         String originalFileName = shopImage.getOriginalFilename();
         if (originalFileName != null && originalFileName.contains(".")) {
             String fileExtension = originalFileName.substring(originalFileName.lastIndexOf(".") + 1);
-            String fileName = seller.getSellerId() + "-shop." + fileExtension;
+            String fileName = seller.getId() + "-shop." + fileExtension;
             saveFile(shopImage, fileName);
             shop.setShopImagePath(fileName);
         } else {
