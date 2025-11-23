@@ -37,7 +37,7 @@ public class SellerController {
         Seller seller = new Seller();
         model.addAttribute("seller", seller);
         model.addAttribute("title", "Create New Seller and Shop");
-        return "seller-shop-create"; // seller-shop-create.ftlh
+        return "seller/seller-shop-create"; // seller-shop-create.ftlh
     }
 
     /**
@@ -65,7 +65,7 @@ public class SellerController {
 
         shopService.createShop(newSeller, shop, shopImage);
 
-        return "redirect:/api/sellers/" + newSeller.getSellerId() + "/storefront";
+        return "redirect:/api/sellers/" + newSeller.getId() + "/storefront";
     }
 
     /**
@@ -80,7 +80,7 @@ public class SellerController {
         Seller seller = sellerService.getSellerById(id);
         model.addAttribute("seller", seller);
         model.addAttribute("title", "Update Seller: " + id);
-        return "seller-update"; // Need to create seller-update.ftlh
+        return "seller/seller-update"; // Need to create seller-update.ftlh
     }
 
     /**
@@ -109,7 +109,7 @@ public class SellerController {
     public String getSeller(@PathVariable Long id, Model model) { 
         model.addAttribute("seller", sellerService.getSellerById(id));
         model.addAttribute("title", "Seller #: " + id);
-        return "seller-details";
+        return "seller/seller-details";
     }
 
     /**
@@ -129,7 +129,7 @@ public class SellerController {
         model.addAttribute("products", shop.getProducts());
         model.addAttribute("title", seller.getName() + "'s Storefront");
 
-        return "storefront"; // storefront.ftlh
+        return "shop/storefront"; // storefront.ftlh
     }
 
 }
