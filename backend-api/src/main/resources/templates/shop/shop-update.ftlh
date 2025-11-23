@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="/css/login-panel.css">
     <link rel="stylesheet" href="/css/navbar.css">
     <link rel="stylesheet" href="/css/sell-now.css">
+    <link rel="stylesheet" href="/css/update-info.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">   
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
@@ -64,22 +65,54 @@
         </div>
     </div>   
 
-    <div class="signup">
-        <div class="signup-container">
-            <div class="header">
-                <h1>Hello, ${seller.name}! Update your shop: ${shop.shopName}</h1>
+    <div class="account-wrapper">
+
+        <nav class="navbar navbar-expand-lg p-0">
+            <div class="account-navigation">
+                <ul class="navbar-nav">
+                    <!--Update Shop information here-->
+                    <li href="#" class="nav-item">
+                        <a>My account</a>
+                    </li>
+                    <!--Update Seller information here-->
+                    <li href="#" class="nav-item active">
+                        <a>My Shop</a>
+                    </li>
+                    <!--See Shop orders here-->
+                    <li href="#" class="nav-item">
+                        <a>Orders</a>
+                    </li>
+                </ul>
             </div>
-            <div class="form">
-                <form action="/api/shops/update/${shop.id?c}" method="post" enctype="multipart/form-data">
-                    <input type="hidden" name="id" value="${shop.id?c}" readonly>
-                    <input type="text" name="shopName" id="shopName" value="${shop.shopName}" placeholder="Shop name" required>
-                    <input type="text" name="description" id="description" value="${shop.description}" placeholder="Shop description" required>
-                    <input type="text" name="location" id="location" value="${shop.location}" placeholder="Location" required>
-                    <input type="file" name="shopImage" id="shopImage" placeholder="Upload storefront image!"accept="image/png, image/jpeg">
-                    <small>Add an  image for your shop storefront!</small>  
-                    <button type="submit" class="btn btn-primary">Update Shop</button>
-                    <a href="/api/sellers/${shop.seller.id?c}/storefront" class="btn btn-outline-danger">Cancel</a>
-                </form>
+        </nav>
+
+        <div class="dashboard">
+            <div class="dashboard-container">
+                <div class="account-card">
+                    <div class="card-name">
+                        <img src="./assets/No_Image_Available.jpg">
+                        <span class="card-title">Shop Name</span>
+                        ${shop.shopName}
+                    </div>
+                    <div class="card-col1">
+                        <span class="card-title">Status</span>
+                        Your status (active/inactive seller)
+                    </div>
+                </div>
+
+                <div class="update-shop">
+                    <h1>Update Shop Information</h1>
+                    <form action="/api/shops/update/${shop.id?c}" method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="id" value="${seller.id?c}" readonly>
+                        <input type="text" name="shopName" id="shopName" value="${shop.shopName}" placeholder="Name" required>
+                        <input type="text" name="location" id="location" value="${shop.location}" placeholder="Location" required>
+                        <input type="text" name="description" id="description" value="${shop.description}" placeholder="Shop description" required>
+                        <input type="file" name="sellerImage" id="sellerImage" placeholder="Upload image!"accept="image/png, image/jpeg">
+                        <small>Add an  image for your storefront!</small>  
+                        <button type="submit" class="btn btn-primary">Update</button>
+                        <a href="/update-info" class="btn btn-outline-danger">Cancel</a>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
