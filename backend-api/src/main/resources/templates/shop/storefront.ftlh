@@ -53,7 +53,7 @@
             </div>
             
         </div>
-        
+
     </nav>
     
 
@@ -85,7 +85,6 @@
                 <button class="filterBtn" data-filter="about" onclick="event.preventDefault(); filterSelection('about')">About</button>
                 <button class="filterBtn active" data-filter="products" onclick="event.preventDefault(); filterSelection('products')">Products</button>
                 <button class="filterBtn" data-filter="reviews" onclick="event.preventDefault(); filterSelection('reviews')">Reviews</button>
-                <button class="filterBtn" data-filter="statistics" onclick="event.preventDefault(); filterSelection('statistics')">Statistics</button>
             </div>
 
             <div class="filter-container">
@@ -111,10 +110,6 @@
                         <p>${customer.review.comment}</p>
 
                     </div>
-                </div>
-
-                <div class="statistics">
-                    
                 </div>
             </div>
 
