@@ -75,12 +75,15 @@ public class SellerController {
      * @param model The model to add attributes to
      * @return      The view name for the update form
      */
-    @GetMapping("/updateForm/{id}")
-    public Object showUpdateForm(@PathVariable("sellerId") Long id, Model model) {
+    @GetMapping("/updateForm/{sellerId}")
+    public String showUpdateForm(@PathVariable("sellerId") Long id, Model model) {
         Seller seller = sellerService.getSellerById(id);
+        Shop shop = shopService.getShopBySellerId(id);
+
         model.addAttribute("seller", seller);
+        model.addAttribute("shop", shop);
         model.addAttribute("title", "Update Seller: " + id);
-        return "seller/seller-update"; // Need to create seller-update.ftlh
+        return "seller/seller-update"; // seller-update.ftlh
     }
 
     /**
@@ -131,5 +134,9 @@ public class SellerController {
 
         return "shop/storefront"; // storefront.ftlh
     }
+
+    
+
+    
 
 }
