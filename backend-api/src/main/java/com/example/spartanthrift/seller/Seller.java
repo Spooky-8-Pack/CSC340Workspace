@@ -51,7 +51,7 @@ public class Seller {
         this.sellerImagePath = sellerImagePath;
     }
 
-    public Long getSellerId() {
+    public Long getId() {
         return id;
     }
 
