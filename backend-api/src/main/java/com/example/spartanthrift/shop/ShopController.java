@@ -34,11 +34,11 @@ public class ShopController {
     public String getShop(@PathVariable Long id, Model model) {
         model.addAttribute("shop", shopService.getShopById(id));
         model.addAttribute("title", "Shop #: " + id);
-        return "shop-details"; //Need to make this
+        return "shop/shop-details"; //Need to make this
     }
 
     /**
-     *  Displays  shop update form 
+     *  Displays shop update form 
      * 
      * @param id
      * @param model
@@ -52,7 +52,7 @@ public class ShopController {
         model.addAttribute("shop", shop);
         model.addAttribute("seller", seller);
         model.addAttribute("title", "Update Shop: " + shopId);
-        return "shop-update"; // shop-update.ftlh
+        return "shop/shop-update"; // shop-update.ftlh
     }
 
     /**
@@ -60,13 +60,13 @@ public class ShopController {
      * 
      * @param id
      * @param image
-     * @return      Redirects to the updated storefront
+     * @return      Redirects to the updated shop storefront
      */
     @PostMapping("/update/{id}") // Doesn't update the right fields yet
     public Object updateShop(@PathVariable Long id, Shop shop, @RequestParam("shopImage") MultipartFile shopImage) {
-        shopService.updateShop(id, shop, shopImage);     
+        Shop updated = shopService.updateShop(id, shop, shopImage);     
           
-        return "redirect:/api/sellers/" + shop.getSeller().getSellerId() + "/storefront";
+        return "redirect:/api/sellers/" + updated.getSeller().getId() + "/storefront";
     }
 
     // @DeleteMapping("/{id}")
