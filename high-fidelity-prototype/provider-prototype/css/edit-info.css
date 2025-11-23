@@ -6,13 +6,17 @@
     padding: 20px;
 }
 
+#update-nav {
+    position: relative!important;
+    z-index: 1!important;
+}
+
 /* Navigation bar */
 .account-navigation {
     position: relative;
     background-color: transparent;
     border-radius: 8px;
     padding: 10px 20px;
-    z-index: 1;
 }
 
 .account-navigation .navbar-nav {
