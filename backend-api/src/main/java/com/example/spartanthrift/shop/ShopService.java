@@ -138,8 +138,8 @@ public class ShopService {
         return shopRepository.findBySeller(seller).orElseThrow(() -> new IllegalArgumentException("Shop not found"));
     }
 
-    public Shop getShopBySellerId(Long sellerId) {
-        return shopRepository.findBySellerId(sellerId).orElseThrow(() -> new IllegalArgumentException("Shop not found"));
+    public Shop getShopBySellerId(Long id) {
+        return shopRepository.findBySellerId(id).orElseThrow(() -> new IllegalArgumentException("Shop not found"));
 
     }
 
