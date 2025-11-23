@@ -33,7 +33,29 @@
                 </div>
             </div>
         </div>
+
+        
+        <div class="nav-center">
+            <!-- Search bar from https://codepen.io/huange/pen/bGqMqM -->
+            <div class="search-container">
+                <form action="#">
+                    <input type="text" class="search-bar" placeholder="Search..">
+                    <button class="search-button" type="submit"><i class="fa fa-search"></i></button>
+                </form>
+            </div>
+        </div>
+
+        <div class="nav-right">
+            <div class="icons">
+                <button id="profile"><i class="fa-solid fa-user"></i></button>
+                <button class="heart"><i class="fa-solid fa-heart"></i></button>
+                <button class="cart"><i class="fa-solid fa-cart-shopping"></i></button>
+            </div>
+            
+        </div>
+        
     </nav>
+    
 
     <section class="shop">
 
