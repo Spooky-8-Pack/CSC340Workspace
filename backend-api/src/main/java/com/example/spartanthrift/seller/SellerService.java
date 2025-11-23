@@ -10,21 +10,17 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.example.spartanthrift.shop.ShopRepository;
-
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 @Service
 @Transactional
 public class SellerService {
     private final SellerRepository sellerRepository;
-    private final ShopRepository shopRepository;
 
     private static final String UPLOAD_DIR = "src/main/resources/static/seller-images/";
 
-    public SellerService(SellerRepository sellerRepository, ShopRepository shopRepository) {
+    public SellerService(SellerRepository sellerRepository) {
         this.sellerRepository = sellerRepository;
-        this.shopRepository = shopRepository;
     }
 
     /**
@@ -42,7 +38,7 @@ public class SellerService {
         try {
             if (originalFileName != null & originalFileName.contains(".")) {
                 String fileExtension = originalFileName.substring(originalFileName.lastIndexOf(".") + 1);
-                String fileName = String.valueOf(newSeller.getSellerId()) + "." + fileExtension;
+                String fileName = String.valueOf(newSeller.getId()) + "." + fileExtension;
                 Path filePath = Paths.get(UPLOAD_DIR + fileName);
 
                 InputStream inputStream = sellerImage.getInputStream();
