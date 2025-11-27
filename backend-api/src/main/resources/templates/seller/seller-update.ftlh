@@ -69,7 +69,7 @@
 
     <div class="account-wrapper">
 
-        <nav class="navbar navbar-expand-lg p-0">
+        <nav id="update-nav" class="navbar navbar-expand-lg p-0">
             <div class="account-navigation">
                 <ul class="navbar-nav">
                     <!--Update Seller information here-->
@@ -94,7 +94,7 @@
                     <div class="card-name">
                         <img src="/seller-images/${(seller.sellerImagePath)!'No_Image_Available.jpg'}">
                         <span class="card-title">Name</span>
-                        Your Name
+                        ${seller.name}
                     </div>
                     <div class="card-col1">
                         <span class="card-title">Status</span>
@@ -114,8 +114,6 @@
                         <input type="text" name="name" id="name" value="${seller.name}" placeholder="Name" required>
                         <small>Email</small>
                         <input type="text" name="email" id="email" value="${seller.email}" placeholder="Email" required>
-                        <small>Password</small>
-                        <input type="password" name="password" id="password" value="${seller.password}" placeholder="Password" required>
                         <small>Add an  image of yourself!</small>  
                         <input type="file" name="sellerImage" id="sellerImage" placeholder="Upload image!"accept="image/png, image/jpeg">
                         <button type="submit" class="btn btn-primary">Update</button>
@@ -123,6 +121,22 @@
                     </form>
                 </div>
             </div>
+
+            <div class="update-password">
+                <h1>Change Password</h1>
+                <form action="#" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="id" value="${seller.id?c}" readonly>
+                    <small>Current password</small>
+                    <input type="text" name="password" id="password" value="${seller.password}" required>
+                    <small>New password</small>
+                    <input type="text" name="newPassword" id="newPassword" valye="${seller.newPassword}" required>
+                    <small>Confirm new password</small>
+                    <input type="text" name="newPassword" id="newPassword" valye="${seller.newPassword}" required>
+                    <button type="submit" class="btn btn-primary">Update</button>
+                    <a href="#" class="btn btn-outline-danger">Cancel</a>
+                </form>
+            </div>
+
         </div>
     </div>
 
