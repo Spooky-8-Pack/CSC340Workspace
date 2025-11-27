@@ -139,6 +139,7 @@
                 <h2>Add New Product</h2>
                 <form id="product-form">
                     <label for="productImage">Images(s):</label>
+                    <small>(Max 10)</small>
                     <input type="file" id="productImage" name="productImage" multiple accept="image/*">
 
                     <label for="name">Name:</label>
@@ -151,7 +152,7 @@
                     <select id="productCategory" name="productCategory" required>
                         <option value="TOPS">Tops</option>
                         <option value="BOTTOMS">Bottoms</option>
-                        <option value="DRESS-SETS">Dresses & Sets</option>
+                        <option value="DRESSES">Dresses & Sets</option>
                         <option value="SHOES">Shoes</option>
                         <option value="ACCESSORIES">Accessories</option>
                         <option value="HEADWEAR">Headwear</option>
