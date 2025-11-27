@@ -1,6 +1,6 @@
 package com.example.spartanthrift.Seller;
 
-import com.example.spartanthrift.User;
+import com.example.spartanthrift.User.User;
 import com.example.spartanthrift.shop.Shop;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -12,7 +12,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "sellers")
-public class Seller extends User{
+public class Seller extends User {
     private String sellerImagePath;
 
     @OneToOne(mappedBy = "seller", cascade = CascadeType.ALL)
