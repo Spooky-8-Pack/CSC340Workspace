@@ -22,3 +22,45 @@ function filterSelection(filter) {
     }
   });
 }
+
+/*
+* Add product modal form
+*/
+
+// Get elements
+const modal = document.getElementById("productModal");
+const openBtn = document.getElementById("openModal");
+const closeBtn = document.querySelector(".close");
+
+// Open modal
+openBtn.addEventListener("click", () => {
+  modal.style.display = "block";
+  modal.style.display = "flex";
+});
+
+// Close modal
+closeBtn.addEventListener("click", () => {
+  modal.style.display = "none";
+});
+
+// Close when clicking outside modal
+window.addEventListener("click", (event) => {
+  if (event.target === modal) {
+    modal.style.display = "none";
+  }
+});
+
+// Handle form submission
+document.getElementById("productForm").addEventListener("submit", (e) => {
+  e.preventDefault();
+  // Collect form data
+  const name = document.getElementById("productName").value;
+  const price = document.getElementById("productPrice").value;
+  const description = document.getElementById("productDescription").value;
+  const images = document.getElementById("productImage").files;
+
+  console.log("Product created:", { name, price, description, images });
+
+  // Close modal after save
+  modal.style.display = "none";
+});
