@@ -64,3 +64,25 @@ document.getElementById("productForm").addEventListener("submit", (e) => {
   // Close modal after save
   modal.style.display = "none";
 });
+
+/* Product image preview */
+const input = document.getElementById("productImage");
+const preview = document.getElementById("imagePreview");
+
+input.addEventListener("change", () => {
+  preview.innerHTML = ""; // clear old previews
+  Array.from(input.files).forEach((file, index) => {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const img = document.createElement("img");
+      img.src = e.target.result;
+      img.style.width = "100px";
+      img.style.margin = "5px";
+      if (index === 0) {
+        img.style.border = "2px solid green"; // highlight thumbnail
+      }
+      preview.appendChild(img);
+    };
+    reader.readAsDataURL(file);
+  });
+});

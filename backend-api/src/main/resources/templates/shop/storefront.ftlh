@@ -142,6 +142,8 @@
                     <small>(Max 10)</small>
                     <input type="file" id="productImage" name="productImage" multiple accept="image/*">
 
+                    <div id="imagePreview"></div>
+
                     <label for="name">Name:</label>
                     <input type="text" id="name" name="name" required>
 
