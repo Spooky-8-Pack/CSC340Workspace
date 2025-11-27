@@ -86,3 +86,21 @@ input.addEventListener("change", () => {
     reader.readAsDataURL(file);
   });
 });
+
+
+// Product thumbnail selection
+input.addEventListener("change", () => {
+  preview.innerHTML = ""; // clear old previews
+  Array.from(input.files).forEach((file, index) => {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const img = document.createElement("img");
+      img.src = e.target.result;
+      if (index === 0) {
+        img.classList.add("thumbnail"); // mark first image
+      }
+      preview.appendChild(img);
+    };
+    reader.readAsDataURL(file);
+  });
+});

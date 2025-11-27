@@ -221,3 +221,23 @@ form button {
 form button:hover {
     background-color: #0056b3;
 }
+
+/* Product image thumbnail */
+.preview-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.preview-container img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  margin: 5px;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+}
+
+.preview-container img.thumbnail {
+  border: 3px solid green; /* highlight first image */
+}
