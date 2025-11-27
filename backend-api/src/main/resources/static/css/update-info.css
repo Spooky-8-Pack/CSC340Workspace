@@ -41,6 +41,12 @@
 }
 
 /* Dashboard container */
+.dashboard {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
 .dashboard-container {
     margin-top: 20px;
     display: flex;
