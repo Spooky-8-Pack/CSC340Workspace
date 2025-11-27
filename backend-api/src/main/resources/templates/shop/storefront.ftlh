@@ -144,8 +144,18 @@
                     <label for="name">Name:</label>
                     <input type="text" id="name" name="name" required>
 
-                    <lable for="price">Price:</lable>
+                    <label for="price">Price:</label>
                     <input type="number" id="price" name="price" step="0.01" required>
+
+                    <label for="productCategory">Category:</label>
+                    <select id="productCategory" name="productCategory" required>
+                        <option value="TOPS">Tops</option>
+                        <option value="BOTTOMS">Bottoms</option>
+                        <option value="DRESS-SETS">Dresses & Sets</option>
+                        <option value="SHOES">Shoes</option>
+                        <option value="ACCESSORIES">Accessories</option>
+                        <option value="HEADWEAR">Headwear</option>
+                    </select>
 
                     <label for="description" id="description" name="description">Description:</label>
                     <textarea id="description" name="description" rows="4" required></textarea>
