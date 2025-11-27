@@ -103,6 +103,23 @@
                     </div>
                 </div>
 
+                <div class="products">
+                    <div class="add-product">
+                        <p>Add Product</p>
+                        <button><i class="fa-solid fa-plus"></i></button>
+                    </div>
+
+                    <div class="product-container">
+                        <div class="product-card">
+                            <img src="/products/${(seller.product.productImage)!'No_Image_Available.jpg'}" style="width: 200px; height: 200px">
+                            <div class="prod-details">
+                                <p>Name</p>
+                                <p>Price</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="reviews">
                     <div class="review-card">
                         <h3>${customer.name}</h3>
@@ -114,6 +131,30 @@
             </div>
 
         </div>
+
+  
+        <div id="productModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Add New Product</h2>
+                <form id="product-form">
+                    <label for="productImage">Images(s):</label>
+                    <input type="file" id="productImage" name="productImage" multiple accept="image/*">
+
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+
+                    <lable for="price">Price:</lable>
+                    <input type="number" id="price" name="price" step="0.01" required>
+
+                    <label for="description" id="description" name="description">Description:</label>
+                    <textarea id="description" name="description" rows="4" required></textarea>
+
+                    <button type="submit">Add Product</button>
+                </form>
+            </div>
+
+        </div>      
 
 
     </section>
