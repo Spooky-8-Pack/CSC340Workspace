@@ -16,7 +16,9 @@
     
     <nav class="navbar">
         <div class="nav-left">
-            <a href="/"><img src="/assets/UNCG_Spartan_Head.png" style="width: 75px; height: 75px" alt="UNC Greensboro spartan logo"></a>
+            <a href="/">
+                <img src="/assets/UNCG_Spartan_Head.png" style="width: 75px; height: 75px" alt="UNC Greensboro spartan logo">
+            </a>
             <div class="menu-dropdown">
                 <button class="menu-button">
                     <img src="/assets/white-menu-icon.png" style="width: 36px; height: 36px" alt="Menu icon"/>
@@ -67,20 +69,20 @@
 
     <div class="account-wrapper">
 
-        <nav class="navbar navbar-expand-lg p-0">
+        <nav id="update-nav" class="navbar navbar-expand-lg p-0">
             <div class="account-navigation">
                 <ul class="navbar-nav">
-                    <!--Update Shop information here-->
-                    <li href="#" class="nav-item">
-                        <a>My account</a>
-                    </li>
                     <!--Update Seller information here-->
-                    <li href="#" class="nav-item active">
-                        <a>My Shop</a>
+                    <li class="nav-item">
+                        <a href="/api/sellers/updateForm/${seller.id?c}">My account</a>
+                    </li>
+                    <!--Update Shop information here-->
+                    <li class="nav-item active">
+                        <a href="/api/shops/updateForm/${shop.id}">My Shop</a>
                     </li>
                     <!--See Shop orders here-->
-                    <li href="#" class="nav-item">
-                        <a>Orders</a>
+                    <li class="nav-item">
+                        <a  href="#">Orders</a>
                     </li>
                 </ul>
             </div>
@@ -90,7 +92,7 @@
             <div class="dashboard-container">
                 <div class="account-card">
                     <div class="card-name">
-                        <img src="./assets/No_Image_Available.jpg">
+                        <img src="/shop-images/${(shop.shopImagePath)!'No_Image_Available.jpg'}">
                         <span class="card-title">Shop Name</span>
                         ${shop.shopName}
                     </div>
@@ -104,11 +106,14 @@
                     <h1>Update Shop Information</h1>
                     <form action="/api/shops/update/${shop.id?c}" method="post" enctype="multipart/form-data">
                         <input type="hidden" name="id" value="${seller.id?c}" readonly>
+                        <small>Name</small>
                         <input type="text" name="shopName" id="shopName" value="${shop.shopName}" placeholder="Name" required>
+                        <small>Location</small>
                         <input type="text" name="location" id="location" value="${shop.location}" placeholder="Location" required>
+                        <small>Description</small>
                         <input type="text" name="description" id="description" value="${shop.description}" placeholder="Shop description" required>
+                        <small>Add an  image of your storefront!</small>  
                         <input type="file" name="sellerImage" id="sellerImage" placeholder="Upload image!"accept="image/png, image/jpeg">
-                        <small>Add an  image for your storefront!</small>  
                         <button type="submit" class="btn btn-primary">Update</button>
                         <a href="/update-info" class="btn btn-outline-danger">Cancel</a>
                     </form>
