@@ -123,7 +123,7 @@ public class SellerController {
      * @return
      */
     @GetMapping("/{id}/storefront")
-    public Object showStorefront(@PathVariable("id") Long sellerId, Model model) {
+    public String showStorefront(@PathVariable("id") Long sellerId, Model model) {
         Seller seller = sellerService.getSellerById(sellerId);
         Shop shop = shopService.getShopBySellerId(sellerId);
 
@@ -135,8 +135,6 @@ public class SellerController {
         return "shop/storefront"; // storefront.ftlh
     }
 
-    
 
-    
 
 }
