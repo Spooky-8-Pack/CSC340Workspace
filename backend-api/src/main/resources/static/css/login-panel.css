@@ -62,3 +62,7 @@
     background-color: #FFB71B;
 }
 
+/* Logged-in Customer/Seller*/
+.panel-links a {
+    text-align: right;
+}
