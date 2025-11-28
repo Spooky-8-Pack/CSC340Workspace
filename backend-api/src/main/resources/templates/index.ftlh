@@ -54,8 +54,9 @@
         
     </nav>
 
-    <div class="login-panel" id="login-panel">
-        <h2>Hello Guest,</h2>
+    <!-- Guest View -->
+    <div class="login-panel" id="login-panel" sec:authorize="isAnonymous()">
+        <h2>Hi, Guest!</h2>
         <div class="panel-buttons">
             <div class="log-in-out">
                 <a href="./sign-in.html" class="sign-in">Sign in</a>
@@ -63,7 +64,30 @@
             </div>
             <a href="/api/sellers/createForm" class="sell-now">Sell now</a>
         </div>
-    </div>   
+    </div>  
+
+    <!-- Logged in Customer -->
+    <div class="login-panel" sec:authorize="hasRole('CUSTOMER')">
+        <h2>Hi, ${#authentication.name}!</h2>
+        <h3>Status: Role</h3>
+        <div class="panel-links">
+            <a href="#">My Account</a>
+            <a href="#">My Orders</a>
+            <a href="#">Sign Out</a>
+        </div>
+    </div>
+
+     <!-- Logged-in Seller -->
+    <div class="login-panel" sec:authorize="hasRole('SELLER')">
+        <h2>Hi, ${#authentication.name}!</h2>
+        <h3>Status: Role</h3>
+        <div class="panel-links">
+            <a href="#">My Account</a>
+            <a href="#">My Wishlist</a>
+            <a href="#">My Orders</a>
+            <a href="#">Sign Out</a>
+        </div>
+    </div>
 
     <section class="home">
         <div class="home-background">
