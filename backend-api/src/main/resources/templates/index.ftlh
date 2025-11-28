@@ -68,24 +68,28 @@
 
     <!-- Logged in Customer -->
     <div class="login-panel" sec:authorize="hasRole('CUSTOMER')">
-        <h2>Hi, ${#authentication.name}!</h2>
-        <h3>Status: Role</h3>
+        <h2>Hi, ${#authentication.principal.name}!</h2>
+        <h3>Status: ${#authentication.principal.role}</h3>
         <div class="panel-links">
             <a href="#">My Account</a>
             <a href="#">My Orders</a>
-            <a href="#">Sign Out</a>
+            <form th:action:"@{/logout}" method="post">
+                <button type="submit">Sign Out</button>
+            </form>
         </div>
     </div>
 
      <!-- Logged-in Seller -->
     <div class="login-panel" sec:authorize="hasRole('SELLER')">
-        <h2>Hi, ${#authentication.name}!</h2>
-        <h3>Status: Role</h3>
+        <h2>Hi, ${#authentication.principal.name}!</h2>
+        <h3>Status: ${#authentication.principal.role}</h3>
         <div class="panel-links">
             <a href="#">My Account</a>
             <a href="#">My Wishlist</a>
             <a href="#">My Orders</a>
-            <a href="#">Sign Out</a>
+            <form th:action:"@{/logout}" method="post">
+                <button type="submit">Sign Out</button>
+            </form>
         </div>
     </div>
 
