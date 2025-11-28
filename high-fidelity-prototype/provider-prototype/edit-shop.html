@@ -54,6 +54,7 @@
         
     </nav>
 
+    <!-- Guest view -->
     <div class="login-panel" id="login-panel">
         <h2>Hello Guest,</h2>
         <div class="panel-buttons">
@@ -64,6 +65,30 @@
             <a href="./sell-now.html" class="sell-now">Sell now</a>
         </div>
     </div>   
+
+    <!-- Logged in Customer
+    <div class="login-panel" sec:authorize="hasRole('CUSTOMER')">
+        <h2>Hi, name!</h2>
+        <h3>Status: Role</h3>
+        <div class="panel-links">
+            <a href="#">My Account</a>
+            <a href="#">My Orders</a>
+            <a href="#">Sign Out</a>
+        </div>
+    </div>
+
+     Logged-in Seller
+    <div class="login-panel" sec:authorize="hasRole('CUSTOMER')">
+        <h2>Hi, name!</h2>
+        <h3>Status: Role</h3>
+        <div class="panel-links">
+            <a href="#">My Account</a>
+            <a href="#">My Favorites</a>
+            <a href="#">My Orders</a>
+            <a href="#">Sign Out</a>
+        </div>
+    </div> -->
+
 
     <div class="account-wrapper">
 
