@@ -9,14 +9,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class HomeController {
+//makes blank redirect to home
+//makes /home show the index page
+      @GetMapping({"", "/"})
+    public String redirectToHome(){
+        return "redirect:/home";
+    }
 
-    /**
-     * Displays the index page
-     * @return
-     */
-    @GetMapping("/") // Landing page is at the root
-    public String showIndexPage() {
-        return "index"; // index-flth
+    @GetMapping("/home")
+    public String goToHome(){
+        return "index";
     }
 
 }
