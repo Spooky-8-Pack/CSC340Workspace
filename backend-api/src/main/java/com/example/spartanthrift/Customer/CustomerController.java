@@ -10,6 +10,7 @@ public class CustomerController {
     @Autowired
     private CustomerService customerService;
 
+    //profile actions
     //get customer profile - view profile
     @GetMapping("/customers/signin/{id}")
     public Object getCustomerProfile(@PathVariable Long id, Model model) {
@@ -30,12 +31,6 @@ public class CustomerController {
         Customer customer = customerService.findByEmail(email);
         Long customerId = customer.getCustomerId();
         return "redirect:" + customerId;
-    }
-
-    //get customer cart - view cart
-    @GetMapping("/customers/{id}/cart")
-    public Object getCustomerCart(@PathVariable Long id){
-        return "customer-cart";
     }
 
     //get customer signup form
@@ -74,5 +69,12 @@ public class CustomerController {
     public Object deleteCustomer(@PathVariable Long id) {
         customerService.deleteCustomer(id);
         return "redirect:/home";
+    }
+
+    //cart actions
+    //get customer cart - view cart
+    @GetMapping("/customers/{id}/cart")
+    public Object getCustomerCart(@PathVariable Long id){
+        return "customer-cart";
     }
 }
