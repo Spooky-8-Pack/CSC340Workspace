@@ -1,6 +1,7 @@
-package com.example.spartanthrift.seller;
+package com.example.spartanthrift.Seller;
 
 import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

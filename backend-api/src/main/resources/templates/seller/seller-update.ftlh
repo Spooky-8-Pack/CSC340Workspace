@@ -6,16 +6,17 @@
     <link rel="stylesheet" href="./css/login-panel.css">
     <link rel="stylesheet" href="./css/navbar.css">
     <link rel="stylesheet" href="./css/sell-now.css">
+    <link rel="stylesheet" href="./css/edit-info.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">   
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
-    <title>Sell Now</title>
+    <title>Update ${shop.shopName}</title>
 </head>
 <body>
     
     <nav class="navbar">
         <div class="nav-left">
-            <a href="index.html"><img src="./assets/UNCG_Spartan_Head.png" style="width: 75px; height: 75px" alt="UNC Greensboro spartan logo"></a>
+            <a href="/"><img src="./assets/UNCG_Spartan_Head.png" style="width: 75px; height: 75px" alt="UNC Greensboro spartan logo"></a>
             <div class="menu-dropdown">
                 <button class="menu-button">
                     <img src="./assets/white-menu-icon.png" style="width: 36px; height: 36px" alt="Menu icon"/>
@@ -64,26 +65,58 @@
         </div>
     </div>   
 
-    <div class="signup">
-        <div class="signup-container">
-            <div class="header">
-                <h1>Sign up to sell today!</h1>
-                <span>Already have an account? <a href="./sign-in.html">Sign In</a></span>
+    <div class="account-wrapper">
+
+        <nav class="navbar navbar-expand-lg p-0">
+            <div class="account-navigation">
+                <ul class="navbar-nav">
+                    <!--Update Shop information here-->
+                    <li href="#" class="nav-item active">
+                        <a>My account</a>
+                    </li>
+                    <!--Update Seller information here-->
+                    <li href="#" class="nav-item">
+                        <a>My Shop</a>
+                    </li>
+                    <!--See Shop orders here-->
+                    <li href="#" class="nav-item">
+                        <a>Orders</a>
+                    </li>
+                </ul>
             </div>
-            <div class="form">
-                <form action="/register" method="post">
-                    <input type="text" name="name" id="name" placeholder="Name">
-                    <input type="email" name="email" id="email" placeholder="Email"/>
-                    <input type="password" name="password" id="password" placeholder="Password"/>
-                    <input type="file" name="sellerImage" id="sellerImage" placeholder="Upload your picture!"accept="image/png, image/jpeg">
-                    <small>Add an  image of yourself!</small>  
-                    <input type="text" name="storeName" id="storeName" placeholder="Store name">
-                    <input type="text" name="description" id="description" placeholder="Shop description">
-                    <input type="text" name="location" id="location" placeholder="Location">
-                    <input type="file" name="shopImage" id="shopImage" placeholder="Upload storefront image!"accept="image/png, image/jpeg">
-                    <small>Add an  image for your shop storefront!</small>  
-                    <button type="submit">Sign Up</button>
-                </form>
+        </nav>
+
+        <div class="dashboard">
+            <div class="dashboard-container">
+                <div class="account-card">
+                    <div class="card-name">
+                        <img src="./assets/No_Image_Available.jpg">
+                        <span class="card-title">Name</span>
+                        Your Name
+                    </div>
+                    <div class="card-col1">
+                        <span class="card-title">Status</span>
+                        Your status (active/inactive seller)
+                    </div>
+                    <div class="card-col3">
+                        <span class="card-title">Member Since</span>
+                        Date
+                    </div>
+                </div>
+
+                <div class="update-shop">
+                    <h1>Update Personal Information</h1>
+                    <form action="/api/sellers/update/${seller.id?c}" method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="id" value="${seller.id?c}" readonly>
+                        <input type="text" name="name" id="name" value="${seller.name}" placeholder="Name" required>
+                        <input type="text" name="email" id="email" value="${seller.email}" placeholder="Email" required>
+                        <input type="password" name="password" id="password" value="${seller.password}" placeholder="Password" required>
+                        <input type="file" name="sellerImage" id="sellerImage" placeholder="Upload image!"accept="image/png, image/jpeg">
+                        <small>Add an  image of yourself!</small>  
+                        <button type="submit" class="btn btn-primary">Update</button>
+                        <a href="#" class="btn btn-outline-danger">Cancel</a>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

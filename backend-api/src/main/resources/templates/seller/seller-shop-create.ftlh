@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/login-panel.css">
-    <link rel="stylesheet" href="./css/navbar.css">
-    <link rel="stylesheet" href="./css/sell-now.css">
+    <link rel="stylesheet" href="/css/login-panel.css">
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/sell-now.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">   
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
@@ -15,10 +15,10 @@
     
     <nav class="navbar">
         <div class="nav-left">
-            <a href="index.html"><img src="./assets/UNCG_Spartan_Head.png" style="width: 75px; height: 75px" alt="UNC Greensboro spartan logo"></a>
+            <a href="/"><img src="/assets/UNCG_Spartan_Head.png" style="width: 75px; height: 75px" alt="UNC Greensboro spartan logo"></a>
             <div class="menu-dropdown">
                 <button class="menu-button">
-                    <img src="./assets/white-menu-icon.png" style="width: 36px; height: 36px" alt="Menu icon"/>
+                    <img src="/assets/white-menu-icon.png" style="width: 36px; height: 36px" alt="Menu icon"/>
                     <span>Categories</span>
                 </button>
                 <div class="menu-content">
@@ -64,25 +64,30 @@
         </div>
     </div>   
 
-    <div class="signup">
+   <div class="signup">
         <div class="signup-container">
             <div class="header">
                 <h1>Sign up to sell today!</h1>
                 <span>Already have an account? <a href="./sign-in.html">Sign In</a></span>
             </div>
             <div class="form">
-                <form action="/register" method="post">
-                    <input type="text" name="name" id="name" placeholder="Name">
-                    <input type="email" name="email" id="email" placeholder="Email"/>
-                    <input type="password" name="password" id="password" placeholder="Password"/>
+                <form action="/api/sellers/create" method="post" enctype="multipart/form-data">
+                    <h3>Seller Info</h3>
+                    <input type="text" name="name" id="name" placeholder="Name" required>
+                    <input type="email" name="email" id="email" placeholder="Email"/ required>
+                    <input type="password" name="password" id="password" placeholder="Password"/ required>
                     <input type="file" name="sellerImage" id="sellerImage" placeholder="Upload your picture!"accept="image/png, image/jpeg">
                     <small>Add an  image of yourself!</small>  
-                    <input type="text" name="storeName" id="storeName" placeholder="Store name">
-                    <input type="text" name="description" id="description" placeholder="Shop description">
-                    <input type="text" name="location" id="location" placeholder="Location">
+
+                    <h3>Shop Info</h3>
+                    <input type="text" name="shopName" id="shopName" placeholder="Shop name" required>
+                    <input type="text" name="description" id="description" placeholder="Shop description" required>
+                    <input type="text" name="location" id="location" placeholder="Location" required>
                     <input type="file" name="shopImage" id="shopImage" placeholder="Upload storefront image!"accept="image/png, image/jpeg">
                     <small>Add an  image for your shop storefront!</small>  
-                    <button type="submit">Sign Up</button>
+                    
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    <a href="/api/sellers" class="btn btn-outline-danger">Cancel</a>
                 </form>
             </div>
         </div>

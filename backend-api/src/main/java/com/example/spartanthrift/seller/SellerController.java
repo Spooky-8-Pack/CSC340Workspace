@@ -1,35 +1,135 @@
-package com.example.spartanthrift.seller;
+package com.example.spartanthrift.Seller;
 
-import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
-import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
+import com.example.spartanthrift.shop.Shop;
+import com.example.spartanthrift.shop.ShopService;
 
-@RestController
+// @RestController
+@Controller
 @RequestMapping("/api/sellers")
-@RequiredArgsConstructor
 public class SellerController {
     private final SellerService sellerService;
+    private final ShopService shopService;
 
-    @PostMapping
-    public ResponseEntity<Seller> createSeller(@Valid @RequestBody Seller seller) {
-        return ResponseEntity.ok(sellerService.createSeller(seller));
+    public SellerController(SellerService sellerService, ShopService shopService) {
+        this.sellerService = sellerService;
+        this.shopService = shopService;
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Seller> updateSeller(@PathVariable Long id, @RequestBody Seller sellerDetails) {
-        return ResponseEntity.ok(sellerService.updateSeller(id, sellerDetails));
+    /**
+     *  Displays the Seller + Shop registration form
+     *  Creating a seller also creates a shop
+     * 
+     * @param id
+     * @param model
+     * @return
+     */
+    @GetMapping("/createForm")
+    public Object showCreateForm(Model model) {
+        Seller seller = new Seller();
+        model.addAttribute("seller", seller);
+        model.addAttribute("title", "Create New Seller and Shop");
+        return "seller/seller-shop-create"; // seller-shop-create.ftlh
     }
 
+    /**
+     *  Create a new seller with a shop
+     *  Redirect to storefront
+     * 
+     * @param seller The seller to add
+     * @return Shop storefront
+     */
+    @PostMapping("/create")
+    public Object createSellerWithShop(Seller seller, 
+                                    @RequestParam MultipartFile sellerImage, 
+                                    @RequestParam String shopName,
+                                    @RequestParam String description,
+                                    @RequestParam String location,
+                                    @RequestParam MultipartFile shopImage) {
+        Seller newSeller = sellerService.createSeller(seller, sellerImage);
+
+        // Create shop
+        Shop shop = new Shop();
+        shop.setShopName(shopName);
+        shop.setSeller(newSeller);
+        shop.setDescription(description);
+        shop.setLocation(location);
+
+        shopService.createShop(newSeller, shop, shopImage);
+
+        return "redirect:/api/sellers/" + newSeller.getId() + "/storefront";
+    }
+
+    /**
+     *  Update form for Seller
+     * 
+     * @param id    The ID of the seller to update
+     * @param model The model to add attributes to
+     * @return      The view name for the update form
+     */
+    @GetMapping("/updateForm/{id}")
+    public Object showUpdateForm(@PathVariable("sellerId") Long id, Model model) {
+        Seller seller = sellerService.getSellerById(id);
+        model.addAttribute("seller", seller);
+        model.addAttribute("title", "Update Seller: " + id);
+        return "seller/seller-update"; // Need to create seller-update.ftlh
+    }
+
+    /**
+     *  Endpoint to update a Seller 
+     * 
+     * @param id    The ID of the seller to update
+     * @param seller    The updated seller 
+     * @param image
+     * @return      The updated seller object
+     */
+    // @PutMapping("/{id}")
+    @PostMapping("/update/{id}")
+    public Object updateSeller(@PathVariable Long id, Seller seller, @RequestParam MultipartFile image) {
+        sellerService.updateSeller(id, seller, image);
+        return "redirect:/sellers/" + id;
+    }
+
+    /**
+     *  Endpoint to get a Seller by ID
+     * 
+     * @param id    The ID of the seller to retrieve
+     * @param model  
+     * @return      The seller with the matching ID
+     */
     @GetMapping("/{id}")
-    public ResponseEntity<Seller> getSeller(@PathVariable Long id) { 
-        return ResponseEntity.ok(sellerService.getSellerById(id));
+    public String getSeller(@PathVariable Long id, Model model) { 
+        model.addAttribute("seller", sellerService.getSellerById(id));
+        model.addAttribute("title", "Seller #: " + id);
+        return "seller/seller-details";
     }
+
+    /**
+     *  Display shop storefront
+     * 
+     * @param sellerId
+     * @param model
+     * @return
+     */
+    @GetMapping("/{id}/storefront")
+    public Object showStorefront(@PathVariable("id") Long sellerId, Model model) {
+        Seller seller = sellerService.getSellerById(sellerId);
+        Shop shop = shopService.getShopBySellerId(sellerId);
+
+        model.addAttribute("seller", seller);
+        model.addAttribute("shop", shop);
+        model.addAttribute("products", shop.getProducts());
+        model.addAttribute("title", seller.getName() + "'s Storefront");
+
+        return "shop/storefront"; // storefront.ftlh
+    }
+
 }

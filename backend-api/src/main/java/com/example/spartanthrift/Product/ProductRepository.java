@@ -5,10 +5,11 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import com.example.spartanthrift.shop.Shop;
+
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
-    //find by seller goes here
-
-    //find by available
+    List<Product> findByShopAndAvailable(Shop shop, boolean available);
     List<Product> findByAvailable(boolean available);
+    List<Product> findByShop(Shop shop);
 }
