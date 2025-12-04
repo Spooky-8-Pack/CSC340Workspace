@@ -1,14 +1,20 @@
 package com.example.spartanthrift.Customer;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
+import com.example.spartanthrift.Cart.*;
+import com.example.spartanthrift.Product.*;
 
 @Controller
 public class CustomerController {
     @Autowired
     private CustomerService customerService;
+    private CartService cartService;
+    private ProductService productService;
 
     //profile actions
     //get customer profile - view profile
@@ -74,7 +80,18 @@ public class CustomerController {
     //cart actions
     //get customer cart - view cart
     @GetMapping("/customers/{id}/cart")
-    public Object getCustomerCart(@PathVariable Long id){
+    public Object getCustomerCart(@PathVariable Long id, Model model){
+        Customer customer = customerService.getCustomerById(id);
+        Object cartItems = cartService.getCartByCustomer(customer);
+        model.addAttribute("cartItems", cartItems);
         return "customer-cart";
     }
+
+    //view product in cart
+    public Object viewProductInCart(Long productId, Model model){
+        Product product = productService.getProductById(productId);
+        model.addAttribute("product", product);
+        return "product-details";
+    }
+
 }
