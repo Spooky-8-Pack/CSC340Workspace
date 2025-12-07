@@ -14,9 +14,10 @@ public class HomeController {
      * Displays the index page
      * @return
      */
-    @GetMapping("/") // Landing page is at the root
+    @GetMapping("/index") // Landing page
     public String showIndexPage() {
-        return "index"; // index-flth
+        System.out.print("Hello");
+        return "index"; // index.ftlh
     }
 
 }
