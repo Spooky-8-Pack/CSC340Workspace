@@ -1,27 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/login-panel.css">
+    <link rel="stylesheet" href="/css/sign-in.css">
     <link rel="stylesheet" href="/css/navbar.css">
-    <link rel="stylesheet" href="/css/sell-now.css">
-    <link rel="stylesheet" href="/css/update-info.css">
+    <link rel="stylesheet" href="/css/login-panel.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">   
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
-    <title>Update ${shop.shopName}</title>
+    <title>Sign in</title>
 </head>
 <body>
-    
     <nav class="navbar">
         <div class="nav-left">
-            <a href="/">
-                <img src="/assets/UNCG_Spartan_Head.png" style="width: 75px; height: 75px" alt="UNC Greensboro spartan logo">
-            </a>
+            <a th:href="@{/index}"><img src="./assets/UNCG_Spartan_Head.png" style="width: 75px; height: 75px" alt="UNC Greensboro spartan logo"></a>
             <div class="menu-dropdown">
                 <button class="menu-button">
-                    <img src="/assets/white-menu-icon.png" style="width: 36px; height: 36px" alt="Menu icon"/>
+                    <img src="./assets/white-menu-icon.png" style="width: 36px; height: 36px" alt="Menu icon"/>
                     <span>Categories</span>
                 </button>
                 <div class="menu-content">
@@ -34,7 +30,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="nav-center">
             <!-- Search bar from https://codepen.io/huange/pen/bGqMqM -->
             <div class="search-container">
@@ -56,73 +52,44 @@
         
     </nav>
 
+
     <div class="login-panel" id="login-panel">
         <h2>Hello Guest,</h2>
         <div class="panel-buttons">
             <div class="log-in-out">
-                <a href="./sign-in.html" class="sign-in">Sign in</a>
+                <a th:href="@{/log-in}" class="sign-in">Sign in</a>
                 <a href="./sign-up.html" class="sign-up">Sign up</a>
             </div>
-            <a href="./sell-now.html" class="sell-now">Sell now</a>
+            <a th:href="@{/api/sellers/createForm}" class="sell-now">Sell now</a>
         </div>
     </div>   
 
-    <div class="account-wrapper">
-
-        <nav id="update-nav" class="navbar navbar-expand-lg p-0">
-            <div class="account-navigation">
-                <ul class="navbar-nav">
-                    <!--Update Seller information here-->
-                    <li class="nav-item">
-                        <a href="/api/sellers/updateForm/${seller.id?c}">My account</a>
-                    </li>
-                    <!--Update Shop information here-->
-                    <li class="nav-item active">
-                        <a href="/api/shops/updateForm/${shop.id}">My Shop</a>
-                    </li>
-                    <!--See Shop orders here-->
-                    <li class="nav-item">
-                        <a  href="#">Orders</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-
-        <div class="dashboard">
-            <div class="dashboard-container">
-                <div class="account-card">
-                    <div class="card-name">
-                        <img src="/shop-images/${(shop.shopImagePath)!'No_Image_Available.jpg'}">
-                        <span class="card-title">Shop Name</span>
-                        ${shop.shopName}
-                    </div>
-                    <div class="card-col1">
-                        <span class="card-title">Status</span>
-                        Your status (active/inactive seller)
-                    </div>
+    <section class="signin">
+        <div class="signin-container">
+            <div class="left">
+                <form th:action="@{/login}" method="post">
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="username" name="username" required>
+                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
                 </div>
-
-                <div class="update-shop">
-                    <h1>Update Shop Information</h1>
-                    <form action="/api/shops/update/${shop.id?c}" method="post" enctype="multipart/form-data">
-                        <input type="hidden" name="id" value="${seller.id?c}" readonly>
-                        <small>Name</small>
-                        <input type="text" name="shopName" id="shopName" value="${shop.shopName}" placeholder="Name" required>
-                        <small>Location</small>
-                        <input type="text" name="location" id="location" value="${shop.location}" placeholder="Location" required>
-                        <small>Description</small>
-                        <input type="text" name="description" id="description" value="${shop.description}" placeholder="Shop description" required>
-                        <small>Add an  image of your storefront!</small>  
-                        <input type="file" name="sellerImage" id="sellerImage" placeholder="Upload image!"accept="image/png, image/jpeg">
-                        <button type="submit" class="btn btn-primary">Update</button>
-                        <a href="/update-info" class="btn btn-outline-danger">Cancel</a>
-                    </form>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" required>
                 </div>
+                <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1" required>
+                    <label class="form-check-label" for="exampleCheck1">Agree to terms & conditions</label>
+                </div>
+                <button type="submit" class="btn btn-primary">Log in</button>
+                </form>
             </div>
+            <img src="/assets/signin_image.jpg" alt="A drawing of three houses side by side.">
+
         </div>
-    </div>
+    </section>
 
-    <!-- Footer from https://mdbootstrap.com/snippets/standard/mdbootstrap/2885027?view=side -->
+     <!-- Footer from https://mdbootstrap.com/snippets/standard/mdbootstrap/2885027?view=side -->
     <footer
             class="text-center text-lg-start text-white"
             style="background-color: #FFB71B"
@@ -226,32 +193,28 @@
             <div class="col-md-5 col-lg-4 ml-lg-0 text-center text-md-end">
                 <!-- Facebook -->
                 <a
-                class="btn btn-outline-light btn-floating m-1"
-                class="text-white"
+                class="btn btn-outline-light btn-floating m-1 text-white"
                 role="button"
                 ><i class="fab fa-facebook-f"></i
                 ></a>
 
                 <!-- Twitter -->
                 <a
-                class="btn btn-outline-light btn-floating m-1"
-                class="text-white"
+                class="btn btn-outline-light btn-floating m-1 text-white"
                 role="button"
                 ><i class="fab fa-twitter"></i
                 ></a>
 
                 <!-- Google -->
                 <a
-                class="btn btn-outline-light btn-floating m-1"
-                class="text-white"
+                class="btn btn-outline-light btn-floating m-1 text-white"
                 role="button"
                 ><i class="fab fa-google"></i
                 ></a>
 
                 <!-- Instagram -->
                 <a
-                class="btn btn-outline-light btn-floating m-1"
-                class="text-white"
+                class="btn btn-outline-light btn-floating m-1 text-white"
                 role="button"
                 ><i class="fab fa-instagram"></i
                 ></a>
@@ -264,6 +227,7 @@
         <!-- Grid container -->
     </footer>
 
-    <script src="./js/login-panel.js"></script>
+    <script src="/js/login-panel.js"></script>
+
 </body>
 </html>
