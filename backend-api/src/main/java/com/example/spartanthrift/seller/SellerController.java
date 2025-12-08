@@ -1,4 +1,4 @@
-package com.example.spartanthrift.Seller;
+package com.example.spartanthrift.seller;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;

@@ -1,4 +1,4 @@
-package com.example.spartanthrift.Seller;
+package com.example.spartanthrift.seller;
 
 import com.example.spartanthrift.User.User;
 import com.example.spartanthrift.shop.Shop;

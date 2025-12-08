@@ -7,8 +7,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 
-import com.example.spartanthrift.Seller.Seller;
-import com.example.spartanthrift.Seller.SellerRepository;
+import com.example.spartanthrift.seller.Seller;
+import com.example.spartanthrift.seller.SellerRepository;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {

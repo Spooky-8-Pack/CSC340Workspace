@@ -1,4 +1,4 @@
-package com.example.spartanthrift.Seller;
+package com.example.spartanthrift.seller;
 
 import java.util.Optional;
 

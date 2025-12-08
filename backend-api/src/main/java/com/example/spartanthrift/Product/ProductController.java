@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import com.example.spartanthrift.Seller.Seller;
+import com.example.spartanthrift.seller.Seller;
 import com.example.spartanthrift.User.User;
 import com.example.spartanthrift.User.UserRepository;
 import com.example.spartanthrift.shop.Shop;
