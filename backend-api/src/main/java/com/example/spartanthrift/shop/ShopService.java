@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.example.spartanthrift.seller.Seller;
+import com.example.spartanthrift.Seller.Seller;
 
 import jakarta.transaction.Transactional;
 

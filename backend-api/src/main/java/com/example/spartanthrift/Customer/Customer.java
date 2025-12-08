@@ -22,13 +22,8 @@ public class Customer extends User{
     @OneToMany(mappedBy = "customer")
     @JsonIgnoreProperties("customer")
     private List<Cart> cart = new ArrayList<>();
-<<<<<<< HEAD
     
     // Blank constructor
-=======
-
-    //blank constructor
->>>>>>> 02b9131f2b40210e12030e78ee7b9a5eacd381bf
     public Customer(){
         this.setRole(Role.CUSTOMER);
     }
