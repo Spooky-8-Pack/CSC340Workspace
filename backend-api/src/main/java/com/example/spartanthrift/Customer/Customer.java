@@ -23,6 +23,16 @@ public class Customer extends User{
     @JsonIgnoreProperties("customer")
     private List<Cart> cart = new ArrayList<>();
 
+<<<<<<< HEAD
+=======
+    public Customer(String name, String email, String password, String address) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.address = address;
+    }
+
+>>>>>>> main
     //blank constructor
     public Customer(){
 

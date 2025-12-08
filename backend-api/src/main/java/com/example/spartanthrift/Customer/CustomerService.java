@@ -23,8 +23,8 @@ public class CustomerService {
      }
 
      //search customers by address
-     public Object searchByAddress(String address){
-        return customerRepository.findByAddress(address);
+     public Customer findByEmail(String email){
+        return customerRepository.findByEmail(email);
      }
 
     //add customer
