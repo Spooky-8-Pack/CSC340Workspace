@@ -1,4 +1,4 @@
-package com.example.spartanthrift.shop;
+package com.example.spartanthrift.Shop;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

@@ -16,10 +16,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.example.spartanthrift.Seller.Seller;
+import com.example.spartanthrift.Shop.Shop;
+import com.example.spartanthrift.Shop.ShopService;
 import com.example.spartanthrift.User.User;
 import com.example.spartanthrift.User.UserRepository;
-import com.example.spartanthrift.shop.Shop;
-import com.example.spartanthrift.shop.ShopService;
 
 @Controller
 public class ProductController {

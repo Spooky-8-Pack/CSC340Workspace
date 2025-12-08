@@ -1,4 +1,4 @@
-package com.example.spartanthrift.shop;
+package com.example.spartanthrift.Shop;
 
 import java.io.InputStream;
 import java.nio.file.Files;

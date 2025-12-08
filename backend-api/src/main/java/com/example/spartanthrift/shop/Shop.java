@@ -1,4 +1,4 @@
-package com.example.spartanthrift.shop;
+package com.example.spartanthrift.Shop;
 
 import java.util.ArrayList;
 import java.util.List;

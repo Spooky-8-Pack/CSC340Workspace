@@ -1,4 +1,4 @@
-package com.example.spartanthrift.shop;
+package com.example.spartanthrift.Shop;
 
 import java.math.BigDecimal;
 import java.util.Map;

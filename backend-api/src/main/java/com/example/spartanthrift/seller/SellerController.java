@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.example.spartanthrift.shop.Shop;
-import com.example.spartanthrift.shop.ShopService;
+import com.example.spartanthrift.Shop.Shop;
+import com.example.spartanthrift.Shop.ShopService;
 
 // @RestController
 @Controller

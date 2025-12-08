@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
-import com.example.spartanthrift.shop.Shop;
+import com.example.spartanthrift.Shop.Shop;
 
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;

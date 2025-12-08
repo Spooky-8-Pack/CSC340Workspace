@@ -1,4 +1,4 @@
-package com.example.spartanthrift.shop;
+package com.example.spartanthrift.Shop;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
