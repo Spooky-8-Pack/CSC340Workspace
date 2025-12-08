@@ -21,16 +21,9 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Seller seller = sellerRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("Account not found"));
-
-        String role = "ROLE_" + seller.getRole();
-
-        return User.builder()
-            .username(seller.getEmail())
-            .password(seller.getPassword())
-            .roles(role.replace("ROLE_", ""))
-            .build();
+        return sellerRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("Account not found"));
     }
+
 
 
 
