@@ -15,4 +15,14 @@ public class AppController {
         return "index"; // index.html
     }
 
+    /**
+     * Displays the log-in in
+     * @return
+     */
+    @GetMapping("/log-in")
+    public String showLoginPage() {
+        return "log-in";
+    }
+
 }
+  
