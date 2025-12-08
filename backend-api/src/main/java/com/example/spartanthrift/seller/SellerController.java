@@ -40,7 +40,7 @@ public class SellerController {
         Seller seller = new Seller();
         model.addAttribute("seller", seller);
         model.addAttribute("title", "Create New Seller and Shop");
-        return "seller/seller-shop-create"; // seller-shop-create.ftlh
+        return "seller/seller-shop-create"; // seller-shop-create.html
     }
 
     /**
@@ -94,7 +94,7 @@ public class SellerController {
         model.addAttribute("seller", seller);
         model.addAttribute("shop", shop);
         model.addAttribute("title", "Update Seller: " + id);
-        return "seller/seller-update"; // seller-update.ftlh
+        return "seller/seller-update"; // seller-update.html
     }
 
     /**
@@ -123,7 +123,7 @@ public class SellerController {
     public String getSeller(@PathVariable Long id, Model model) { 
         model.addAttribute("seller", sellerService.getSellerById(id));
         model.addAttribute("title", "Seller #: " + id);
-        return "seller/seller-details";
+        return "seller/seller-details"; // seller-details.html
     }
 
     /**
@@ -143,7 +143,7 @@ public class SellerController {
         model.addAttribute("products", shop.getProducts());
         model.addAttribute("title", seller.getName() + "'s Storefront");
 
-        return "shop/storefront"; // storefront.ftlh
+        return "shop/storefront"; // storefront.html
     }
 
 
