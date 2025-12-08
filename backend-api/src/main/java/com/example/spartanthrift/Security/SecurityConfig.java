@@ -24,7 +24,8 @@ public class SecurityConfig {
             .requestMatchers("/index").permitAll()
             .requestMatchers("/assets/**", "/css/**", "/js/**", 
                             "/products/**", "/seller-images/**", "/shop-images/**").permitAll() // allow static resources
-            .requestMatchers("/log-in", "/api/sellers/createForm", "/api/sellers/create").permitAll()
+            .requestMatchers("/log-in", "/api/sellers/createForm", "/api/sellers/create",
+                            "/customers/signup").permitAll()
             .requestMatchers("/storefront/**").permitAll()
             .requestMatchers("/api/sellers/updateForm", "/api/sellers/update").hasAnyRole("SELLER")
             .anyRequest().authenticated()
