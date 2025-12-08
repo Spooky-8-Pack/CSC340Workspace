@@ -1,13 +1,15 @@
 package com.example.spartanthrift.Customer;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
-import com.example.spartanthrift.Cart.*;
-import com.example.spartanthrift.Product.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import com.example.spartanthrift.Cart.CartService;
+import com.example.spartanthrift.Product.Product;
+import com.example.spartanthrift.Product.ProductService;
 
 @Controller
 public class CustomerController {
@@ -35,7 +37,7 @@ public class CustomerController {
     @GetMapping("/customers/signin/form")
     public Object findByEmail(String email){
         Customer customer = customerService.findByEmail(email);
-        Long customerId = customer.getCustomerId();
+        Long customerId = customer.getId();
         return "redirect:" + customerId;
     }
 
