@@ -3,6 +3,9 @@ package com.example.spartanthrift.Security;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+/**
+ * Maps to all shared pages in web application
+ */
 @Controller
 public class AppController {
 
