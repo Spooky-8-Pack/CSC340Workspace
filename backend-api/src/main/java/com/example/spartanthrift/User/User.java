@@ -34,7 +34,7 @@ public abstract class User implements UserDetails {
 
     @Email
     @NotBlank
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String email;
 
     @NotBlank
