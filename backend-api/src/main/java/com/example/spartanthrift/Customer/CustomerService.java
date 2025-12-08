@@ -1,6 +1,7 @@
 package com.example.spartanthrift.Customer;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -10,6 +11,12 @@ public class CustomerService {
 
     @Autowired
     private CustomerRepository customerRepository;
+    private final PasswordEncoder passwordEncoder;
+
+    public CustomerService(CustomerRepository customerRepository, PasswordEncoder passwordEncoder) {
+        this.customerRepository = customerRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     //get all customers
     public Object getAllCustomers(){
@@ -32,6 +39,7 @@ public class CustomerService {
         if(customerRepository.existsByEmail(customer.getEmail())){
             throw new IllegalStateException("Email already registered");
         }
+        customer.setPassword(passwordEncoder.encode(customer.getPassword()));
         return customerRepository.save(customer);
     }
     
@@ -41,7 +49,7 @@ public class CustomerService {
             .orElseThrow(() -> new EntityNotFoundException("Customer not found"));
 
         customer.setName(customerDetails.getName());
-        customer.setPassword(customerDetails.getPassword());
+        customer.setPassword(passwordEncoder.encode(customerDetails.getPassword()));
         customer.setEmail(customerDetails.getEmail());
         customer.setAddress(customerDetails.getAddress());
         return customerRepository.save(customer);
