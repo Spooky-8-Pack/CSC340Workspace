@@ -16,10 +16,10 @@
     
     <nav class="navbar">
         <div class="nav-left">
-            <a th:href="@{/index}"><img src="./assets/UNCG_Spartan_Head.png" style="width: 75px; height: 75px" alt="UNC Greensboro spartan logo"></a>
+            <a th:href="@{/index}"><img src="/assets/UNCG_Spartan_Head.png" style="width: 75px; height: 75px" alt="UNC Greensboro spartan logo"></a>
             <div class="menu-dropdown">
                 <button class="menu-button">
-                    <img src="./assets/white-menu-icon.png" style="width: 36px; height: 36px" alt="Menu icon"/>
+                    <img src="/assets/white-menu-icon.png" style="width: 36px; height: 36px" alt="Menu icon"/>
                     <span>Categories</span>
                 </button>
                 <div class="menu-content">
@@ -54,7 +54,8 @@
         
     </nav>
 
-    <div class="login-panel" id="login-panel">
+    <!--Only for anonymous (not logged in)-->
+    <div class="login-panel" id="login-panel" sec:authorize="isAnonymous()">
         <h2>Hello Guest,</h2>
         <div class="panel-buttons">
             <div class="log-in-out">
