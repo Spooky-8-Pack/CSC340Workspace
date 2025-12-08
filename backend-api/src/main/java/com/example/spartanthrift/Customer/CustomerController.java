@@ -35,7 +35,7 @@ public class CustomerController {
     @GetMapping("/customers/signin/form")
     public Object findByEmail(String email){
         Customer customer = customerService.findByEmail(email);
-        Long customerId = customer.getCustomerId();
+        Long customerId = customer.getId();
         return "redirect:" + customerId;
     }
 

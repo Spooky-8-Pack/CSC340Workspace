@@ -41,16 +41,10 @@ public class ProductController {
         this.shopService = shopService;
         this.userRepository = userRepository;
         this.productRepository = productRepository;
-    }
+    }    
     
-<<<<<<< HEAD
-    //create a product
-    @PostMapping("/products")
-    public Object createProduct(@RequestBody Product product){
-        return productService.createProduct(null, product);
-=======
     /**
-     * Createw new Product
+     * Create new Product
      * 
      * @param product
      * @param principal
@@ -69,7 +63,6 @@ public class ProductController {
             productRepository.save(product);
         }
         return "redirect:/storefront";
->>>>>>> 620178c4a708580ca03cba99888399d16414d4da
     }
 
     //update product
