@@ -53,7 +53,7 @@
                 <!--Only for SELLERS-->
                 <section sec:authorize="hasRole('SELLER')">
                     <a id="profile" class="nav-button" th:href="@{/api/sellers/updateForm/{sellerId}(sellerId=${#authentication.principal.id})}"><i class="fa-solid fa-user"></i></a>
-                    <a id="shop" class="nav-button" th:href="@{/api/sellers/{sellerId}(sellerId=${#authentication.principal.id})/storefront}><i class="fa-solid fa-store"></i></a>
+                    <a id="shop" class="nav-button" th:href="@{/api/sellers/{sellerId}(sellerId=${#authentication.principal.id})/storefront}"><i class="fa-solid fa-store"></i></a>
                     <a id="heart" class="nav-button"><i class="fa-solid fa-heart"></i></a>
                     <a id="cart" class="nav-button"><i class="fa-solid fa-cart-shopping"></i></a>
                 </section>
@@ -75,7 +75,7 @@
             <div class="panel-buttons">
                 <div class="log-in-out">
                     <a th:href="@{/log-in}" class="sign-in">Sign in</a>
-                    <a href="./sign-up.html" class="sign-up">Sign up</a>
+                    <a th:href="@{/customers/signup}" class="sign-up">Sign up</a>
                 </div>
                 <a th:href="@{/api/sellers/createForm}" class="sell-now">Sell now</a>
             </div>
