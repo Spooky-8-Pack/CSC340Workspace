@@ -24,13 +24,13 @@ public class CustomerController {
     public Object getCustomerProfile(@PathVariable Long id, Model model) {
         model.addAttribute("customer", customerService.getCustomerById(id));
         model.addAttribute("title", "Customer #: " + id);
-        return "customer-profile";
+        return "customer/customer-profile";
     }
 
     //get customer signin form
     @GetMapping("/customers/signin")
     public Object showSigninForm(Model model){
-        return "customer-sign-in";
+        return "customer/customer-sign-in";
     }
 
     //find customer by email in form then redirect to profile 
@@ -47,7 +47,7 @@ public class CustomerController {
         Customer customer = new Customer();
         model.addAttribute("customer", customer);
         model.addAttribute("title", "Sign Up");
-        return "customer-sign-up";
+        return "customer/customer-sign-up";
     }
       
     //create a customer - sign up
@@ -62,7 +62,7 @@ public class CustomerController {
     public String showUpdateForm(@PathVariable Long id, Model model){
         Customer customer = customerService.getCustomerById(id);
         model.addAttribute("customer", customer);
-        return "customer-update";
+        return "customer/customer-update";
     }
 
     //update customer - update a profile
@@ -86,7 +86,7 @@ public class CustomerController {
         Customer customer = customerService.getCustomerById(id);
         Object cartItems = cartService.getCartByCustomer(customer);
         model.addAttribute("cartItems", cartItems);
-        return "customer-cart";
+        return "customer/customer-cart";
     }
 
     //view product in cart
