@@ -43,9 +43,10 @@
 
         <div class="nav-right">
             <div class="icons">
-                <button id="profile"><i class="fa-solid fa-user"></i></button>
-                <button class="heart"><i class="fa-solid fa-heart"></i></button>
-                <button class="cart"><i class="fa-solid fa-cart-shopping"></i></button>
+                <a id="profile" class="nav-button"><i class="fa-solid fa-user"></i></a>
+                <a id="shop" class="nav-button" th:href="@{/api/sellers/{id}(shop.id)/storefront}"><i class="fa-solid fa-store"></i></a>
+                <a id="heart" class="nav-button"><i class="fa-solid fa-heart"></i></a>
+                <a id="cart" class="nav-button"><i class="fa-solid fa-cart-shopping"></i></a>
             </div>
             
         </div>
