@@ -20,7 +20,7 @@ public class CustomerController {
 
     //profile actions
     //get customer profile - view profile
-    @GetMapping("/customers/signin/{id}")
+    @GetMapping("/customers/{id}")
     public Object getCustomerProfile(@PathVariable Long id, Model model) {
         model.addAttribute("customer", customerService.getCustomerById(id));
         model.addAttribute("title", "Customer #: " + id);
