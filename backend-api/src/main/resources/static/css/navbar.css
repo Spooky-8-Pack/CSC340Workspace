@@ -82,6 +82,7 @@
     display: block;
 }
 
+/* Nav center */
 .nav-center {
     max-width: 800px;
     width: 100%;
@@ -157,4 +158,8 @@
     background: transparent;
     color: white;
     font-size: 30px;
+}
+
+.nav-button {
+    background: transparent;
 }

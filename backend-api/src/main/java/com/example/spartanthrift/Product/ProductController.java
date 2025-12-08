@@ -1,34 +1,68 @@
 package com.example.spartanthrift.Product;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
 
+import com.example.spartanthrift.Seller.Seller;
+import com.example.spartanthrift.User.User;
+import com.example.spartanthrift.User.UserRepository;
+import com.example.spartanthrift.shop.Shop;
 import com.example.spartanthrift.shop.ShopService;
 
-@RestController
+@Controller
 public class ProductController {
+
     @Autowired
     private final ProductService productService;
+
+    @Autowired
+    private final ProductRepository productRepository;
+
+    @Autowired 
+    private final UserRepository userRepository;
+
     private final ShopService shopService;
 
-    public ProductController(ProductService productService, ShopService shopService) {
+    public ProductController(ProductService productService, ShopService shopService,
+        UserRepository userRepository, ProductRepository productRepository) {
         this.productService = productService;
         this.shopService = shopService;
+        this.userRepository = userRepository;
+        this.productRepository = productRepository;
     }
     
-    //create a product
-    @PostMapping("/products")
-    public Object createProduct(@RequestBody Product product){
-        return productService.createProduct(product);
+    /**
+     * Createw new Product
+     * 
+     * @param product
+     * @param principal
+     * @return  The refreshed storefront with added product
+     */
+    @PostMapping("/createProduct")
+    public String createProduct(@ModelAttribute Product product, Principal principal){
+        String email = principal.getName();
+
+        User user = userRepository.findByEmail(email)
+            .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+
+        if (user instanceof Seller seller) {
+            Shop shop = seller.getShop();
+            product.setShop(shop);
+            productRepository.save(product);
+        }
+        return "redirect:/storefront";
     }
 
     //update product

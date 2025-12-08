@@ -1,23 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/navbar.css">
-    <link rel="stylesheet" href="./css/index.css">
-    <link rel="preload" href="./assets/homepage-background.jpg" as="image">
-    <link rel="stylesheet" href="./css/login-panel.css">
+    <link rel="stylesheet" href="/css/storefront.css">
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/login-panel.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">   
-    <title>Spartan Thrift</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${shop.shopName}</title>
 </head>
 <body>
+
     <nav class="navbar">
         <div class="nav-left">
-            <a href="/"><img src="/assets/UNCG_Spartan_Head.png" style="width: 75px; height: 75px" alt="UNC Greensboro spartan logo"></a>
+            <a th:href="@{/index}"><img src="./assets/UNCG_Spartan_Head.png" style="width: 75px; height: 75px" alt="UNC Greensboro spartan logo"></a>
             <div class="menu-dropdown">
                 <button class="menu-button">
-                    <img src="/assets/white-menu-icon.png" style="width: 36px; height: 36px" alt="Menu icon"/>
+                    <img src="./assets/white-menu-icon.png" style="width: 36px; height: 36px" alt="Menu icon"/>
                     <span>Categories</span>
                 </button>
                 <div class="menu-content">
@@ -52,93 +53,117 @@
         
     </nav>
 
-    <div class="login-panel" id="login-panel">
-        <h2>Hello Guest,</h2>
-        <div class="panel-buttons">
-            <div class="log-in-out">
-                <a href="./sign-in.html" class="sign-in">Sign in</a>
-                <a href="./sign-up.html" class="sign-up">Sign up</a>
-            </div>
-            <a href="/api/sellers/createForm" class="sell-now">Sell now</a>
-        </div>
-    </div>   
+    
 
-    <section class="home">
-        <div class="home-background">
-            <div class="home-description">
-                <h1>Spartan Thrift</h1>
-                <h2 style="color: white;">The <span class="highlight">only</span> online campus thrift store</h2>
-                <div class="gender-filter">
-                    <button class="gfilter">Shop men</button>
-                    <button class="gfilter">Shop women</button>
+    <section class="shop">
+
+        
+        <div class="shop-header">
+            <img class="shop-image" 
+                th:src="@{/shop-images/{img}(img=${shop.shopImagePath})}"
+                onerror="this.src='No_Image_Available.jpg'"
+                alt="Shop Image">
+            <div class="shop-details">
+                <div class="location">
+                    <h3>Location</h2>
+                    <p>${shop.location}</p>
                 </div>
-            </div>
-        </div>
-
-        <div class="featured-container">
-            <h1>Featured</h1>
-            <div class="featured">
-                <div class="featured-row" id="featured-row">
-                    <div class="featured-item">
-                        <img src="./assets/gray_square.png">
-                        <p>Item 1</p>
-                    </div>
-                    <div class="featured-item">
-                        <img src="./assets/gray_square.png">
-                        <p>Item 2</p>
-                    </div>
-                    <div class="featured-item">
-                        <img src="./assets/gray_square.png">
-                        <p>Item 3</p>
-                    </div>
-                    <div class="featured-item">
-                        <img src="./assets/gray_square.png">
-                        <p>Item 4</p>
-                    </div>
-                    <div class="featured-item">
-                        <img src="./assets/gray_square.png">
-                        <p>Item 5</p>
-                    </div>
-                    <div class="featured-item">
-                        <img src="./assets/gray_square.png">
-                        <p>Item 6</p>
-                    </div>
+                <div class="Rating">
+                    <h3>Rating</h3>
+                    <p>Nothing yet</p>
                 </div>
-                <button id="right-rotate-button"><i class="fa-sharp-duotone fa-solid fa-arrow-right"></i></button>
+                <a href="/api/shops/updateForm/${shop.id}">Edit Shop</a>
+            </div>
+            <div class="seller-info">
+                <h2>Seller</h2>
+                <img id="seller-image" 
+                    th:src="@{/seller-images/{img}(img=${seller.sellerImagePath})}"
+                    onerror="this.src='No_Image_Available.jpg'"
+                    alt="Seller Image">
+                <p>${seller.name}</p>
             </div>
         </div>
 
-        <div class="shop-by-category">
-            <h1>Shop by categories</h1>
+        <div class="shop-stuff">
+             <div class="btnContainer">
+                <button class="filterBtn" data-filter="about" onclick="event.preventDefault(); filterSelection('about')">About</button>
+                <button class="filterBtn active" data-filter="products" onclick="event.preventDefault(); filterSelection('products')">Products</button>
+                <button class="filterBtn" data-filter="reviews" onclick="event.preventDefault(); filterSelection('reviews')">Reviews</button>
+            </div>
+
             <div class="filter-container">
-                <div class="filters">
-                    <div class="filter-item">
-                        <img src="./assets/gray_square.png">
-                        <p>Tops</p>
+
+                <div class="about">
+                    <p>${shop.description}</p>
+                </div>
+
+                <div class="products">
+                    <div class="add-product">
+                        <p>Add Product</p>
+                        <button><i class="fa-solid fa-plus"></i></button>
                     </div>
-                    <div class="filter-item">
-                        <img src="./assets/gray_square.png">
-                        <p>Bottoms</p>
+
+                    <div class="product-container">
+                        <div class="product-card" th:each="product : ${products}">
+                            <img th:src="@{/products/{img}(img=${product.productImage})}"
+                                onerror="this.src='No_Image_Available.jpg'" 
+                                style="width: 200px; height: 200px">
+                            <div class="prod-details">
+                                <p th:text="${product.name}">Name</p>
+                                <p th:text="${product.price}">Price</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="filter-item">
-                        <img src="./assets/gray_square.png">
-                        <p>Dresses & Sets</p>
-                    </div>
-                    <div class="filter-item">
-                        <img src="./assets/gray_square.png">
-                        <p>Shoes</p>
-                    </div>
-                    <div class="filter-item">
-                        <img src="./assets/gray_square.png">
-                        <p>Accessories</p>
-                    </div>
-                    <div class="filter-item">
-                        <img src="./assets/gray_square.png">
-                        <p>Headwear</p>
+                </div>
+
+                <div class="reviews">
+                    <div class="review-card">
+                        <h3>${customer.name}</h3>
+                        <p>Rating: ${customer.review.overallRating} </p>
+                        <p>${customer.review.comment}</p>
+
                     </div>
                 </div>
             </div>
+
         </div>
+
+  
+        <div id="productModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Add New Product</h2>
+                <form id="product-form">
+                    <label for="productImage">Images(s):</label>
+                    <small>(Max 10)</small>
+                    <input type="file" id="productImage" name="productImage" multiple accept="image/*">
+
+                    <div id="imagePreview" class="preview-container"></div>
+
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+
+                    <label for="price">Price:</label>
+                    <input type="number" id="price" name="price" step="0.01" required>
+
+                    <label for="productCategory">Category:</label>
+                    <select id="productCategory" name="productCategory" required>
+                        <option value="TOPS">Tops</option>
+                        <option value="BOTTOMS">Bottoms</option>
+                        <option value="DRESSES">Dresses & Sets</option>
+                        <option value="SHOES">Shoes</option>
+                        <option value="ACCESSORIES">Accessories</option>
+                        <option value="HEADWEAR">Headwear</option>
+                    </select>
+
+                    <label for="description" id="description" name="description">Description:</label>
+                    <textarea id="description" name="description" rows="4" required></textarea>
+
+                    <button type="submit">Add Product</button>
+                </form>
+            </div>
+
+        </div>      
 
 
     </section>
@@ -247,32 +272,28 @@
             <div class="col-md-5 col-lg-4 ml-lg-0 text-center text-md-end">
                 <!-- Facebook -->
                 <a
-                class="btn btn-outline-light btn-floating m-1"
-                class="text-white"
+                class="btn btn-outline-light btn-floating m-1 text-white"
                 role="button"
                 ><i class="fab fa-facebook-f"></i
                 ></a>
 
                 <!-- Twitter -->
                 <a
-                class="btn btn-outline-light btn-floating m-1"
-                class="text-white"
+                class="btn btn-outline-light btn-floating m-1 text-white"
                 role="button"
                 ><i class="fab fa-twitter"></i
                 ></a>
 
                 <!-- Google -->
                 <a
-                class="btn btn-outline-light btn-floating m-1"
-                class="text-white"
+                class="btn btn-outline-light btn-floating m-1 text-white"
                 role="button"
                 ><i class="fab fa-google"></i
                 ></a>
 
                 <!-- Instagram -->
                 <a
-                class="btn btn-outline-light btn-floating m-1"
-                class="text-white"
+                class="btn btn-outline-light btn-floating m-1 text-white"
                 role="button"
                 ><i class="fab fa-instagram"></i
                 ></a>
@@ -285,7 +306,14 @@
         <!-- Grid container -->
     </footer>
 
-    <script src="./js/index.js"></script>
-    <script src="./js/login-panel.js"></script>
+    <script src="/js/login-panel.js" defer></script>
+    <script src="/js/seller-shop.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            filterSelection("products");
+        });
+    </script>
+       
 </body>
 </html>

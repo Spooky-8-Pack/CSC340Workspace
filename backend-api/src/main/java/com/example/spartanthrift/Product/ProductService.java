@@ -6,19 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.spartanthrift.shop.Shop;
-import com.example.spartanthrift.shop.ShopRepository;
 
 import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class ProductService {
     @Autowired
-    private ProductRepository productRepository;
-    private final ShopRepository shopRepository;
+    private final ProductRepository productRepository;
 
-    public ProductService(ProductRepository productRepository, ShopRepository shopRepository) {
+    public ProductService(ProductRepository productRepository) {
         this.productRepository = productRepository;
-        this.shopRepository = shopRepository;
     }
 
     /**
@@ -28,10 +25,7 @@ public class ProductService {
      * @param product
      * @return
      */
-    public Product createProduct(Long shopId, Product product) {
-        Shop shop = shopRepository.findById(shopId).orElseThrow(() -> new IllegalStateException("Shop not found"));
-
-        product.setShop(shop);
+    public Product createProduct(Product product) {
         return productRepository.save(product);
     }
 

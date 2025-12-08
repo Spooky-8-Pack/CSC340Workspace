@@ -29,8 +29,6 @@
     font-size: 30px;
 }
 
-
-
 .seller-info {
     display: flex;
     justify-content: center;
@@ -154,4 +152,92 @@
     background-color: white;
     border-radius: 10px;
     flex-flow: column nowrap;
+}
+
+/* Modal Backgorund */
+
+.modal {
+    display: none; /* hidden by default */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 400px;
+    height: 500px;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.5); /* semi-transparent backdrop */
+    justify-content: center;
+    align-items: center;
+
+    /* Center form when shown */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Modal content box */
+.modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 8px;
+    width: 70%!important;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* Close button */
+.close {
+    float: right;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* Form styling */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form label {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+form input, form textarea, form button {
+    margin-top: 5px;
+    padding: 8px;
+    font-size: 14px;
+}
+
+form button {
+    margin-top: 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #0056b3;
+}
+
+/* Product image thumbnail */
+.preview-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.preview-container img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  margin: 5px;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+}
+
+.preview-container img.thumbnail {
+  border: 3px solid green; /* highlight first image */
 }
