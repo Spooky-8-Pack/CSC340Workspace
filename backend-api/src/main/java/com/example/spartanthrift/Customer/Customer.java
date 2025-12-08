@@ -22,38 +22,19 @@ public class Customer extends User{
     @OneToMany(mappedBy = "customer")
     @JsonIgnoreProperties("customer")
     private List<Cart> cart = new ArrayList<>();
-
-<<<<<<< HEAD
-=======
-    public Customer(String name, String email, String password, String address) {
-        this.name = name;
-        this.email = email;
-        this.password = password;
-        this.address = address;
-    }
-
->>>>>>> main
-    //blank constructor
+    
+    // Blank constructor
     public Customer(){
 
     }
 
-    //constructor with args
+    // Constructor with args
     public Customer(String address, List<Cart> cart){
         this.address = address;
         this.cart = cart;
     }
 
-    //getters and setters
-
-    // public Long getCustomerId() {
-    //     return customerId;
-    // }
-
-    // public void setCustomerId(Long customerId) {
-    //     this.customerId = customerId;
-    // }
-
+    // Getters and setters
      public String getAddress() {
         return address;
     }
