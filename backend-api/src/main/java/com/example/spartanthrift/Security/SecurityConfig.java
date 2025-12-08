@@ -26,11 +26,12 @@ public class SecurityConfig {
                             "/products/**", "/seller-images/**", "/shop-images/**").permitAll() // allow static resources
             .requestMatchers("/log-in", "/api/sellers/createForm", "/api/sellers/create").permitAll()
             .requestMatchers("/storefront/**").permitAll()
+            .requestMatchers("/api/sellers/updateForm", "/api/sellers/update").hasAnyRole("SELLER")
             .anyRequest().authenticated()
         )
         .formLogin(form -> form
             .loginPage("/log-in")
-            .loginProcessingUrl("/authenticate")
+            .loginProcessingUrl("/login")
             .defaultSuccessUrl("/index", true)
             .permitAll()
         )
