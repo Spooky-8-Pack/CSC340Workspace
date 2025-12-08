@@ -1,8 +1,11 @@
 package com.example.spartanthrift.Seller;
 
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -48,15 +51,17 @@ public class SellerController {
      * @return Shop storefront
      */
     @PostMapping("/create")
-    public Object createSellerWithShop(Seller seller, 
+    public Object createSellerWithShop(@ModelAttribute Seller seller, 
                                     @RequestParam MultipartFile sellerImage, 
                                     @RequestParam String shopName,
                                     @RequestParam String description,
                                     @RequestParam String location,
                                     @RequestParam MultipartFile shopImage) {
+        
+        // Save seller
         Seller newSeller = sellerService.createSeller(seller, sellerImage);
 
-        // Create shop
+        // Save shop
         Shop shop = new Shop();
         shop.setShopName(shopName);
         shop.setSeller(newSeller);
@@ -65,6 +70,12 @@ public class SellerController {
 
         shopService.createShop(newSeller, shop, shopImage);
 
+        // Authenticate seller
+        UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(newSeller, newSeller.getPassword(),
+            newSeller.getAuthorities());
+        SecurityContextHolder.getContext().setAuthentication(auth);   
+
+        // Redirect to storefront
         return "redirect:/api/sellers/" + newSeller.getId() + "/storefront";
     }
 
