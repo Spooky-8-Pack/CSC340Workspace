@@ -6,13 +6,17 @@
     padding: 20px;
 }
 
+#update-nav {
+    position: relative!important;
+    z-index: 1!important;
+}
+
 /* Navigation bar */
 .account-navigation {
     position: relative;
     background-color: transparent;
     border-radius: 8px;
     padding: 10px 20px;
-    z-index: 1;
 }
 
 .account-navigation .navbar-nav {
@@ -24,7 +28,7 @@
 }
 
 .account-navigation .nav-item a {
-    color: #ecf0f1;
+    color: black;
     text-decoration: none;
     font-weight: 500;
     transition: color 0.3s ease;
@@ -37,6 +41,12 @@
 }
 
 /* Dashboard container */
+.dashboard {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
 .dashboard-container {
     margin-top: 20px;
     display: flex;

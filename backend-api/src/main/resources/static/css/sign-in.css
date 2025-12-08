@@ -1,0 +1,28 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.signin {
+    height: auto;
+}
+
+.signin-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+.signin-container img {
+    display: flex;
+    width: 350px;
+    height: 350px;
+    padding: 30px;
+    justify-items: center;
+}
+
+.left {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

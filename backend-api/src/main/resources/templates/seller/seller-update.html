@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,10 +16,10 @@
     
     <nav class="navbar">
         <div class="nav-left">
-            <a href="/"><img src="/assets/UNCG_Spartan_Head.png" style="width: 75px; height: 75px" alt="UNC Greensboro spartan logo"></a>
+            <a th:href="@{/index}"><img src="./assets/UNCG_Spartan_Head.png" style="width: 75px; height: 75px" alt="UNC Greensboro spartan logo"></a>
             <div class="menu-dropdown">
                 <button class="menu-button">
-                    <img src="/assets/white-menu-icon.png" style="width: 36px; height: 36px" alt="Menu icon"/>
+                    <img src="./assets/white-menu-icon.png" style="width: 36px; height: 36px" alt="Menu icon"/>
                     <span>Categories</span>
                 </button>
                 <div class="menu-content">
@@ -32,7 +32,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="nav-center">
             <!-- Search bar from https://codepen.io/huange/pen/bGqMqM -->
             <div class="search-container">
@@ -67,16 +67,16 @@
 
     <div class="account-wrapper">
 
-        <nav class="navbar navbar-expand-lg p-0">
+        <nav id="update-nav" class="navbar navbar-expand-lg p-0">
             <div class="account-navigation">
                 <ul class="navbar-nav">
-                    <!--Update Shop information here-->
-                    <li href="#" class="nav-item">
+                    <!--Update Seller information here-->
+                    <li href="/api/sellers/updateForm/${seller.id}" class="nav-item active">
                         <a>My account</a>
                     </li>
-                    <!--Update Seller information here-->
-                    <li href="#" class="nav-item active">
-                        <a>My Shop</a>
+                    <!--Update Shop information here-->
+                    <li class="nav-item">
+                        <a href="/api/shops/updateForm/${shop.id}">My Shop</a>
                     </li>
                     <!--See Shop orders here-->
                     <li href="#" class="nav-item">
@@ -90,30 +90,51 @@
             <div class="dashboard-container">
                 <div class="account-card">
                     <div class="card-name">
-                        <img src="./assets/No_Image_Available.jpg">
-                        <span class="card-title">Shop Name</span>
-                        ${shop.shopName}
+                        <img src="/seller-images/${(seller.sellerImagePath)!'No_Image_Available.jpg'}">
+                        <span class="card-title">Name</span>
+                        ${seller.name}
                     </div>
                     <div class="card-col1">
                         <span class="card-title">Status</span>
                         Your status (active/inactive seller)
                     </div>
+                    <div class="card-col3">
+                        <span class="card-title">Member Since</span>
+                        Date
+                    </div>
                 </div>
 
                 <div class="update-shop">
-                    <h1>Update Shop Information</h1>
-                    <form action="/api/shops/update/${shop.id?c}" method="post" enctype="multipart/form-data">
+                    <h1>Update Personal Information</h1>
+                    <form action="/api/sellers/update/${seller.id?c}" method="post" enctype="multipart/form-data">
                         <input type="hidden" name="id" value="${seller.id?c}" readonly>
-                        <input type="text" name="shopName" id="shopName" value="${shop.shopName}" placeholder="Name" required>
-                        <input type="text" name="location" id="location" value="${shop.location}" placeholder="Location" required>
-                        <input type="text" name="description" id="description" value="${shop.description}" placeholder="Shop description" required>
+                        <small>Name</small>
+                        <input type="text" name="name" id="name" value="${seller.name}" placeholder="Name" required>
+                        <small>Email</small>
+                        <input type="text" name="email" id="email" value="${seller.email}" placeholder="Email" required>
+                        <small>Add an  image of yourself!</small>  
                         <input type="file" name="sellerImage" id="sellerImage" placeholder="Upload image!"accept="image/png, image/jpeg">
-                        <small>Add an  image for your storefront!</small>  
                         <button type="submit" class="btn btn-primary">Update</button>
-                        <a href="/update-info" class="btn btn-outline-danger">Cancel</a>
+                        <a href="#" class="btn btn-outline-danger">Cancel</a>
                     </form>
                 </div>
             </div>
+
+            <div class="update-password">
+                <h1>Change Password</h1>
+                <form action="#" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="id" value="${seller.id?c}" readonly>
+                    <small>Current password</small>
+                    <input type="text" name="password" id="password" value="${seller.password}" required>
+                    <small>New password</small>
+                    <input type="text" name="newPassword" id="newPassword" valye="${seller.newPassword}" required>
+                    <small>Confirm new password</small>
+                    <input type="text" name="newPassword" id="newPassword" valye="${seller.newPassword}" required>
+                    <button type="submit" class="btn btn-primary">Update</button>
+                    <a href="#" class="btn btn-outline-danger">Cancel</a>
+                </form>
+            </div>
+
         </div>
     </div>
 
@@ -221,32 +242,28 @@
             <div class="col-md-5 col-lg-4 ml-lg-0 text-center text-md-end">
                 <!-- Facebook -->
                 <a
-                class="btn btn-outline-light btn-floating m-1"
-                class="text-white"
+                class="btn btn-outline-light btn-floating m-1 text-white"
                 role="button"
                 ><i class="fab fa-facebook-f"></i
                 ></a>
 
                 <!-- Twitter -->
                 <a
-                class="btn btn-outline-light btn-floating m-1"
-                class="text-white"
+                class="btn btn-outline-light btn-floating m-1 text-white"
                 role="button"
                 ><i class="fab fa-twitter"></i
                 ></a>
 
                 <!-- Google -->
                 <a
-                class="btn btn-outline-light btn-floating m-1"
-                class="text-white"
+                class="btn btn-outline-light btn-floating m-1 text-white"
                 role="button"
                 ><i class="fab fa-google"></i
                 ></a>
 
                 <!-- Instagram -->
                 <a
-                class="btn btn-outline-light btn-floating m-1"
-                class="text-white"
+                class="btn btn-outline-light btn-floating m-1 text-white"
                 role="button"
                 ><i class="fab fa-instagram"></i
                 ></a>

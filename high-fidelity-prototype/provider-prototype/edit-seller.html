@@ -67,7 +67,7 @@
 
     <div class="account-wrapper">
 
-        <nav class="navbar navbar-expand-lg p-0">
+        <nav id="update-nav" class="navbar navbar-expand-lg p-0">
             <div class="account-navigation">
                 <ul class="navbar-nav">
                     <!--Update Shop information here-->
@@ -117,6 +117,22 @@
                         <a href="#" class="btn btn-outline-danger">Cancel</a>
                     </form>
                 </div>
+
+            </div>
+
+            <div class="update-password">
+                <h1>Change Password</h1>
+                <form action="#" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="id" value="${seller.id?c}" readonly>
+                    <small>Current password</small>
+                    <input type="text" name="password" id="password" value="${seller.password}" required>
+                    <small>New password</small>
+                    <input type="text" name="newPassword" id="newPassword" valye="${seller.newPassword}" required>
+                    <small>Confirm new password</small>
+                    <input type="text" name="newPassword" id="newPassword" valye="${seller.newPassword}" required>
+                    <button type="submit" class="btn btn-primary">Update</button>
+                    <a href="#" class="btn btn-outline-danger">Cancel</a>
+                </form>
             </div>
         </div>
     </div>

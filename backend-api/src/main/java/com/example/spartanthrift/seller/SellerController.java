@@ -1,8 +1,11 @@
 package com.example.spartanthrift.Seller;
 
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -48,15 +51,17 @@ public class SellerController {
      * @return Shop storefront
      */
     @PostMapping("/create")
-    public Object createSellerWithShop(Seller seller, 
+    public Object createSellerWithShop(@ModelAttribute Seller seller, 
                                     @RequestParam MultipartFile sellerImage, 
                                     @RequestParam String shopName,
                                     @RequestParam String description,
                                     @RequestParam String location,
                                     @RequestParam MultipartFile shopImage) {
+        
+        // Save seller
         Seller newSeller = sellerService.createSeller(seller, sellerImage);
 
-        // Create shop
+        // Save shop
         Shop shop = new Shop();
         shop.setShopName(shopName);
         shop.setSeller(newSeller);
@@ -65,6 +70,12 @@ public class SellerController {
 
         shopService.createShop(newSeller, shop, shopImage);
 
+        // Authenticate seller
+        UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(newSeller, newSeller.getPassword(),
+            newSeller.getAuthorities());
+        SecurityContextHolder.getContext().setAuthentication(auth);   
+
+        // Redirect to storefront
         return "redirect:/api/sellers/" + newSeller.getId() + "/storefront";
     }
 
@@ -75,12 +86,15 @@ public class SellerController {
      * @param model The model to add attributes to
      * @return      The view name for the update form
      */
-    @GetMapping("/updateForm/{id}")
-    public Object showUpdateForm(@PathVariable("sellerId") Long id, Model model) {
+    @GetMapping("/updateForm/{sellerId}")
+    public String showUpdateForm(@PathVariable("sellerId") Long id, Model model) {
         Seller seller = sellerService.getSellerById(id);
+        Shop shop = shopService.getShopBySellerId(id);
+
         model.addAttribute("seller", seller);
+        model.addAttribute("shop", shop);
         model.addAttribute("title", "Update Seller: " + id);
-        return "seller/seller-update"; // Need to create seller-update.ftlh
+        return "seller/seller-update"; // seller-update.ftlh
     }
 
     /**
@@ -120,7 +134,7 @@ public class SellerController {
      * @return
      */
     @GetMapping("/{id}/storefront")
-    public Object showStorefront(@PathVariable("id") Long sellerId, Model model) {
+    public String showStorefront(@PathVariable("id") Long sellerId, Model model) {
         Seller seller = sellerService.getSellerById(sellerId);
         Shop shop = shopService.getShopBySellerId(sellerId);
 
@@ -131,5 +145,7 @@ public class SellerController {
 
         return "shop/storefront"; // storefront.ftlh
     }
+
+
 
 }

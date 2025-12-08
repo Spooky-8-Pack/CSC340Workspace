@@ -6,6 +6,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.multipart.MultipartFile;
@@ -16,11 +17,13 @@ import jakarta.transaction.Transactional;
 @Transactional
 public class SellerService {
     private final SellerRepository sellerRepository;
+    private final PasswordEncoder passwordEncoder;
 
     private static final String UPLOAD_DIR = "src/main/resources/static/seller-images/";
 
-    public SellerService(SellerRepository sellerRepository) {
+    public SellerService(SellerRepository sellerRepository, PasswordEncoder passwordEncoder) {
         this.sellerRepository = sellerRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     /**
@@ -29,6 +32,9 @@ public class SellerService {
      * @return
      */
     public Seller createSeller(Seller seller, MultipartFile sellerImage) {
+        // Enocode raw password before saving
+        seller.setPassword(passwordEncoder.encode(seller.getPassword()));
+
         // Creating seller in sellerRepository
         Seller newSeller = sellerRepository.save(seller); 
 

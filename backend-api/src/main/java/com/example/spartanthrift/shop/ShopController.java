@@ -64,9 +64,10 @@ public class ShopController {
      */
     @PostMapping("/update/{id}") // Doesn't update the right fields yet
     public String updateShop(@PathVariable Long id, Shop shop, @RequestParam("shopImage") MultipartFile shopImage) {
-        Shop updated = shopService.updateShop(id, shop, shopImage);     
+        Shop updated = shopService.updateShop(id, shop, shopImage);
           
         return "redirect:/api/sellers/" + updated.getSeller().getId() + "/storefront";
     }
+
 
 }

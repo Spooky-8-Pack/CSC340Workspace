@@ -1,24 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/login-panel.css">
+    <link rel="stylesheet" href="/css/sign-in.css">
     <link rel="stylesheet" href="/css/navbar.css">
-    <link rel="stylesheet" href="/css/sell-now.css">
+    <link rel="stylesheet" href="/css/login-panel.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">   
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
-    <title>Update ${shop.shopName}</title>
+    <title>Sign in</title>
 </head>
 <body>
-    
     <nav class="navbar">
         <div class="nav-left">
-            <a href="/"><img src="/assets/UNCG_Spartan_Head.png" style="width: 75px; height: 75px" alt="UNC Greensboro spartan logo"></a>
+            <a th:href="@{/index}"><img src="./assets/UNCG_Spartan_Head.png" style="width: 75px; height: 75px" alt="UNC Greensboro spartan logo"></a>
             <div class="menu-dropdown">
                 <button class="menu-button">
-                    <img src="/assets/white-menu-icon.png" style="width: 36px; height: 36px" alt="Menu icon"/>
+                    <img src="./assets/white-menu-icon.png" style="width: 36px; height: 36px" alt="Menu icon"/>
                     <span>Categories</span>
                 </button>
                 <div class="menu-content">
@@ -31,7 +30,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="nav-center">
             <!-- Search bar from https://codepen.io/huange/pen/bGqMqM -->
             <div class="search-container">
@@ -53,38 +52,44 @@
         
     </nav>
 
+
     <div class="login-panel" id="login-panel">
         <h2>Hello Guest,</h2>
         <div class="panel-buttons">
             <div class="log-in-out">
-                <a href="./sign-in.html" class="sign-in">Sign in</a>
+                <a th:href="@{/log-in}" class="sign-in">Sign in</a>
                 <a href="./sign-up.html" class="sign-up">Sign up</a>
             </div>
-            <a href="./sell-now.html" class="sell-now">Sell now</a>
+            <a th:href="@{/api/sellers/createForm}" class="sell-now">Sell now</a>
         </div>
     </div>   
 
-    <div class="signup">
-        <div class="signup-container">
-            <div class="header">
-                <h1>Hello, ${seller.name}! Update your shop: ${shop.shopName}</h1>
-            </div>
-            <div class="form">
-                <form action="/api/shops/update/${shop.id?c}" method="post" enctype="multipart/form-data">
-                    <input type="hidden" name="id" value="${shop.id?c}" readonly>
-                    <input type="text" name="shopName" id="shopName" value="${shop.shopName}" placeholder="Shop name" required>
-                    <input type="text" name="description" id="description" value="${shop.description}" placeholder="Shop description" required>
-                    <input type="text" name="location" id="location" value="${shop.location}" placeholder="Location" required>
-                    <input type="file" name="shopImage" id="shopImage" placeholder="Upload storefront image!"accept="image/png, image/jpeg">
-                    <small>Add an  image for your shop storefront!</small>  
-                    <button type="submit" class="btn btn-primary">Update Shop</button>
-                    <a href="/api/sellers/${shop.seller.id?c}/storefront" class="btn btn-outline-danger">Cancel</a>
+    <section class="signin">
+        <div class="signin-container">
+            <div class="left">
+                <form th:action="@{/login}" method="post">
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="username" name="username" required>
+                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" required>
+                </div>
+                <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1" required>
+                    <label class="form-check-label" for="exampleCheck1">Agree to terms & conditions</label>
+                </div>
+                <button type="submit" class="btn btn-primary">Log in</button>
                 </form>
             </div>
-        </div>
-    </div>
+            <img src="/assets/signin_image.jpg" alt="A drawing of three houses side by side.">
 
-    <!-- Footer from https://mdbootstrap.com/snippets/standard/mdbootstrap/2885027?view=side -->
+        </div>
+    </section>
+
+     <!-- Footer from https://mdbootstrap.com/snippets/standard/mdbootstrap/2885027?view=side -->
     <footer
             class="text-center text-lg-start text-white"
             style="background-color: #FFB71B"
@@ -188,32 +193,28 @@
             <div class="col-md-5 col-lg-4 ml-lg-0 text-center text-md-end">
                 <!-- Facebook -->
                 <a
-                class="btn btn-outline-light btn-floating m-1"
-                class="text-white"
+                class="btn btn-outline-light btn-floating m-1 text-white"
                 role="button"
                 ><i class="fab fa-facebook-f"></i
                 ></a>
 
                 <!-- Twitter -->
                 <a
-                class="btn btn-outline-light btn-floating m-1"
-                class="text-white"
+                class="btn btn-outline-light btn-floating m-1 text-white"
                 role="button"
                 ><i class="fab fa-twitter"></i
                 ></a>
 
                 <!-- Google -->
                 <a
-                class="btn btn-outline-light btn-floating m-1"
-                class="text-white"
+                class="btn btn-outline-light btn-floating m-1 text-white"
                 role="button"
                 ><i class="fab fa-google"></i
                 ></a>
 
                 <!-- Instagram -->
                 <a
-                class="btn btn-outline-light btn-floating m-1"
-                class="text-white"
+                class="btn btn-outline-light btn-floating m-1 text-white"
                 role="button"
                 ><i class="fab fa-instagram"></i
                 ></a>
@@ -226,6 +227,7 @@
         <!-- Grid container -->
     </footer>
 
-    <script src="./js/login-panel.js"></script>
+    <script src="/js/login-panel.js"></script>
+
 </body>
 </html>
