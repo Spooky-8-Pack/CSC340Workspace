@@ -25,7 +25,7 @@ public class Customer extends User{
     
     // Blank constructor
     public Customer(){
-
+        this.setRole(Role.CUSTOMER);
     }
 
     // Constructor with args
