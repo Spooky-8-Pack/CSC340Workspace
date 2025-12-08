@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.spartanthrift.Product.Product;
-import com.example.spartanthrift.seller.Seller;
+import com.example.spartanthrift.Seller.Seller;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.CascadeType;
