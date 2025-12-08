@@ -96,7 +96,7 @@
                     </div>
                     <div class="card-col1">
                         <span class="card-title">Status</span>
-                        Your status (active/inactive seller)
+                        Your status 
                     </div>
                     <div class="card-col3">
                         <span class="card-title">Member Since</span>
@@ -106,18 +106,32 @@
 
                 <div class="update-shop">
                     <h1>Update Personal Information</h1>
-                    <form action="/customers/${customer.customerId}/update" method="post" enctype="multipart/form-data">
+                    <form action="/customers/${customer.id}/update" method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="id" value="${customer.id?c}" readonly>
+                        <small>Name</small>
                         <input type="text" name="name" id="name" value="${customer.name}" placeholder="Name" required>
+                        <small>Email</small>
                         <input type="text" name="email" id="email" value="${customer.email}" placeholder="Email" required>
-                        <input type="text" id="address" name="address" value="${customer.address}" placeholder="1234 Street" />
-                        <input type="text" name="password" id="password" value="${customer.password}" placeholder="Password" required>
                         <button type="submit" class="btn btn-primary">Update</button>
-                        <a href="/customers/signin/${customer.customerId}" class="btn btn-outline-danger">Cancel</a>
+                        <a href="#" class="btn btn-outline-danger">Cancel</a>
                     </form>
                 </div>
             </div>
-        </div>
-    </div>
+
+            <div class="update-password">
+                <h1>Change Password</h1>
+                <form action="#" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="id" value="${customer.id?c}" readonly>
+                    <small>Current password</small>
+                    <input type="text" name="password" id="password" value="${customer.password}" required>
+                    <small>New password</small>
+                    <input type="text" name="newPassword" id="newPassword" valye="${customer.newPassword}" required>
+                    <small>Confirm new password</small>
+                    <input type="text" name="newPassword" id="newPassword" valye="${customer.newPassword}" required>
+                    <button type="submit" class="btn btn-primary">Update</button>
+                    <a href="#" class="btn btn-outline-danger">Cancel</a>
+                </form>
+            </div>
 
     <!-- Footer from https://mdbootstrap.com/snippets/standard/mdbootstrap/2885027?view=side -->
     <footer

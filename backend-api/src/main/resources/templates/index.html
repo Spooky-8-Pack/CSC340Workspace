@@ -60,7 +60,9 @@
 
                 <!--Only for CUSTOMERS-->
                 <section sec:authorize="hasRole('CUSTOMER')">
-
+                    <button id="profile"><i class="fa-solid fa-user" href="@{/customers/signin/{id}(customer.id)}"></i></button>
+                    <button class="heart"><i class="fa-solid fa-heart"></i></button>
+                    <button class="cart"><i class="fa-solid fa-cart-shopping"></i></button>
                 </section>
             </div>
         </div>
@@ -94,7 +96,10 @@
 
         <!--Only for CUSTOMERS-->
         <section sec:authroize="hasRole('CUSTOMER')">
-
+            <div class="panel-buttons">
+                <div class="log-in-out">
+                    <a th:href="@{/customers/signin/{id}(customer.id)}" class="sign-in">Profile</a>
+                </div>
         </section>
 
 
