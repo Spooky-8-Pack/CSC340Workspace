@@ -1,11 +1,10 @@
 package com.example.spartanthrift.Product;
 
-import java.io.IOException;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -17,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.example.spartanthrift.Product.Product.ProductCategory;
 import com.example.spartanthrift.Shop.Shop;
 import com.example.spartanthrift.Shop.ShopService;
 
@@ -24,17 +24,14 @@ import com.example.spartanthrift.Shop.ShopService;
 @RequestMapping("/api/products")
 public class ProductController {
 
-    @Autowired
     private final ProductService productService;
-
-
-
+    private final ProductRepository productRepository;
     private final ShopService shopService;
 
-    public ProductController(ProductService productService, ShopService shopService) {
+    public ProductController(ProductService productService, ShopService shopService, ProductRepository productRepository) {
         this.productService = productService;
         this.shopService = shopService;
-
+        this.productRepository = productRepository;
     }    
    /**
      * Add new product
@@ -54,7 +51,6 @@ public class ProductController {
         return "redirect:/api/sellers/" + shop.getSeller().getId() + "/storefront";
     }
 
-
     //update product
     @PutMapping("/products/{id}")
     public Product updateProduct(@PathVariable Long id, @RequestBody Product product){
@@ -73,6 +69,30 @@ public class ProductController {
     public Product getProductById(@PathVariable Long id) {
         return productService.getProductById(id);
     }
+
+    /**
+     * Display Featured and Categoried products on index page 
+     * @param model
+     * @return
+     */
+    @GetMapping("/")
+    public String index(Model model) {
+        // Featured: take first 6 products
+        List<Product> featuredProducts = productRepository.findTop6ByOrderByCreatedAtDesc();
+        model.addAttribute("featuredProducts", featuredProducts);
+
+        // Categories: full lists
+        model.addAttribute("tops", productRepository.findByCategory(ProductCategory.TOPS));
+        model.addAttribute("bottoms", productRepository.findByCategory(ProductCategory.BOTTOMS));
+        model.addAttribute("dresses", productRepository.findByCategory(ProductCategory.DRESSES));
+        model.addAttribute("shoes", productRepository.findByCategory(ProductCategory.SHOES));
+        model.addAttribute("accessories", productRepository.findByCategory(ProductCategory.ACCESSORIES));
+        model.addAttribute("headwear", productRepository.findByCategory(ProductCategory.HEADWEAR));
+
+        return "index"; // index.html
+    }
+
+    
 
     //get available products
     @GetMapping("/products/available")
