@@ -49,9 +49,12 @@ public class CustomerService {
             .orElseThrow(() -> new EntityNotFoundException("Customer not found"));
 
         customer.setName(customerDetails.getName());
-        customer.setPassword(passwordEncoder.encode(customerDetails.getPassword()));
         customer.setEmail(customerDetails.getEmail());
         customer.setAddress(customerDetails.getAddress());
+        // Only update password if it was provided
+        if (customerDetails.getPassword() != null && !customerDetails.getPassword().isEmpty()) {
+            customer.setPassword(passwordEncoder.encode(customerDetails.getPassword()));
+        }
         return customerRepository.save(customer);
     }
 
@@ -60,5 +63,20 @@ public class CustomerService {
         throw new EntityNotFoundException("Customer not found");
        }
        customerRepository.deleteById(id);
-    }    
+    }
+    
+    //change customer password
+    public Customer changePassword(Long id, String currentPassword, String newPassword, String confirmPassword) {
+        Customer customer = customerRepository.findById(id)
+            .orElseThrow(() -> new EntityNotFoundException("Customer not found"));
+        
+        // Verify passwords match
+        if (!newPassword.equals(confirmPassword)) {
+            throw new IllegalArgumentException("Passwords do not match");
+        }
+        
+        // Update password
+        customer.setPassword(passwordEncoder.encode(newPassword));
+        return customerRepository.save(customer);
+    }
 }

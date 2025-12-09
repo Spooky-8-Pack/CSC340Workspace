@@ -27,5 +27,14 @@ public class AppController {
         return "log-in";
     }
 
+    /**
+     * Logs out the current user and redirects to index page
+     * @return
+     */
+    @GetMapping("/logout")
+    public String logout() {
+        return "redirect:/index";
+    }
+
 }
   

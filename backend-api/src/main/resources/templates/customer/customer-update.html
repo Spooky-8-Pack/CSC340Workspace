@@ -3,23 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/login-panel.css">
-    <link rel="stylesheet" href="./css/navbar.css">
-    <link rel="stylesheet" href="./css/sell-now.css">
-    <link rel="stylesheet" href="./css/edit-info.css">
+    <link rel="stylesheet" href="/css/login-panel.css">
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/sell-now.css">
+    <link rel="stylesheet" href="/css/update-info.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">   
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
-    <title>Update ${shop.shopName}</title>
+    <title th:text="'Update ' + ${customer.name} + ' | Spartan Thrift'">Update Customer | Spartan Thrift</title>
 </head>
 <body>
     
     <nav class="navbar">
         <div class="nav-left">
-            <a th:href="@{/index}"><img src="./assets/UNCG_Spartan_Head.png" style="width: 75px; height: 75px" alt="UNC Greensboro spartan logo"></a>
+            <a th:href="@{/index}"><img src="/assets/UNCG_Spartan_Head.png" style="width: 75px; height: 75px" alt="UNC Greensboro spartan logo"></a>
             <div class="menu-dropdown">
                 <button class="menu-button">
-                    <img src="./assets/white-menu-icon.png" style="width: 36px; height: 36px" alt="Menu icon"/>
+                    <img src="/assets/white-menu-icon.png" style="width: 36px; height: 36px" alt="Menu icon"/>
                     <span>Categories</span>
                 </button>
                 <div class="menu-content">
@@ -54,12 +54,13 @@
         
     </nav>
 
-    <div class="login-panel" id="login-panel">
+    <!--Only for anonymous (not logged in)-->
+    <div class="login-panel" id="login-panel" sec:authorize="isAnonymous()">
         <h2>Hello Guest,</h2>
         <div class="panel-buttons">
             <div class="log-in-out">
                 <a th:href="@{/log-in}" class="sign-in">Sign in</a>
-                <a href="./sign-up.html" class="sign-up">Sign up</a>
+                <a th:href="@{/customers/signup}" class="sign-up">Sign up</a>
             </div>
             <a th:href="@{/api/sellers/createForm}" class="sell-now">Sell now</a>
         </div>
@@ -67,18 +68,18 @@
 
     <div class="account-wrapper">
 
-        <nav class="navbar navbar-expand-lg p-0">
+        <nav id="update-nav" class="navbar navbar-expand-lg p-0">
             <div class="account-navigation">
                 <ul class="navbar-nav">
-                    <!--Update Shop information here-->
+                    <!--Update Customer information here-->
                     <li href="#" class="nav-item active">
                         <a>My account</a>
                     </li>
-                    <!--Update Seller information here-->
-                    <li href="#" class="nav-item">
-                        <a>My Shop</a>
+                    <!--View Customer cart here-->
+                    <li th:href="@{/customers/{id}/cart(id=${customer.id})}" class="nav-item">
+                        <a th:href="@{/customers/{id}/cart(id=${customer.id})}">My Cart</a>
                     </li>
-                    <!--See Shop orders here-->
+                    <!--View Customer orders here-->
                     <li href="#" class="nav-item">
                         <a>Orders</a>
                     </li>
@@ -90,48 +91,51 @@
             <div class="dashboard-container">
                 <div class="account-card">
                     <div class="card-name">
-                        <img src="./assets/No_Image_Available.jpg">
                         <span class="card-title">Name</span>
-                        Your Name
+                        <p th:text="${customer.name}">Customer Name</p>
                     </div>
                     <div class="card-col1">
                         <span class="card-title">Status</span>
-                        Your status 
+                        <p>Active Customer</p>
                     </div>
                     <div class="card-col3">
                         <span class="card-title">Member Since</span>
-                        Date
+                        <p>Date</p>
                     </div>
                 </div>
 
                 <div class="update-shop">
                     <h1>Update Personal Information</h1>
-                    <form action="/customers/${customer.id}/update" method="post" enctype="multipart/form-data">
-                        <input type="hidden" name="id" value="${customer.id?c}" readonly>
+                    <form th:action="@{/customers/{id}/update(id=${customer.id})}" method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="id" th:value="${customer.id}" readonly>
                         <small>Name</small>
-                        <input type="text" name="name" id="name" value="${customer.name}" placeholder="Name" required>
+                        <input type="text" name="name" id="name" th:value="${customer.name}" placeholder="Name" required>
                         <small>Email</small>
-                        <input type="text" name="email" id="email" value="${customer.email}" placeholder="Email" required>
+                        <input type="text" name="email" id="email" th:value="${customer.email}" placeholder="Email" required>
+                        <small>Address</small>
+                        <input type="text" name="address" id="address" th:value="${customer.address}" placeholder="Address" required>
                         <button type="submit" class="btn btn-primary">Update</button>
-                        <a href="#" class="btn btn-outline-danger">Cancel</a>
+                        <a th:href="@{/customers/{id}(id=${customer.id})}" class="btn btn-outline-danger">Cancel</a>
                     </form>
                 </div>
             </div>
 
             <div class="update-password">
                 <h1>Change Password</h1>
-                <form action="#" method="post" enctype="multipart/form-data">
-                    <input type="hidden" name="id" value="${customer.id?c}" readonly>
+                <form th:action="@{/customers/{id}/changePassword(id=${customer.id})}" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="id" th:value="${customer.id}" readonly>
                     <small>Current password</small>
-                    <input type="text" name="password" id="password" value="${customer.password}" required>
+                    <input type="password" name="currentPassword" id="currentPassword" required>
                     <small>New password</small>
-                    <input type="text" name="newPassword" id="newPassword" valye="${customer.newPassword}" required>
+                    <input type="password" name="newPassword" id="newPassword" required>
                     <small>Confirm new password</small>
-                    <input type="text" name="newPassword" id="newPassword" valye="${customer.newPassword}" required>
+                    <input type="password" name="confirmPassword" id="confirmPassword" required>
                     <button type="submit" class="btn btn-primary">Update</button>
-                    <a href="#" class="btn btn-outline-danger">Cancel</a>
+                    <a th:href="@{/customers/{id}(id=${customer.id})}" class="btn btn-outline-danger">Cancel</a>
                 </form>
             </div>
+        </div>
+    </div>
 
     <!-- Footer from https://mdbootstrap.com/snippets/standard/mdbootstrap/2885027?view=side -->
     <footer
@@ -267,7 +271,7 @@
         </div>
         <!-- Grid container -->
     </footer>
-
-    <script src="./js/login-panel.js"></script>
+    
+    <script src="/js/login-panel.js"></script>
 </body>
 </html>

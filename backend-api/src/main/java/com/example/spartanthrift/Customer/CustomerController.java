@@ -20,7 +20,7 @@ public class CustomerController {
 
     //profile actions
     //get customer profile - view profile
-    @GetMapping("/customers/signin/{id}")
+    @GetMapping("/customers/{id}")
     public Object getCustomerProfile(@PathVariable Long id, Model model) {
         model.addAttribute("customer", customerService.getCustomerById(id));
         model.addAttribute("title", "Customer #: " + id);
@@ -69,7 +69,14 @@ public class CustomerController {
     @PostMapping("/customers/{id}/update")
     public String updateCustomer(@PathVariable Long id, Customer customerDetails) {
         customerService.updateCustomer(id, customerDetails);
-        return "redirect:/customers/signin/" + id;
+        return "redirect:/customers/" + id;
+    }
+
+    //change customer password
+    @PostMapping("/customers/{id}/changePassword")
+    public String changePassword(@PathVariable Long id, String currentPassword, String newPassword, String confirmPassword) {
+        customerService.changePassword(id, currentPassword, newPassword, confirmPassword);
+        return "redirect:/customers/" + id;
     }
 
     //delete profile
