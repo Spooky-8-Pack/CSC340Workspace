@@ -1,11 +1,10 @@
 package com.example.spartanthrift.Product;
 
-import java.security.Principal;
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,56 +13,47 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
-import com.example.spartanthrift.Seller.Seller;
 import com.example.spartanthrift.Shop.Shop;
 import com.example.spartanthrift.Shop.ShopService;
-import com.example.spartanthrift.User.User;
-import com.example.spartanthrift.User.UserRepository;
 
 @Controller
+@RequestMapping("/api/products")
 public class ProductController {
 
     @Autowired
     private final ProductService productService;
 
-    @Autowired
-    private final ProductRepository productRepository;
 
-    @Autowired 
-    private final UserRepository userRepository;
 
     private final ShopService shopService;
 
-    public ProductController(ProductService productService, ShopService shopService,
-        UserRepository userRepository, ProductRepository productRepository) {
+    public ProductController(ProductService productService, ShopService shopService) {
         this.productService = productService;
         this.shopService = shopService;
-        this.userRepository = userRepository;
-        this.productRepository = productRepository;
+
     }    
-    
-    /**
-     * Create new Product
+   /**
+     * Add new product
      * 
+     * @param shopId
      * @param product
-     * @param principal
-     * @return  The refreshed storefront with added product
+     * @return
      */
-    @PostMapping("/createProduct")
-    public String createProduct(@ModelAttribute Product product, Principal principal){
-        String email = principal.getName();
+    @PostMapping("/create")
+    public String createProduct(@ModelAttribute Product product,
+                                @RequestParam Long shopId,
+                                @RequestParam("productImages") List<MultipartFile> productImages) {
+        Shop shop = shopService.getShopById(shopId);
+        product.setShop(shop);
 
-        User user = userRepository.findByEmail(email)
-            .orElseThrow(() -> new UsernameNotFoundException("User not found"));
-
-        if (user instanceof Seller seller) {
-            Shop shop = seller.getShop();
-            product.setShop(shop);
-            productRepository.save(product);
-        }
-        return "redirect:/storefront";
+        productService.saveProduct(product, productImages);
+        return "redirect:/api/sellers/" + shop.getSeller().getId() + "/storefront";
     }
+
 
     //update product
     @PutMapping("/products/{id}")
