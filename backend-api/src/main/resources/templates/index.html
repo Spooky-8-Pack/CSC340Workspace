@@ -50,15 +50,6 @@
                 <button id="cart"><i class="fa-solid fa-cart-shopping"></i></button>
             </section>
 
-<<<<<<< HEAD
-                <!--Only for CUSTOMERS-->
-                <section sec:authorize="hasRole('CUSTOMER')">
-                    <button id="profile"><i class="fa-solid fa-user" th:href="@{/customers/{customerId}(customerId=${#authentication.principal.id})}"></i></button>
-                    <button class="heart"><i class="fa-solid fa-heart"></i></button>
-                    <button class="cart"><i class="fa-solid fa-cart-shopping"></i></button>
-                </section>
-            </div>
-=======
             <!-- Seller -->
             <section sec:authorize="hasRole('SELLER')">
                 <a id="profile" class="nav-button"
@@ -82,7 +73,6 @@
                 <a id="heart" class="nav-button"><i class="fa-solid fa-heart"></i></a>
                 <a id="cart" class="nav-button"><i class="fa-solid fa-cart-shopping"></i></a>
             </section>
->>>>>>> main
         </div>
     </div>
 
@@ -96,40 +86,9 @@
                 <a th:href="@{/log-in}" class="sign-in">Sign in</a>
                 <a th:href="@{/customers/signup}" class="sign-up">Sign up</a>
             </div>
-<<<<<<< HEAD
-        </section>
-
-        <!--Only for SELLERS-->
-        <section sec:authorize="hasRole('SELLER')">
-            <div class="panel-buttons">
-                <div class="log-in-out">
-                    <a th:href="@{/api/sellers/updateForm/{id}(seller.id)}" class="sign-in">Profile</a>
-                    <a href="#" class="sign-in">My Shop</a>
-                </div>
-            </div>
-
-        </section>
-
-        <!--Only for CUSTOMERS-->
-        <section sec:authroize="hasRole('CUSTOMER')">
-            <div class="panel-buttons">
-                <div class="log-in-out">
-                    <a th:href="@{/customers/{customerId}(customerId=${#authentication.principal.id})}" class="sign-in">Profile</a>
-                </div>
-                <div class="log-in-out">
-                    <form th:action="@{/logout}" method="POST" style="display:inline;">
-                        <button type="submit" class="sign-in" style="background:none; border:none; cursor:pointer; text-decoration:underline;">Log Out</button>
-                    </form>
-                </div>
-        </section>
-
-
-    </div>   
-=======
             <a th:href="@{/api/sellers/createForm}" class="sell-now">Sell now</a>
         </div>
     </div>
->>>>>>> main
 
     <section class="home">
         <div class="home-background">
