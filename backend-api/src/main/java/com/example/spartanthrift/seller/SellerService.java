@@ -31,6 +31,7 @@ public class SellerService {
      * @param seller The seller to add
      * @return
      */
+    @SuppressWarnings({"CallToPrintStackTrace", "UseSpecificCatch"})
     public Seller createSeller(Seller seller, MultipartFile sellerImage) {
         // Enocode raw password before saving
         seller.setPassword(passwordEncoder.encode(seller.getPassword()));
