@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">   
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
-    <title th:text="'Update: ' + ${seller.name}">Update: Seller</title>
+    <title th:text="'Update: ' + ${seller.name}"></title>
 </head>
 <body>
     
@@ -75,9 +75,12 @@
                         <a th:href="@{/api/shops/updateForm/{shopId}(shopId=${#authentication.principal.shop.id})}">My Shop</a>
                     </li>
                     <!--See Shop orders-->
-                    <li href="#" class="nav-item">
-                        <a>Orders</a>
+                    <li class="nav-item">
+                        <a href="#">Orders</a>
                     </li>
+                    <form th:action="@{/logout}" method="post">
+                        <button id="logout-button" type="submit" class="btn btn-link">Logout</button>
+                    </form>
                 </ul>
             </div>
         </nav>
@@ -86,17 +89,18 @@
             <div class="dashboard-container">
                 <div class="account-card">
                     <div class="card-name">
-                        <img src="/seller-images/${(seller.sellerImagePath)!'No_Image_Available.jpg'}">
+                        <img th:src="${seller.sellerImagePath != null ? '/seller-images/' + seller.sellerImagePath : '/No_Image_Available.jpg'}"
+                            style="width: 100px; height: 100px">                        
                         <span class="card-title">Name</span>
-                        ${seller.name}
+                        <p th:text="${seller.name}"></p>
                     </div>
                     <div class="card-col1">
                         <span class="card-title">Status</span>
-                        Your status (active/inactive seller)
+                        <p>Active</p>
                     </div>
                     <div class="card-col3">
                         <span class="card-title">Member Since</span>
-                        Date
+                        <p th:text="${#temporals.format(seller.accountCreated, 'yyyy-MM-dd')}"></p>
                     </div>
                 </div>
 
@@ -105,27 +109,26 @@
                     <form th:action="@{/api/sellers/update/{sellerId}(sellerId=${#authentication.principal.id})}" method="post" enctype="multipart/form-data">
                         <input type="hidden" name="id" value="${seller.id?c}" readonly>
                         <small>Name</small>
-                        <input type="text" name="name" id="name" value="${seller.name}" placeholder="Name" required>
+                        <input type="text" name="name" id="name" th:value="${seller.name}" placeholder="Name" required>
                         <small>Email</small>
-                        <input type="text" name="email" id="email" value="${seller.email}" placeholder="Email" required>
+                        <input type="text" name="email" id="email" th:value="${seller.email}" placeholder="Email" required>
                         <small>Add an  image of yourself!</small>  
-                        <input type="file" name="sellerImage" id="sellerImage" placeholder="Upload image!"accept="image/png, image/jpeg">
+                        <input type="file" name="image" id="image" placeholder="Upload image!" accept="image/*">
                         <button type="submit" class="btn btn-primary">Update</button>
-                        <a href="#" class="btn btn-outline-danger">Cancel</a>
                     </form>
                 </div>
             </div>
 
             <div class="update-password">
                 <h1>Change Password</h1>
-                <form th:action="@{/api/sellers/update/{sellerId}(sellerId=${#authentication.principal.id})}" method="post" enctype="multipart/form-data">
-                    <input type="hidden" name="id" value="${seller.id?c}" readonly>
+                <form th:action="@{/api/sellers/updatePassword/{sellerId}(sellerId=${#authentication.principal.id})}" method="post">
+                    <input type="hidden" name="id" th:value="${seller.id}" readonly>
                     <small>Current password</small>
-                    <input type="text" name="password" id="password" value="${seller.password}" required>
+                    <input type="password" name="password" id="password" required>
                     <small>New password</small>
-                    <input type="text" name="newPassword" id="newPassword" valye="${seller.newPassword}" required>
+                    <input type="password" name="newPassword" id="newPassword" required>
                     <small>Confirm new password</small>
-                    <input type="text" name="newPassword" id="newPassword" valye="${seller.newPassword}" required>
+                    <input type="password" name="confirmPassword" id="confirmPassword" required>
                     <button type="submit" class="btn btn-primary">Update</button>
                     <a th:href="@{/api/sellers/updateForm/{sellerId}(sellerId=${#authentication.principal.id})}" class="btn btn-outline-danger">Cancel</a>
                 </form>
