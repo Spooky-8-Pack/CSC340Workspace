@@ -88,16 +88,15 @@ public class ShopService {
         Shop existingShop = shopRepository.findById(id)
         .orElseThrow(() -> new IllegalArgumentException("Shop not found"));
 
-        // Copy over updated fields
+        // Copy updated fields
         existingShop.setShopName(shop.getShopName());
         existingShop.setDescription(shop.getDescription());
         existingShop.setLocation(shop.getLocation());
 
-        // Handle shopImage
-        String originalFileName = shopImage.getOriginalFilename();
-
         try {
-            if (originalFileName != null && originalFileName.contains(".")) {
+            if (shopImage != null && !shopImage.isEmpty()) {
+                // Save new image
+                String originalFileName = shopImage.getOriginalFilename();
                 String fileExtension = originalFileName.substring(originalFileName.lastIndexOf(".") + 1);
                 String fileName = String.valueOf(id) + "." + fileExtension;
                 Path filePath = Paths.get(UPLOAD_DIR + fileName);
@@ -107,6 +106,9 @@ public class ShopService {
                 Files.createDirectories(Paths.get(UPLOAD_DIR));
                 Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
                 existingShop.setShopImagePath(fileName);
+            } else if (existingShop.getShopImagePath() == null) {
+                // Assign default if no image provided
+                existingShop.setShopImagePath("No_Image_available.jpg");
             }
         } catch (Exception e) {
             e.printStackTrace();

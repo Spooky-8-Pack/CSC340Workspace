@@ -9,17 +9,23 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.spartanthrift.Customer.CustomerService;
-import com.example.spartanthrift.Product.ProductService;
+import com.example.spartanthrift.Product.Product;
+import com.example.spartanthrift.Product.ProductRepository;
+
+import jakarta.persistence.EntityNotFoundException;
 
 @RestController
 public class CartController {
     @Autowired
     private CartService cartService;
     @Autowired
-    private ProductService productService;
-    @Autowired
     private CustomerService customerService;
-    //seller service goes here
+
+    private final ProductRepository productRepository;
+
+    public CartController(ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
 
     @PostMapping("/cart")
     public Cart createCart(@RequestBody Cart cart){
@@ -48,7 +54,9 @@ public class CartController {
 
     @GetMapping("/cart/product/{productId}")
     public Object getCartItems(@PathVariable Long productId){
-        return cartService.getCartByProduct(productService.getProductById(productId));
+        Product product = productRepository.findById(productId).orElseThrow(() -> new EntityNotFoundException("Product not found"));
+
+        return cartService.getCartByProduct(product);
     }
     
     //get by seller goes here

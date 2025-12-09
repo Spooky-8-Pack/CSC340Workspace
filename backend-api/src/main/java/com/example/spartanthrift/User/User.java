@@ -1,5 +1,6 @@
 package com.example.spartanthrift.User;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 
@@ -16,9 +17,11 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+
 
 @Entity
 @Table(name = "users")
@@ -27,6 +30,9 @@ public abstract class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false, updatable = false)
+    private LocalDateTime accountCreated;
 
     @NotBlank
     @Column(nullable = false)
@@ -48,9 +54,20 @@ public abstract class User implements UserDetails {
         CUSTOMER,
         SELLER
     }
+
+    // Getters and Setters
     
     public Long getId() {
         return id;
+    }
+
+    @PrePersist
+    public void setAccountCreated() {
+        this.accountCreated = LocalDateTime.now();
+    }
+
+    public LocalDateTime getAccountCreated() {
+        return accountCreated;
     }
 
     public String getName() {

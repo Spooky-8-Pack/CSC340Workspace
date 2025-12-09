@@ -1,12 +1,10 @@
 package com.example.spartanthrift.Product;
 
-import java.security.Principal;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -14,55 +12,43 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
-import com.example.spartanthrift.Seller.Seller;
+import com.example.spartanthrift.Product.Product.ProductCategory;
 import com.example.spartanthrift.Shop.Shop;
 import com.example.spartanthrift.Shop.ShopService;
-import com.example.spartanthrift.User.User;
-import com.example.spartanthrift.User.UserRepository;
 
 @Controller
+@RequestMapping("/api/products")
 public class ProductController {
 
-    @Autowired
     private final ProductService productService;
-
-    @Autowired
     private final ProductRepository productRepository;
-
-    @Autowired 
-    private final UserRepository userRepository;
-
     private final ShopService shopService;
 
-    public ProductController(ProductService productService, ShopService shopService,
-        UserRepository userRepository, ProductRepository productRepository) {
+    public ProductController(ProductService productService, ShopService shopService, ProductRepository productRepository) {
         this.productService = productService;
         this.shopService = shopService;
-        this.userRepository = userRepository;
         this.productRepository = productRepository;
     }    
-    
-    /**
-     * Create new Product
+   /**
+     * Add new product
      * 
+     * @param shopId
      * @param product
-     * @param principal
-     * @return  The refreshed storefront with added product
+     * @return
      */
-    @PostMapping("/createProduct")
-    public String createProduct(@ModelAttribute Product product, Principal principal){
-        String email = principal.getName();
+    @PostMapping("/create")
+    public String createProduct(@ModelAttribute Product product,
+                                @RequestParam Long shopId,
+                                @RequestParam("productImages") List<MultipartFile> productImages) {
+        Shop shop = shopService.getShopById(shopId);
+        product.setShop(shop);
 
-        User user = userRepository.findByEmail(email)
-            .orElseThrow(() -> new UsernameNotFoundException("User not found"));
-
-        if (user instanceof Seller seller) {
-            Shop shop = seller.getShop();
-            product.setShop(shop);
-            productRepository.save(product);
-        }
-        return "redirect:/storefront";
+        productService.saveProduct(product, productImages);
+        return "redirect:/api/sellers/" + shop.getSeller().getId() + "/storefront";
     }
 
     //update product
@@ -83,6 +69,30 @@ public class ProductController {
     public Product getProductById(@PathVariable Long id) {
         return productService.getProductById(id);
     }
+
+    /**
+     * Display Featured and Categoried products on index page 
+     * @param model
+     * @return
+     */
+    @GetMapping("/")
+    public String index(Model model) {
+        // Featured: take first 6 products
+        List<Product> featuredProducts = productRepository.findTop6ByOrderByCreatedAtDesc();
+        model.addAttribute("featuredProducts", featuredProducts);
+
+        // Categories: full lists
+        model.addAttribute("tops", productRepository.findByCategory(ProductCategory.TOPS));
+        model.addAttribute("bottoms", productRepository.findByCategory(ProductCategory.BOTTOMS));
+        model.addAttribute("dresses", productRepository.findByCategory(ProductCategory.DRESSES));
+        model.addAttribute("shoes", productRepository.findByCategory(ProductCategory.SHOES));
+        model.addAttribute("accessories", productRepository.findByCategory(ProductCategory.ACCESSORIES));
+        model.addAttribute("headwear", productRepository.findByCategory(ProductCategory.HEADWEAR));
+
+        return "index"; // index.html
+    }
+
+    
 
     //get available products
     @GetMapping("/products/available")

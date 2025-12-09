@@ -31,6 +31,7 @@ public class SellerService {
      * @param seller The seller to add
      * @return
      */
+    @SuppressWarnings({"CallToPrintStackTrace", "UseSpecificCatch"})
     public Seller createSeller(Seller seller, MultipartFile sellerImage) {
         // Enocode raw password before saving
         seller.setPassword(passwordEncoder.encode(seller.getPassword()));
@@ -71,23 +72,54 @@ public class SellerService {
      */
     @SuppressWarnings({"UseSpecificCatch", "CallToPrintStackTrace"})
     public Seller updateSeller(Long sellerId, Seller seller, MultipartFile sellerImage) {
-        String originalFileName = sellerImage.getOriginalFilename();
+        Seller existing = sellerRepository.findById(sellerId).orElseThrow(() -> new IllegalArgumentException("Seller not found"));
+
+        // Copy fields
+        existing.setName(seller.getName());
+        existing.setEmail(seller.getEmail());
 
         try {
-            if (originalFileName != null && originalFileName.contains(".")) {
+            if (sellerImage != null && !sellerImage.isEmpty()) {
+                // Save new image
+                String originalFileName = sellerImage.getOriginalFilename();
                 String fileExtension = originalFileName.substring(originalFileName.lastIndexOf(".") + 1);
-                String fileName = String.valueOf(sellerId) + "." + fileExtension;
+                String fileName = sellerId + "." + fileExtension;
                 Path filePath = Paths.get(UPLOAD_DIR + fileName);
 
-                InputStream inputStream = sellerImage.getInputStream();
-
                 Files.createDirectories(Paths.get(UPLOAD_DIR));
-                Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
-                seller.setSellerImagePath(fileName);
+                Files.copy(sellerImage.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+
+                existing.setSellerImagePath(fileName);
+            } else if (existing.getSellerImagePath() == null) {
+                seller.setSellerImagePath("No_Image_Available.jpg");
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return sellerRepository.save(existing);
+    }
+
+    /**
+     * Update password 
+     * 
+     * @param sellerId
+     * @param currentPassword
+     * @param newPassword
+     * @param confirmPassword
+     * @return
+     */
+    public Seller updatePassword(Long sellerId, String currentPassword, String newPassword,
+                                    String confirmPassword) {
+        Seller seller = sellerRepository.findById(sellerId).orElseThrow(() -> new IllegalArgumentException("Seller not found"));
+
+        if (!passwordEncoder.matches(currentPassword, seller.getPassword())) {
+            throw new IllegalArgumentException("Current password incorrect");
+        }
+        if (!newPassword.equals(confirmPassword)) {
+            throw new IllegalArgumentException("Passwords do not match");
+        }
+
+        seller.setPassword(passwordEncoder.encode(newPassword));
         return sellerRepository.save(seller);
     }
 

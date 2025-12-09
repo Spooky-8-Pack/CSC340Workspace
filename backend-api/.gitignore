@@ -32,4 +32,11 @@ build/
 ### VS Code ###
 .vscode/
 
-backend-api/src/main/resources/application.properties
+
+src/main/resources/application.properties
+
+src/main/resources/static/products
+src/main/resources/static/seller-images
+src/main/resources/static/shop-images
+
+
