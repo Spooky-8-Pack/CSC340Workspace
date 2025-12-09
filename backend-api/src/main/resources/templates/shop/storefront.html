@@ -102,14 +102,19 @@
                 <div class="products">
                     <div class="add-product">
                         <p>Add Product</p>
-                        <button><i class="fa-solid fa-plus"></i></button>
+                        <button id="openModal"><i class="fa-solid fa-plus"></i></button>
                     </div>
 
                     <div class="product-container">
                         <div class="product-card" th:each="product : ${products}">
-                            <img th:src="@{/products/{img}(img=${product.productImage})}"
-                                onerror="this.src='No_Image_Available.jpg'" 
-                                style="width: 200px; height: 200px">
+                            <div th:each="imgPath : ${product.imagePaths}">
+                                <img th:src="@{'/products/' + ${imgPath}}"
+                                    style="width: 200px; height: 200px">
+                            </div>
+                            <div th:if="${product.imagePaths == null or product.imagePaths.isEmpty()}">
+                                <img th:src="@{/No_Image_Available.jpg}"
+                                    style="width: 200px; height: 200px">
+                            </div>
                             <div class="prod-details">
                                 <p th:text="${product.name}">Name</p>
                                 <p th:text="${product.price}">Price</p>
@@ -130,15 +135,16 @@
 
         </div>
 
-  
         <div id="productModal" class="modal">
             <div class="modal-content">
                 <span class="close">&times;</span>
                 <h2>Add New Product</h2>
-                <form id="product-form">
+                <form id="product-form" th:action="@{/api/products/create}" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="shopId" th:value="${shop.id}"/>
+                    
                     <label for="productImage">Images(s):</label>
                     <small>(Max 10)</small>
-                    <input type="file" id="productImage" name="productImage" multiple accept="image/*">
+                    <input type="file" id="productImage" name="productImages" multiple accept="image/*">
 
                     <div id="imagePreview" class="preview-container"></div>
 
@@ -149,13 +155,13 @@
                     <input type="number" id="price" name="price" step="0.01" required>
 
                     <label for="productCategory">Category:</label>
-                    <select id="productCategory" name="productCategory" required>
-                        <option value="TOPS">Tops</option>
-                        <option value="BOTTOMS">Bottoms</option>
-                        <option value="DRESSES">Dresses & Sets</option>
-                        <option value="SHOES">Shoes</option>
-                        <option value="ACCESSORIES">Accessories</option>
-                        <option value="HEADWEAR">Headwear</option>
+                    <select id="category" name="category" required>
+                        <option th:value="TOPS">Tops</option>
+                        <option th:value="BOTTOMS">Bottoms</option>
+                        <option th:value="DRESSES">Dresses & Sets</option>
+                        <option th:value="SHOES">Shoes</option>
+                        <option th:value="ACCESSORIES">Accessories</option>
+                        <option th:value="HEADWEAR">Headwear</option>
                     </select>
 
                     <label for="description" name="description">Description:</label>
@@ -305,7 +311,7 @@
     </footer>
 
     <script src="/js/login-panel.js" defer></script>
-    <script src="/js/storefront.js"></script>
+    <script src="/js/storefront.js" defer></script>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
