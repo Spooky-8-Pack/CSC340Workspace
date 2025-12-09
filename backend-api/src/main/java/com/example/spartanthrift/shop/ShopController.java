@@ -66,7 +66,7 @@ public class ShopController {
     public String updateShop(@PathVariable Long id, Shop shop, @RequestParam("shopImage") MultipartFile shopImage) {
         Shop updated = shopService.updateShop(id, shop, shopImage);
           
-        return "redirect:/api/sellers/" + updated.getSeller().getId() + "/storefront";
+        return "redirect:/api/shops/updateForm/" + updated.getId();
     }
 
 
