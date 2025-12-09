@@ -75,14 +75,14 @@
                     <h3>Rating</h3>
                     <p>Nothing yet</p>
                 </div>
-                <a th:href="@{/api/sellers/{sellerId}/storefront(sellerId=${#authentication.principal.id})}">Edit Shop</a>
+                <a th:href="@{/api/shops/updateForm/{shopId}(shopId=${#authentication.principal.shop.id})}">Edit Shop</a>
             </div>
             <div class="seller-info">
                 <h2>Seller</h2>
                 <img id="seller-image"
                     th:src="@{/seller-images/{img}(img=${seller.sellerImagePath} ?: 'No_Image_Available.jpg')}"
                     alt="Seller Image">
-                <p th:text="${seller.name}">Seller Name</p>
+                <p th:text="${seller.name}"></p>
             </div>
         </div>
 
