@@ -57,7 +57,7 @@
                 <i class="fa-solid fa-user"></i>
                 </a>
                 <a id="shop" class="nav-button"
-                th:href="@{/api/sellers/{sellerId}(sellerId=${#authentication.principal.id})/storefront}">
+                th:href="@{/api/sellers/{sellerId}/storefront(sellerId=${#authentication.principal.id})}">
                 <i class="fa-solid fa-store"></i>
                 </a>
                 <a id="heart" class="nav-button"><i class="fa-solid fa-heart"></i></a>
@@ -106,32 +106,14 @@
             <h1>Featured</h1>
             <div class="featured">
                 <div class="featured-row" id="featured-row">
-                    <div class="featured-item">
-                        <img src="./assets/gray_square.png">
-                        <p>Item 1</p>
-                    </div>
-                    <div class="featured-item">
-                        <img src="./assets/gray_square.png">
-                        <p>Item 2</p>
-                    </div>
-                    <div class="featured-item">
-                        <img src="./assets/gray_square.png">
-                        <p>Item 3</p>
-                    </div>
-                    <div class="featured-item">
-                        <img src="./assets/gray_square.png">
-                        <p>Item 4</p>
-                    </div>
-                    <div class="featured-item">
-                        <img src="./assets/gray_square.png">
-                        <p>Item 5</p>
-                    </div>
-                    <div class="featured-item">
-                        <img src="./assets/gray_square.png">
-                        <p>Item 6</p>
+                    <div class="featured-item" th:each="product : ${featuredProducts}">
+                        <img th:src="@{${product.imagePath}}" alt="Product image">
+                        <p th:text="${product.name}"></p>
                     </div>
                 </div>
-                <button id="right-rotate-button"><i class="fa-sharp-duotone fa-solid fa-arrow-right"></i></button>
+                <button id="right-rotate-button">
+                    <i class="fa-sharp-duotone fa-solid fa-arrow-right"></i>
+                </button>
             </div>
         </div>
 
@@ -140,27 +122,27 @@
             <div class="filter-container">
                 <div class="filters">
                     <div class="filter-item">
-                        <img src="./assets/gray_square.png">
+                        <img th:src="@{${#lists.isEmpty(tops) ? '/assets/No_Image_Available.jpg' : tops[0].imagePath}}">
                         <p>Tops</p>
                     </div>
                     <div class="filter-item">
-                        <img src="./assets/gray_square.png">
+                        <img th:src="@{${#lists.isEmpty(bottoms) ? '/assets/No_Image_Available.jpg' : bottoms[0].imagePath}}">
                         <p>Bottoms</p>
                     </div>
                     <div class="filter-item">
-                        <img src="./assets/gray_square.png">
+                        <img th:src="@{${#lists.isEmpty(dresses) ? '/assets/No_Image_Available.jpg' : dresses[0].imagePath}}">
                         <p>Dresses & Sets</p>
                     </div>
                     <div class="filter-item">
-                        <img src="./assets/gray_square.png">
+                        <img th:src="@{${#lists.isEmpty(shoes) ? '/assets/No_Image_Available.jpg' : shoes[0].imagePath}}">
                         <p>Shoes</p>
                     </div>
                     <div class="filter-item">
-                        <img src="./assets/gray_square.png">
+                        <img th:src="@{${#lists.isEmpty(accessories) ? '/assets/No_Image_Available.jpg' : accessories[0].imagePath}}">
                         <p>Accessories</p>
                     </div>
                     <div class="filter-item">
-                        <img src="./assets/gray_square.png">
+                        <img th:src="@{${#lists.isEmpty(headwear) ? '/assets/No_Image_Available.jpg' : headwear[0].imagePath}}">
                         <p>Headwear</p>
                     </div>
                 </div>
