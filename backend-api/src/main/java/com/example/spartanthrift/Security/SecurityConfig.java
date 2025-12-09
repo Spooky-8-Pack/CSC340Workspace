@@ -42,7 +42,9 @@ public class SecurityConfig {
             .invalidateHttpSession(true)
             .deleteCookies("JSESSIONID")
         );
-
+            .clearAuthentication(true)
+            .permitAll()
+        );
 
     return http.build();
     }
