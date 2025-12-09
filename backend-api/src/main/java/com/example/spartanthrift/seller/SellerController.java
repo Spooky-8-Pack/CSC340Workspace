@@ -113,9 +113,31 @@ public class SellerController {
      */
     // @PutMapping("/{id}")
     @PostMapping("/update/{id}")
-    public Object updateSeller(@PathVariable Long id, Seller seller, @RequestParam MultipartFile image) {
+    public String updateSeller(@PathVariable Long id, 
+                                @ModelAttribute Seller seller, 
+                                @RequestParam(value = "image", required = false) MultipartFile image) {
         sellerService.updateSeller(id, seller, image);
-        return "redirect:/sellers/" + id;
+
+        return "redirect:/api/sellers/updateForm/" + id;
+    }
+
+    /**
+     * Update password 
+     * 
+     * @param sellerId
+     * @param currentPassword
+     * @param newPassword
+     * @param confirmPassword
+     * @return
+     */
+    @PostMapping("/updatePassword/{id}")
+    public String updatePassword(@PathVariable("id") Long sellerId,
+                                @RequestParam("password") String currentPassword,
+                                @RequestParam("newPassword") String newPassword,
+                                @RequestParam("confirmPassword") String confirmPassword) {
+        sellerService.updatePassword(sellerId, currentPassword, newPassword, confirmPassword);
+        
+        return "redirect:/api/sellers/updateForm/" + sellerId;
     }
 
     /**
