@@ -1,5 +1,7 @@
 package com.example.spartanthrift.Seller;
 
+import java.util.List;
+
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -12,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.example.spartanthrift.Product.Product;
+import com.example.spartanthrift.Product.ProductService;
 import com.example.spartanthrift.Shop.Shop;
 import com.example.spartanthrift.Shop.ShopService;
 
@@ -21,10 +25,12 @@ import com.example.spartanthrift.Shop.ShopService;
 public class SellerController {
     private final SellerService sellerService;
     private final ShopService shopService;
+    private final ProductService productService;
 
-    public SellerController(SellerService sellerService, ShopService shopService) {
+    public SellerController(SellerService sellerService, ShopService shopService, ProductService productService) {
         this.sellerService = sellerService;
         this.shopService = shopService;
+        this.productService = productService;
     }
 
     /**
@@ -137,6 +143,8 @@ public class SellerController {
     public String showStorefront(@PathVariable("id") Long sellerId, Model model) {
         Seller seller = sellerService.getSellerById(sellerId);
         Shop shop = shopService.getShopBySellerId(sellerId);
+
+        List<Product> products = productService.getAllProducts();
 
         model.addAttribute("seller", seller);
         model.addAttribute("shop", shop);
