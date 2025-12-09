@@ -40,6 +40,10 @@
     font-weight: bolder;
 }
 
+#logout-button {
+    text-align: end;
+}
+
 /* Dashboard container */
 .dashboard {
     display: flex;
