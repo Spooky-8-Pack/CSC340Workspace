@@ -2,6 +2,7 @@ package com.example.spartanthrift.Product;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import com.example.spartanthrift.Shop.Shop;
@@ -17,6 +18,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Size;
 
@@ -27,7 +29,8 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    //seller connection goes here
+    @Column(nullable = false, updatable = false)
+    private LocalDateTime dateAdded;
 
     @Column(nullable = false)
     private String name;
@@ -106,6 +109,15 @@ public class Product {
 
     public Long getId() {
         return id;
+    }
+
+    @PrePersist
+    public void setDateAdded() {
+        this.dateAdded = LocalDateTime.now();
+    }
+
+    public LocalDateTime getDateAdded() {
+        return dateAdded;
     }
 
     public void setId(Long id) {
