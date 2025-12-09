@@ -3,7 +3,6 @@ package com.example.spartanthrift.Security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import static org.springframework.security.config.Customizer.withDefaults;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -37,7 +36,13 @@ public class SecurityConfig {
             .permitAll()
         )
         .exceptionHandling(ex -> ex.accessDeniedPage("/403"))
-        .logout(withDefaults());
+        .logout(logout -> logout
+            .logoutUrl("/logout")
+            .logoutSuccessUrl("/index")
+            .invalidateHttpSession(true)
+            .deleteCookies("JSESSIONID")
+        );
+
 
     return http.build();
     }
