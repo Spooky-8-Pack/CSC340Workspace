@@ -41,23 +41,16 @@
             </div>
         </div>
 
-        <div class="nav-right">
-            <div class="icons">
-                <!--Only for anonymous (not logged in)-->
-                <section sec:authorize="isAnonymous()">
-                    <button id="profile"><i class="fa-solid fa-user"></i></button>
-                    <button id="heart"><i class="fa-solid fa-heart"></i></button>
-                    <button id="cart"><i class="fa-solid fa-cart-shopping"></i></button>
-                </section>
-                
-                <!--Only for SELLERS-->
-                <section sec:authorize="hasRole('SELLER')">
-                    <a id="profile" class="nav-button" th:href="@{/api/sellers/updateForm/{sellerId}(sellerId=${#authentication.principal.id})}"><i class="fa-solid fa-user"></i></a>
-                    <a id="shop" class="nav-button" th:href="@{/api/sellers/{sellerId}(sellerId=${#authentication.principal.id})/storefront}"><i class="fa-solid fa-store"></i></a>
-                    <a id="heart" class="nav-button"><i class="fa-solid fa-heart"></i></a>
-                    <a id="cart" class="nav-button"><i class="fa-solid fa-cart-shopping"></i></a>
-                </section>
+    <div class="nav-right">
+        <div class="icons">
+            <!-- Anonymous -->
+            <section sec:authorize="isAnonymous()">
+                <button id="profile"><i class="fa-solid fa-user"></i></button>
+                <button id="heart"><i class="fa-solid fa-heart"></i></button>
+                <button id="cart"><i class="fa-solid fa-cart-shopping"></i></button>
+            </section>
 
+<<<<<<< HEAD
                 <!--Only for CUSTOMERS-->
                 <section sec:authorize="hasRole('CUSTOMER')">
                     <button id="profile"><i class="fa-solid fa-user" th:href="@{/customers/{customerId}(customerId=${#authentication.principal.id})}"></i></button>
@@ -65,22 +58,45 @@
                     <button class="cart"><i class="fa-solid fa-cart-shopping"></i></button>
                 </section>
             </div>
+=======
+            <!-- Seller -->
+            <section sec:authorize="hasRole('SELLER')">
+                <a id="profile" class="nav-button"
+                th:href="@{/api/sellers/updateForm/{sellerId}(sellerId=${#authentication.principal.id})}">
+                <i class="fa-solid fa-user"></i>
+                </a>
+                <a id="shop" class="nav-button"
+                th:href="@{/api/sellers/{sellerId}(sellerId=${#authentication.principal.id})/storefront}">
+                <i class="fa-solid fa-store"></i>
+                </a>
+                <a id="heart" class="nav-button"><i class="fa-solid fa-heart"></i></a>
+                <a id="cart" class="nav-button"><i class="fa-solid fa-cart-shopping"></i></a>
+            </section>
+
+            <!-- Customer -->
+            <section sec:authorize="hasRole('CUSTOMER')">
+                <a id="profile" class="nav-button"
+                th:href="@{/customers/signin/{id}(id=${#authentication.principal.id})}">
+                <i class="fa-solid fa-user"></i>
+                </a>
+                <a id="heart" class="nav-button"><i class="fa-solid fa-heart"></i></a>
+                <a id="cart" class="nav-button"><i class="fa-solid fa-cart-shopping"></i></a>
+            </section>
+>>>>>>> main
         </div>
-        
+    </div>
+
+
     </nav>
 
-    <div class="login-panel" id="login-panel">
-
-        <!--Only for anonymous (not logged in)-->
-        <section sec:authorize="isAnonymous()">
-            <h2>Hello Guest,</h2>
-            <div class="panel-buttons">
-                <div class="log-in-out">
-                    <a th:href="@{/log-in}" class="sign-in">Sign in</a>
-                    <a th:href="@{/customers/signup}" class="sign-up">Sign up</a>
-                </div>
-                <a th:href="@{/api/sellers/createForm}" class="sell-now">Sell now</a>
+   <div class="login-panel" id="login-panel" sec:authorize="isAnonymous()">
+        <h2>Hello Guest,</h2>
+        <div class="panel-buttons">
+            <div class="log-in-out">
+                <a th:href="@{/log-in}" class="sign-in">Sign in</a>
+                <a th:href="@{/customers/signup}" class="sign-up">Sign up</a>
             </div>
+<<<<<<< HEAD
         </section>
 
         <!--Only for SELLERS-->
@@ -109,6 +125,11 @@
 
 
     </div>   
+=======
+            <a th:href="@{/api/sellers/createForm}" class="sell-now">Sell now</a>
+        </div>
+    </div>
+>>>>>>> main
 
     <section class="home">
         <div class="home-background">
