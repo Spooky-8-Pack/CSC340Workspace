@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">   
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
-    <title th:text="'Update: ' + ${shop.shopName}">Update: Shop</title>
+    <title th:text="'Update: ' + ${shop.shopName}"></title>
 </head>
 <body>
     
@@ -77,6 +77,13 @@
                     <li href="#" class="nav-item">
                         <a>Orders</a>
                     </li>
+                    <!--Log out-->
+                    <li class="nav-item">
+                        <form th:action="@{/logout}" method="post">
+                            <button id="logout-button" type="submit" class="btn btn-link">Logout</button>
+                        </form>
+                    </li>
+                  
                 </ul>
             </div>
         </nav>
@@ -85,30 +92,31 @@
             <div class="dashboard-container">
                 <div class="account-card">
                     <div class="card-name">
-                        <img src="/shop-images/${(shop.shopImagePath)!'No_Image_Available.jpg'}">
+                        <img th:src="${shop.shopImagePath != null ? '/shop-images/' + shop.shopImagePath : '/No_Image_Available.jpg'}"
+                            alt="Shop image"
+                            style="width:150px; height:150px">
                         <span class="card-title">Shop Name</span>
-                        ${shop.shopName}
+                        <p th:text="${shop.shopName}">Shop name</p>
                     </div>
                     <div class="card-col1">
                         <span class="card-title">Status</span>
-                        Your status (active/inactive seller)
+                        Active
                     </div>
                 </div>
 
                 <div class="update-shop">
                     <h1>Update Shop Information</h1>
-                    <form action="/api/shops/update/${shop.id?c}" method="post" enctype="multipart/form-data">
-                        <input type="hidden" name="id" value="${seller.id?c}" readonly>
+                    <form th:action="@{/api/shops/update/{shopId}(shopId=${#authentication.principal.shop.id})}" method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="id" th:value="${seller.id}" readonly>
                         <small>Name</small>
-                        <input type="text" name="shopName" id="shopName" value="${shop.shopName}" placeholder="Name" required>
+                        <input type="text" name="shopName" id="shopName" th:value="${shop.shopName}" placeholder="Name" required>
                         <small>Location</small>
-                        <input type="text" name="location" id="location" value="${shop.location}" placeholder="Location" required>
+                        <input type="text" name="location" id="location" th:value="${shop.location}" placeholder="Location" required>
                         <small>Description</small>
-                        <input type="text" name="description" id="description" value="${shop.description}" placeholder="Shop description" required>
+                        <input type="text" name="description" id="description" th:value="${shop.description}" placeholder="Shop description" required>
                         <small>Add an  image of your storefront!</small>  
-                        <input type="file" name="sellerImage" id="sellerImage" placeholder="Upload image!"accept="image/png, image/jpeg">
+                        <input type="file" name="shopImage" id="shopImage" placeholder="Upload image!"accept="image/*">
                         <button type="submit" class="btn btn-primary">Update</button>
-                        <a href="/update-info" class="btn btn-outline-danger">Cancel</a>
                     </form>
                 </div>
             </div>
