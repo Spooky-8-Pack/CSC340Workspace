@@ -41,7 +41,7 @@
 }
 
 #logout-button {
-    text-align: end;
+    float: right;
 }
 
 /* Dashboard container */
